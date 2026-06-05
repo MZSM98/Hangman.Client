@@ -1,0 +1,42 @@
+## Archivos específicos del usuario
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Directorio de caché y opciones de Visual Studio
+.vs/
+
+## Resultados de compilación (Build)
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+## Paquetes NuGet
+*.nupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+
+## Archivos generados por el sistema operativo (Windows)
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+
+## Archivos de pruebas (Test results)
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+EOF
