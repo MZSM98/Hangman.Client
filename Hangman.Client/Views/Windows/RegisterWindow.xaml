@@ -3,10 +3,80 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hangman.Client.Views.Windows"
         mc:Ignorable="d"
-        Title="RegisterWindow" Height="450" Width="800">
+        Title="El Ahorcado - Registro" Height="1080" Width="1920"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        FontFamily="{StaticResource FuentePixel}">
+
     <Grid>
-        
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/HangmanBackground.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <Border Width="850" Height="800" Background="#FDF8F5" CornerRadius="10"
+                BorderBrush="#B58B5C" BorderThickness="3"
+                VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <Grid Margin="60,40,60,40">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="NUEVO JUGADOR" FontSize="36" FontWeight="Bold" 
+                           Foreground="#8C5A35" HorizontalAlignment="Center" Margin="0,0,0,20"
+                           FontFamily="{StaticResource FuentePixel}"/>
+
+                <StackPanel Grid.Row="1" Margin="0,0,0,25">
+                    <TextBlock Text="Nombre de usuario" FontSize="30" FontWeight="SemiBold" Margin="0,0,0,0
+                               "/>
+                    <TextBox ToolTip="Ej: Juan Pérez"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Margin="0,0,0,25">
+                    <TextBlock Text="Fecha de Nacimiento" FontSize="25" FontWeight="SemiBold" Margin="0,0,0,0"/>
+                    <DatePicker Height="45" FontSize="25" Background="#F8EAD9" BorderBrush="#C79F73" BorderThickness="2"/>
+                </StackPanel>
+
+                <Grid Grid.Row="3" Margin="0,0,0,25">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Teléfono" FontSize="25" FontWeight="SemiBold" Margin="0,0,0,0"/>
+                        <TextBox ToolTip="222-123-4567"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Email" FontSize="25" FontWeight="SemiBold" Margin="0,0,0,0"/>
+                        <TextBox ToolTip="correo@dominio.com"/>
+                    </StackPanel>
+                </Grid>
+
+                <StackPanel Grid.Row="4" Margin="0,0,0,40">
+                    <TextBlock Text="Password" FontSize="25" FontWeight="SemiBold" Margin="0,0,0,0"/>
+                    <PasswordBox/>
+                </StackPanel>
+
+                <Button Grid.Row="6" Content="REGISTRARSE" Height="70" 
+                        Style="{StaticResource BotonMaderaStyle}" 
+                        Margin="0,0,0,20" Padding="0,17,0,0" FontSize="25"/>
+
+                <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="¿Ya tienes cuenta? " FontSize="20" Foreground="#555555"/>
+                    <TextBlock Text="Iniciar Sesión" FontSize="20" Foreground="#8C5A35" 
+                               FontWeight="SemiBold" Cursor="Hand" TextDecorations="Underline"/>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

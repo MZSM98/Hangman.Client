@@ -3,34 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="Views/Windows/LoginWindow.xaml">
     <Application.Resources>
-
+        <FontFamily x:Key="FuentePixel">pack://application:,,,/Assets/Minecraftia-Regular.ttf#Minecraftia</FontFamily>
         <SolidColorBrush x:Key="ColorTexto" Color="#3D2314"/>
         <SolidColorBrush x:Key="ColorMaderaClara" Color="#E5C39C"/>
         <SolidColorBrush x:Key="ColorMaderaBorde" Color="#C79F73"/>
         <SolidColorBrush x:Key="ColorFondoInput" Color="#F8EAD9"/>
-
+    
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="{StaticResource ColorTexto}"/>
         </Style>
 
         <Style TargetType="TextBox">
             <Setter Property="Height" Value="45"/>
-            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="Background" Value="{StaticResource ColorFondoInput}"/>
             <Setter Property="BorderBrush" Value="{StaticResource ColorMaderaBorde}"/>
             <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Padding" Value="10,12,10,5"/>
             <Setter Property="Foreground" Value="{StaticResource ColorTexto}"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
-
+        
         <Style TargetType="PasswordBox">
             <Setter Property="Height" Value="45"/>
-            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="Background" Value="{StaticResource ColorFondoInput}"/>
             <Setter Property="BorderBrush" Value="{StaticResource ColorMaderaBorde}"/>
             <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Padding" Value="10,12,10,5"/>
             <Setter Property="Foreground" Value="{StaticResource ColorTexto}"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
 
         <Style TargetType="CheckBox">
@@ -44,9 +46,10 @@
             <Setter Property="BorderBrush" Value="#B58B5C"/>
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="Foreground" Value="{StaticResource ColorTexto}"/>
-            <Setter Property="FontSize" Value="28"/>
-            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="0,6,0,0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -54,7 +57,7 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="15">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -64,6 +67,42 @@
                     <Setter Property="Background" Value="#F2D5B5"/>
                 </Trigger>
             </Style.Triggers>
+        </Style>
+
+        <Style x:Key="BotonRetroStyle" TargetType="Button">
+            <Setter Property="Background" Value="#F29C38"/>
+            <Setter Property="BorderBrush" Value="#462A1A"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Foreground" Value="#462A1A"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border Background="#462A1A" Margin="6,6,-6,-6"/>
+
+                            <Border x:Name="BotonFrente" 
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,0"/>
+                            </Border>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BotonFrente" Property="Background" Value="#F6B15E"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="BotonFrente" Property="Margin" Value="3,3,-3,-3"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
     </Application.Resources>
