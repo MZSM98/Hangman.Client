@@ -1,0 +1,109 @@
+﻿<Window x:Class="Hangman.Client.Views.Windows.GameBoardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="El Ahorcado - Tablero de Juego" Height="1080" Width="1920"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        FontFamily="{StaticResource FuentePixel}">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/HangmanBackground.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <Border Margin="50" MaxWidth="1600" Background="#E6F2E3D5" CornerRadius="25"
+                VerticalAlignment="Stretch" HorizontalAlignment="Center"
+                BorderBrush="#B58B5C" BorderThickness="4">
+
+            <Grid Margin="30">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Background="{StaticResource ColorMaderaClara}" CornerRadius="12" Padding="15" BorderBrush="{StaticResource ColorMaderaBorde}" BorderThickness="3" Margin="0,0,0,20">
+                    <TextBlock Text="¡ADIVINA LA PALABRA!" FontSize="45" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{StaticResource ColorTexto}"/>
+                </Border>
+
+                <Grid Grid.Row="1" Margin="0,10,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="6.5*"/>
+                        <ColumnDefinition Width="3.5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0" Background="{StaticResource ColorMaderaClara}" BorderBrush="{StaticResource ColorMaderaBorde}" BorderThickness="4" CornerRadius="15" Padding="25" MaxWidth="600" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <TextBlock Text="PISTA: ES UN ANIMAL QUE LADRA" FontSize="28" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"/>
+                        </Border>
+
+                        <TextBlock Grid.Row="1" Text="P   _   R   R   O" FontSize="90" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,20,0,0"/>
+                    </Grid>
+
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text=" O " FontSize="90" HorizontalAlignment="Center" Margin="0,-20,0,0"/>
+                        <TextBlock Text="/|\" FontSize="90" HorizontalAlignment="Center" Margin="0,-45,0,0"/>
+                        <TextBlock Text="/ \" FontSize="90" HorizontalAlignment="Center" Margin="0,-45,0,20"/>
+
+                        <Border Background="{StaticResource ColorMaderaBorde}" CornerRadius="12" Padding="25,15" Margin="0,10,0,0">
+                            <TextBlock Text="FALLOS: 6 / 6" FontSize="28" FontWeight="Bold" Foreground="#FFFFFF"/>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="2" Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <UniformGrid Grid.Column="0" Rows="2" Columns="13" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <UniformGrid.Resources>
+                            <Style TargetType="Button" BasedOn="{StaticResource BotonRetroStyle}">
+                                <Setter Property="Margin" Value="5"/>
+                                <Setter Property="Width" Value="65"/>
+                                <Setter Property="Height" Value="65"/>
+                                <Setter Property="FontSize" Value="28"/>
+                            </Style>
+                        </UniformGrid.Resources>
+                        <Button Content="Q"/>
+                        <Button Content="W"/>
+                        <Button Content="E"/>
+                        <Button Content="R"/>
+                        <Button Content="T"/>
+                        <Button Content="Y"/>
+                        <Button Content="U"/>
+                        <Button Content="I"/>
+                        <Button Content="O"/>
+                        <Button Content="P"/>
+                        <Button Content="A"/>
+                        <Button Content="S"/>
+                        <Button Content="D"/>
+                        <Button Content="F"/>
+                        <Button Content="G"/>
+                        <Button Content="H"/>
+                        <Button Content="J"/>
+                        <Button Content="K"/>
+                        <Button Content="L"/>
+                        <Button Content="Z"/>
+                        <Button Content="X"/>
+                        <Button Content="C"/>
+                        <Button Content="V"/>
+                        <Button Content="B"/>
+                        <Button Content="N"/>
+                        <Button Content="M"/>
+                    </UniformGrid>
+
+                    <Button Grid.Column="1" Content="RENDIRSE" Style="{StaticResource BotonRetroStyle}" Width="220" Height="75" FontSize="28" Background="#E59C9C" BorderBrush="#B55C5C" VerticalAlignment="Bottom" Margin="20,0,0,5"/>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
