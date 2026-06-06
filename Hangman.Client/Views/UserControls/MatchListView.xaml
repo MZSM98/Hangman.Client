@@ -3,10 +3,68 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hangman.Client.Views.UserControls"
         mc:Ignorable="d"
-        Title="MatchListView" Height="450" Width="800">
+        Title="El Ahorcado - Partidas Disponibles" Height="1080" Width="1920"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        FontFamily="{StaticResource FuentePixel}">
+
     <Grid>
-        
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/HangmanBackground.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <Border Margin="50" Background="#E6FAF3E6" CornerRadius="10" 
+                BorderBrush="#B58B5C" BorderThickness="4">
+
+            <Grid Margin="50">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="LISTA DE PARTIDAS DISPONIBLES" 
+                           FontSize="45" Foreground="#462A1A" Margin="0,0,0,10"/>
+
+                <Border Grid.Row="1" BorderBrush="#D09D6C" BorderThickness="0,0,0,2" Margin="0,0,0,50"/>
+
+                <Border Grid.Row="2" BorderBrush="#D6A57A" BorderThickness="2" Background="White" VerticalAlignment="Top">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Row="0" Grid.ColumnSpan="4" Background="#D6A57A"/>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Usuario Creador" Foreground="White" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="Partidas Ganadas" Foreground="White" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="0" Grid.Column="2" Text="Fecha de Creación" Foreground="White" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="0" Grid.Column="3" Text="Acción" Foreground="White" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                        <Border Grid.Row="1" Grid.ColumnSpan="4" BorderBrush="#EAEAEA" BorderThickness="0,0,0,1"/>
+
+                        <Border Grid.Row="2" Grid.ColumnSpan="4" BorderBrush="#EAEAEA" BorderThickness="0,0,0,1"/>
+
+                        <Border Grid.Row="3" Grid.ColumnSpan="4" BorderBrush="#EAEAEA" BorderThickness="0,0,0,1"/>
+                    </Grid>
+                </Border>
+
+                <TextBlock Grid.Row="3" Text="*Al ingresar serás el Adivinador de la palabra" 
+                           FontFamily="Segoe UI" FontStyle="Italic" FontSize="23" Foreground="#462A1A" 
+                           Margin="0,15,0,0"/>
+                
+            </Grid>
+            
+        </Border>
     </Grid>
 </Window>
