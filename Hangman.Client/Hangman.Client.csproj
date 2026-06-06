@@ -125,11 +125,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\" />
     <Folder Include="Models\" />
     <Folder Include="Resources\Icons\" />
     <Folder Include="Resources\Styles\" />
     <Folder Include="ViewModels\Base\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\HangmanBackground.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,7 +9,7 @@
 
     <Grid>
         <Grid.Background>
-            <SolidColorBrush Color="Red"/>
+            <ImageBrush ImageSource="/Assets/HangmanBackground.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
 
         <Border Width="1100" Height="650" Background="#E6F2E3D5" CornerRadius="20"
