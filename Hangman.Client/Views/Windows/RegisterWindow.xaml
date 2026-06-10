@@ -3,9 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:localization="clr-namespace:Hangman.Client.Localization"
         mc:Ignorable="d"
-        Title="El Ahorcado - Registro" Height="1080" Width="1920"
-        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Title="{localization:Loc Register_WindowTitle}"
+        Height="1080"
+        Width="1920"
+        MinHeight="720"
+        MinWidth="1100"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
         FontFamily="{StaticResource FuentePixel}">
 
     <Grid>
@@ -13,70 +19,258 @@
             <ImageBrush ImageSource="/Assets/HangmanBackground.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
 
-        <Border Width="850" Height="800" Background="#FDF8F5" CornerRadius="10"
-                BorderBrush="#B58B5C" BorderThickness="3"
-                VerticalAlignment="Center" HorizontalAlignment="Center">
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      Padding="20">
 
-            <Grid Margin="60,40,60,40">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+            <Border MaxWidth="950"
+                    MinWidth="760"
+                    Background="#FDF8F5"
+                    CornerRadius="10"
+                    BorderBrush="#B58B5C"
+                    BorderThickness="3"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
 
-                <TextBlock Grid.Row="0" Text="NUEVO JUGADOR" FontSize="36" FontWeight="Bold" 
-                           Foreground="#8C5A35" HorizontalAlignment="Center" Margin="0,0,0,20"
-                           FontFamily="{StaticResource FuentePixel}"/>
+                <Grid Margin="60,40,60,40">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="1" Margin="0,0,0,25">
-                    <TextBlock Text="Nombre de usuario" FontSize="30" FontWeight="SemiBold" Margin="0,0,0,0
-                               "/>
-                    <TextBox ToolTip="Ej: Juan Pérez"/>
-                </StackPanel>
+                    <TextBlock Grid.Row="0"
+                               Text="{localization:Loc Register_Title}"
+                               FontSize="36"
+                               FontWeight="Bold"
+                               Foreground="#8C5A35"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap"
+                               Margin="0,0,0,25"/>
 
-                <StackPanel Grid.Row="2" Margin="0,0,0,25">
-                    <TextBlock Text="Fecha de Nacimiento" FontSize="25" FontWeight="SemiBold" Margin="0,0,0,0"/>
-                    <DatePicker Height="45" FontSize="25" Background="#F8EAD9" BorderBrush="#C79F73" BorderThickness="2"/>
-                </StackPanel>
+                    <StackPanel Grid.Row="1" Margin="0,0,0,20">
+                        <TextBlock Text="{localization:Loc Register_FullNameLabel}"
+                                   FontSize="24"
+                                   FontWeight="SemiBold"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,6"/>
 
-                <Grid Grid.Row="3" Margin="0,0,0,25">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="30"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel Grid.Column="0">
-                        <TextBlock Text="Teléfono" FontSize="25" FontWeight="SemiBold" Margin="0,0,0,0"/>
-                        <TextBox ToolTip="222-123-4567"/>
+                        <TextBox Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{localization:Loc Register_FullNameTooltip}"/>
                     </StackPanel>
 
-                    <StackPanel Grid.Column="2">
-                        <TextBlock Text="Email" FontSize="25" FontWeight="SemiBold" Margin="0,0,0,0"/>
-                        <TextBox ToolTip="correo@dominio.com"/>
+                    <Grid Grid.Row="2" Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="24"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="{localization:Loc Register_DateOfBirthLabel}"
+                                       FontSize="24"
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"
+                                       Margin="0,0,0,6"/>
+
+                            <Grid x:Name="DateOfBirthSelector"
+                                  Height="45">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="52"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.ColumnSpan="2"
+                                        Background="{StaticResource ColorFondoInput}"
+                                        BorderBrush="{StaticResource ColorMaderaBorde}"
+                                        BorderThickness="2"/>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="{Binding DateOfBirth, StringFormat={}{0:dd/MM/yyyy}, TargetNullValue=''}"
+                                           FontSize="18"
+                                           Foreground="{StaticResource ColorTexto}"
+                                           VerticalAlignment="Center"
+                                           Margin="12,7,8,0"
+                                           IsHitTestVisible="False"/>
+
+                                <Button Grid.Column="1"
+                                        Content="▼"
+                                        FontSize="18"
+                                        FontFamily="{StaticResource FuentePixel}"
+                                        Foreground="{StaticResource ColorTexto}"
+                                        Background="#E5C39C"
+                                        BorderBrush="#B58B5C"
+                                        BorderThickness="2"
+                                        Cursor="Hand"
+                                        Click="OpenDateCalendarButton_Click"/>
+
+                                <Popup x:Name="DateOfBirthPopup"
+                                       PlacementTarget="{Binding ElementName=DateOfBirthSelector}"
+                                       Placement="Bottom"
+                                       StaysOpen="False"
+                                       AllowsTransparency="True">
+
+                                    <Border Background="#FAF3E6"
+                                            BorderBrush="#B58B5C"
+                                            BorderThickness="3"
+                                            Padding="6">
+
+                                        <Calendar SelectedDate="{Binding DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  Style="{StaticResource RetroCalendarStyle}"
+                                                  SelectedDatesChanged="DateOfBirthCalendar_SelectedDatesChanged"/>
+                                    </Border>
+                                </Popup>
+                            </Grid>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="{localization:Loc Register_PreferredLanguageLabel}"
+                                       FontSize="24"
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"
+                                       Margin="0,0,0,6"/>
+
+                            <ComboBox SelectedValue="{Binding PreferredLanguageCode, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedValuePath="Tag"
+                                      Style="{StaticResource RetroComboBoxStyle}">
+
+                                <ComboBoxItem Tag="es"
+                                              Content="{localization:Loc Language_Spanish}"/>
+
+                                <ComboBoxItem Tag="en"
+                                              Content="{localization:Loc Language_English}"/>
+                            </ComboBox>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="24"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="{localization:Loc Register_PhoneLabel}"
+                                       FontSize="24"
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"
+                                       Margin="0,0,0,6"/>
+
+                            <TextBox x:Name="PhoneTextBox"
+                                     Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="{localization:Loc Register_PhoneTooltip}"
+                                     MaxLength="20"
+                                     InputScope="Number"
+                                     PreviewTextInput="PhoneTextBox_PreviewTextInput"
+                                     DataObject.Pasting="PhoneTextBox_Pasting"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="{localization:Loc Register_EmailLabel}"
+                                       FontSize="24"
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"
+                                       Margin="0,0,0,6"/>
+
+                            <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="{localization:Loc Register_EmailTooltip}"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="4" Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="24"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="{localization:Loc Register_PasswordLabel}"
+                                       FontSize="24"
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"
+                                       Margin="0,0,0,6"/>
+
+                            <PasswordBox x:Name="PasswordBox"
+                                         PasswordChanged="PasswordBox_PasswordChanged"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="{localization:Loc Register_ConfirmPasswordLabel}"
+                                       FontSize="24"
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"
+                                       Margin="0,0,0,6"/>
+
+                            <PasswordBox x:Name="ConfirmPasswordBox"
+                                         PasswordChanged="ConfirmPasswordBox_PasswordChanged"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <StackPanel Grid.Row="5" Margin="0,0,0,18">
+                        <TextBlock Text="{Binding ErrorMessage}"
+                                   FontSize="17"
+                                   Foreground="#9B1C1C"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,0,0,8"/>
+
+                        <TextBlock Text="{Binding SuccessMessage}"
+                                   FontSize="17"
+                                   Foreground="#1F6B2A"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+                    <Button Grid.Row="6"
+                            Content="{localization:Loc Register_Button}"
+                            Height="70"
+                            MinWidth="280"
+                            MaxWidth="430"
+                            HorizontalAlignment="Center"
+                            Command="{Binding RegisterCommand}"
+                            Style="{StaticResource BotonMaderaStyle}"
+                            Margin="0,0,0,20"
+                            Padding="20,14,20,8"
+                            FontSize="24"/>
+
+                    <StackPanel Grid.Row="7"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,0,0,5">
+
+                        <TextBlock Text="{localization:Loc Register_AlreadyHaveAccount}"
+                                   FontSize="20"
+                                   Foreground="#555555"
+                                   TextWrapping="Wrap"/>
+
+                        <TextBlock Text="{localization:Loc Register_LoginLink}"
+                                   FontSize="20"
+                                   Foreground="#8C5A35"
+                                   FontWeight="SemiBold"
+                                   Cursor="Hand"
+                                   TextDecorations="Underline"
+                                   Margin="6,0,0,0">
+
+                            <TextBlock.InputBindings>
+                                <MouseBinding Gesture="LeftClick"
+                                              Command="{Binding OpenLoginCommand}"/>
+                            </TextBlock.InputBindings>
+                        </TextBlock>
                     </StackPanel>
                 </Grid>
-
-                <StackPanel Grid.Row="4" Margin="0,0,0,40">
-                    <TextBlock Text="Password" FontSize="25" FontWeight="SemiBold" Margin="0,0,0,0"/>
-                    <PasswordBox/>
-                </StackPanel>
-
-                <Button Grid.Row="6" Content="REGISTRARSE" Height="70" 
-                        Style="{StaticResource BotonMaderaStyle}" 
-                        Margin="0,0,0,20" Padding="0,17,0,0" FontSize="25"/>
-
-                <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBlock Text="¿Ya tienes cuenta? " FontSize="20" Foreground="#555555"/>
-                    <TextBlock Text="Iniciar Sesión" FontSize="20" Foreground="#8C5A35" 
-                               FontWeight="SemiBold" Cursor="Hand" TextDecorations="Underline"/>
-                </StackPanel>
-            </Grid>
-        </Border>
+            </Border>
+        </ScrollViewer>
     </Grid>
 </Window>

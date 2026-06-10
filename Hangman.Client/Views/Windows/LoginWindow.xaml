@@ -3,71 +3,175 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:localization="clr-namespace:Hangman.Client.Localization"
         mc:Ignorable="d"
-        Title="El Ahorcado - Inicio de Sesión" Height="1080" Width="1920"
-        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Title="{localization:Loc Login_WindowTitle}"
+        Height="1080"
+        Width="1920"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
         FontFamily="{StaticResource FuentePixel}">
+
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Assets/HangmanBackground.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
 
-        <Border Width="1100" Height="650" Background="#E6F2E3D5" CornerRadius="20"
-                VerticalAlignment="Center" HorizontalAlignment="Center"
-                BorderBrush="#B58B5C" BorderThickness="3">
+        <Border Width="1100"
+                Height="700"
+                Background="#E6F2E3D5"
+                CornerRadius="20"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                BorderBrush="#B58B5C"
+                BorderThickness="3">
+
             <Grid Margin="0,20,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Border Grid.Row="0" Margin="60,20,60,20" Background="#E5C39C" CornerRadius="15" Height="100" BorderBrush="#C79F73" BorderThickness="2">
-                    <TextBlock Grid.Row="0" Text="EL AHORCADO" FontSize="70" Foreground="#462A1A" 
-                                HorizontalAlignment="Center" Margin="0,0,0,0">
+                <Border Grid.Row="0"
+                        Margin="60,20,60,20"
+                        Background="#E5C39C"
+                        CornerRadius="15"
+                        Height="100"
+                        BorderBrush="#C79F73"
+                        BorderThickness="2">
+
+                    <TextBlock Text="{localization:Loc Login_WindowTitle}"
+                               FontSize="50"
+                               Foreground="#462A1A"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top" Height="92" Width="930" Margin="38,5,0,0">
+
                         <TextBlock.Effect>
-                            <DropShadowEffect Color="#8C5A35" BlurRadius="0" ShadowDepth="5" Direction="315" Opacity="0.7"/>
+                            <DropShadowEffect Color="#8C5A35"
+                                              BlurRadius="0"
+                                              ShadowDepth="5"
+                                              Direction="315"
+                                              Opacity="0.7"/>
                         </TextBlock.Effect>
                     </TextBlock>
                 </Border>
 
-                <Grid Grid.Row="1" Margin="100,70,100,0">
+                <Grid Grid.Row="1" Margin="100,60,100,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Correo electrónico" FontSize="20" VerticalAlignment="Center" Margin="0,0,30,30"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Margin="0,0,0,30"/>
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="0"
+                               Text="{localization:Loc Login_EmailLabel}"
+                               FontSize="20"
+                               VerticalAlignment="Center"
+                               Margin="0,0,30,30"/>
 
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Contraseña" FontSize="20" VerticalAlignment="Center" Margin="0,0,30,10"/>
-                    <PasswordBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,10"/>
+                    <TextBox x:Name="EmailTextBox"
+                             Grid.Row="0"
+                             Grid.Column="1"
+                             Margin="0,0,0,30"
+                             Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <CheckBox Grid.Row="2" Grid.Column="1" Content=" Mostrar Contraseñas" FontSize="20" Margin="0,10,0,0" />
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="0"
+                               Text="{localization:Loc Login_PasswordLabel}"
+                               FontSize="20"
+                               VerticalAlignment="Center"
+                               Margin="0,0,30,10"/>
+
+                    <Grid Grid.Row="1" Grid.Column="1" Margin="0,0,0,10">
+                        <PasswordBox x:Name="LoginPasswordBox"
+                                     PasswordChanged="LoginPasswordBox_PasswordChanged"/>
+
+                        <TextBox x:Name="VisiblePasswordTextBox"
+                                 Visibility="Collapsed"
+                                 TextChanged="VisiblePasswordTextBox_TextChanged"/>
+                    </Grid>
+
+                    <CheckBox x:Name="ShowPasswordCheckBox"
+                              Grid.Row="2"
+                              Grid.Column="1"
+                              Content="{localization:Loc Login_ShowPassword}"
+                              FontSize="20"
+                              Margin="0,10,0,0"
+                              Checked="ShowPasswordCheckBox_Checked"
+                              Unchecked="ShowPasswordCheckBox_Unchecked"/>
                 </Grid>
 
-                <Grid Grid.Row="2" Margin="60,10,60,30">
-                    <Button Content="INICIAR SESIÓN" Width="350" Height="65" 
-                            Click="Button_Click" 
-                            Style="{StaticResource BotonMaderaStyle}" Padding="0,10,0,0"/>
+                <StackPanel Grid.Row="2"
+                            Margin="100,0,100,15">
 
-                    <Button Width="65" Height="65" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                            Click="Button_Click_1" 
+                    <TextBlock Text="{Binding ErrorMessage}"
+                               FontSize="18"
+                               Foreground="#9B1C1C"
+                               TextWrapping="Wrap"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center"
+                               Margin="0,0,0,8"/>
+
+                    <TextBlock Text="{Binding SuccessMessage}"
+                               FontSize="18"
+                               Foreground="#1F6B2A"
+                               TextWrapping="Wrap"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center"/>
+                </StackPanel>
+
+                <Grid Grid.Row="3" Margin="60,10,60,30">
+                    <Button Content="{localization:Loc Login_Button}"
+                            Width="350"
+                            Height="65"
+                            Command="{Binding LoginCommand}"
+                            Style="{StaticResource BotonMaderaStyle}"
+                            Padding="0,10,0,0"/>
+
+                    <Button Width="65"
+                            Height="65"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Click="SettingsButton_Click"
+                            ToolTip="{localization:Loc Login_SettingsTooltip}"
                             Style="{StaticResource BotonMaderaStyle}">
-                        <TextBlock Text="⚙" FontSize="40" FontFamily="Segoe UI" Foreground="#3D2314" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-5,0,0"/>
+
+                        <TextBlock Text="⚙"
+                                   FontSize="40"
+                                   FontFamily="Segoe UI"
+                                   Foreground="#3D2314"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Margin="0,-5,0,0"/>
                     </Button>
                 </Grid>
 
-                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,30">
-                    <TextBlock Text="Crear cuenta" FontSize="20" Foreground="#3D2314" Cursor="Hand" TextDecorations="Underline"/>
-                </StackPanel>
+                <StackPanel Grid.Row="4"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0,0,0,30">
 
+                    <TextBlock Text="{localization:Loc Login_CreateAccount}"
+                               FontSize="20"
+                               Foreground="#3D2314"
+                               Cursor="Hand"
+                               TextDecorations="Underline">
+
+                        <TextBlock.InputBindings>
+                            <MouseBinding Gesture="LeftClick"
+                                          Command="{Binding OpenRegisterCommand}"/>
+                        </TextBlock.InputBindings>
+                    </TextBlock>
+                </StackPanel>
             </Grid>
         </Border>
     </Grid>

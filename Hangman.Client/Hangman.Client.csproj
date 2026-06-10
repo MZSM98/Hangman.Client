@@ -35,8 +35,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=3.3.1.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.3.3.1\lib\net462\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +62,45 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\ServiceReferenceAuth\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Logging\ClientLoggerFactory.cs" />
+    <Compile Include="Infrastructure\Logging\IClientLogger.cs" />
+    <Compile Include="Infrastructure\Logging\Log4NetClientLogger.cs" />
+    <Compile Include="Localization\LocExtension.cs" />
+    <Compile Include="Localization\Messages\ClientValidationMessageProvider.cs" />
+    <Compile Include="Localization\Messages\IMessageProvider.cs" />
+    <Compile Include="Localization\Messages\IServerMessageProvider.cs" />
+    <Compile Include="Localization\Messages\ResourceMessageProvider.cs" />
+    <Compile Include="Localization\Messages\ServerMessageKeyBuilder.cs" />
+    <Compile Include="Localization\Messages\ServerMessageModuleName.cs" />
+    <Compile Include="Localization\Messages\ServerMessageProvider.cs" />
+    <Compile Include="Localization\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Auth\AuthenticatedUserModel.cs" />
+    <Compile Include="Models\Auth\LoginFormModel.cs" />
+    <Compile Include="Models\Auth\RegisterFormModel.cs" />
+    <Compile Include="Models\Auth\UserSession.cs" />
+    <Compile Include="Models\Auth\VerifyEmailFormModel.cs" />
+    <Compile Include="Services\Auth\AuthClient.cs" />
+    <Compile Include="Services\Auth\IAuthClient.cs" />
+    <Compile Include="Validators\Auth\AuthValidationLimits.cs" />
+    <Compile Include="Validators\Auth\LoginFormValidator.cs" />
+    <Compile Include="Validators\Auth\RegisterFormValidator.cs" />
+    <Compile Include="Validators\Auth\VerifyEmailFormValidator.cs" />
+    <Compile Include="Validators\ClientValidationCode.cs" />
+    <Compile Include="Validators\ClientValidationResult.cs" />
+    <Compile Include="ViewModels\Base\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Base\RelayCommand.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\VerifyEmailViewModel.cs" />
     <Compile Include="Views\UserControls\MatchListView.xaml.cs">
       <DependentUpon>MatchListView.xaml</DependentUpon>
     </Compile>
@@ -69,6 +115,9 @@
     </Compile>
     <Compile Include="Views\Windows\RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\VerifyEmailWindow.xaml.cs">
+      <DependentUpon>VerifyEmailWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\UserControls\MatchListView.xaml">
       <SubType>Designer</SubType>
@@ -102,6 +151,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Windows\VerifyEmailWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -119,11 +172,32 @@
     </Compile>
     <EmbeddedResource Include="Localization\Resources.en.resx" />
     <EmbeddedResource Include="Localization\Resources.es.resx" />
+    <EmbeddedResource Include="Localization\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Resource Include="Assets\Minecraftia-Regular.ttf" />
+    <None Include="Connected Services\ServiceReferenceAuth\AuthService.wsdl" />
+    <None Include="Connected Services\ServiceReferenceAuth\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceAuth\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceAuth\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Auth.LoginResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Auth.RegisterResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Auth.RequestPasswordResetResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Auth.ResendVerificationEmailResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Auth.ResetPasswordResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Auth.VerifyEmailResponse.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -133,13 +207,38 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Resources\Icons\" />
     <Folder Include="Resources\Styles\" />
-    <Folder Include="ViewModels\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\HangmanBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\HangmanGame\Hangman.Contracts\Hangman.Contracts.csproj">
+      <Project>{93557a29-2cee-4d35-9edb-2ef076d895f7}</Project>
+      <Name>Hangman.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServiceReferenceAuth\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReferenceAuth\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReferenceAuth\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReferenceAuth\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReferenceAuth\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
