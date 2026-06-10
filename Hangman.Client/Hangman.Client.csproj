@@ -84,6 +84,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Models\Auth\AuthenticatedUserModel.cs" />
+    <Compile Include="Validators\Auth\AuthFieldValidator.cs" />
     <Compile Include="Models\Auth\LoginFormModel.cs" />
     <Compile Include="Models\Auth\RegisterFormModel.cs" />
     <Compile Include="Models\Auth\UserSession.cs" />
@@ -205,6 +206,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Icons\" />

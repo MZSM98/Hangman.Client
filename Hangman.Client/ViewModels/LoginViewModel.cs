@@ -7,6 +7,7 @@ using Hangman.Client.Validators.Auth;
 using Hangman.Client.ViewModels.Base;
 using Hangman.Contracts.Auth;
 using System;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -171,6 +172,16 @@ namespace Hangman.Client.ViewModels
             catch (TimeoutException exception)
             {
                 logger.Error("LoginAsync failed due to timeout.", exception);
+
+                SetError(serverMessageProvider.GetMessage(
+                    ServerMessageModuleName.Common,
+                    "RuntimeError"));
+
+                ClearPassword();
+            }
+            catch (CommunicationException exception)
+            {
+                logger.Error("LoginAsync failed due to a WCF communication error.", exception);
 
                 SetError(serverMessageProvider.GetMessage(
                     ServerMessageModuleName.Common,
