@@ -186,6 +186,16 @@ namespace Hangman.Client.ViewModels
                 ClearCode();
                 RaiseVerificationSucceeded();
             }
+            catch (EndpointNotFoundException exception)
+            {
+                logger.Error("VerifyEmailAsync failed because the authentication service endpoint was not found.", exception);
+
+                SetError(serverMessageProvider.GetMessage(
+                    ServerMessageModuleName.Common,
+                    "RuntimeError"));
+
+                ClearCode();
+            }
             catch (TimeoutException exception)
             {
                 logger.Error("VerifyEmailAsync failed due to timeout.", exception);
@@ -266,6 +276,14 @@ namespace Hangman.Client.ViewModels
 
                 SetSuccess(translatedMessage);
                 ClearCode();
+            }
+            catch (EndpointNotFoundException exception)
+            {
+                logger.Error("ResendAsync failed because the authentication service endpoint was not found.", exception);
+
+                SetError(serverMessageProvider.GetMessage(
+                    ServerMessageModuleName.Common,
+                    "RuntimeError"));
             }
             catch (TimeoutException exception)
             {

@@ -1,7 +1,4 @@
 ﻿using Hangman.Client.Models.Auth;
-using System;
-using System.Linq;
-using System.Net.Mail;
 
 namespace Hangman.Client.Validators.Auth
 {

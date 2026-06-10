@@ -307,7 +307,7 @@
     <value>El código de recuperación expiró.</value>
   </data>
   <data name="Server_Auth_PasswordResetTokenNotFound" xml:space="preserve">
-    <value>PasswordResetTokenNotFound</value>
+    <value>No se encontró un código de recuperación válido.</value>
   </data>
   <data name="Server_Auth_PasswordTooLong" xml:space="preserve">
     <value>La contraseña es demasiado larga.</value>
@@ -340,7 +340,7 @@
     <value>Hay un problema de configuración del sistema.</value>
   </data>
   <data name="Server_Common_DatabaseConnectionError" xml:space="preserve">
-    <value> No se pudo completar la operación por una restricción de datos.</value>
+    <value>No se pudo conectar a la base de datos.</value>
   </data>
   <data name="Server_Common_DatabaseConstraintError" xml:space="preserve">
     <value>The operation could not be completed due to a data restriction.</value>

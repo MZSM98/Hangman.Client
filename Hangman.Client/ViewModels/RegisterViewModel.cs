@@ -232,6 +232,16 @@ namespace Hangman.Client.ViewModels
                     RaiseVerificationRequired(registeredEmail);
                 }
             }
+            catch (EndpointNotFoundException exception)
+            {
+                logger.Error("RegisterAsync failed because the authentication service endpoint was not found.", exception);
+
+                SetError(serverMessageProvider.GetMessage(
+                    ServerMessageModuleName.Common,
+                    "RuntimeError"));
+
+                ClearSensitiveData();
+            }
             catch (TimeoutException exception)
             {
                 logger.Error("RegisterAsync failed due to timeout.", exception);

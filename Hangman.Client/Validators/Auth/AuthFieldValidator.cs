@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using System.Net.Mail;
 
-namespace Hangman.Client.Models.Auth
+namespace Hangman.Client.Validators.Auth
 {
     internal static class AuthFieldValidator
     {
