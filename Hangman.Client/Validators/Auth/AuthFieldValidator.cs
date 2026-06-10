@@ -243,6 +243,28 @@ namespace Hangman.Client.Validators.Auth
             return ClientValidationResult.Success();
         }
 
+        public static ClientValidationResult ValidateRecoveryCode(string code)
+        {
+            if (string.IsNullOrWhiteSpace(code))
+            {
+                return ClientValidationResult.Fail(ClientValidationCode.RecoveryCodeRequired);
+            }
+
+            string trimmedCode = code.Trim();
+
+            if (trimmedCode.Length != AuthValidationLimits.VerificationCodeLength)
+            {
+                return ClientValidationResult.Fail(ClientValidationCode.RecoveryCodeInvalidLength);
+            }
+
+            if (!trimmedCode.All(char.IsDigit))
+            {
+                return ClientValidationResult.Fail(ClientValidationCode.RecoveryCodeInvalidFormat);
+            }
+
+            return ClientValidationResult.Success();
+        }
+
         private static bool HasValidEmailFormat(string email)
         {
             try

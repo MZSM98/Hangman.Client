@@ -19,6 +19,7 @@ namespace Hangman.Client.Views.Windows
 
             viewModel.LoginSucceeded += OnLoginSucceeded;
             viewModel.RegisterRequested += OnRegisterRequested;
+            viewModel.PasswordResetRequested += OnPasswordResetRequested;
             viewModel.PasswordClearRequested += OnPasswordClearRequested;
         }
 
@@ -31,7 +32,7 @@ namespace Hangman.Client.Views.Windows
 
             viewModel.SetPassword(LoginPasswordBox.Password);
 
-            if (ShowPasswordCheckBox.IsChecked is true)
+            if (ShowPasswordCheckBox.IsChecked ?? false)
             {
                 isSynchronizingPassword = true;
                 VisiblePasswordTextBox.Text = LoginPasswordBox.Password;
@@ -109,10 +110,21 @@ namespace Hangman.Client.Views.Windows
             isSynchronizingPassword = false;
         }
 
+        private void OnPasswordResetRequested(object sender, PasswordResetRequestedEventArgs e)
+        {
+            RequestPasswordResetWindow requestPasswordResetWindow =
+                new RequestPasswordResetWindow(e.Email);
+
+            requestPasswordResetWindow.Show();
+
+            Close();
+        }
+
         protected override void OnClosed(EventArgs e)
         {
             viewModel.LoginSucceeded -= OnLoginSucceeded;
             viewModel.RegisterRequested -= OnRegisterRequested;
+            viewModel.PasswordResetRequested -= OnPasswordResetRequested;
             viewModel.PasswordClearRequested -= OnPasswordClearRequested;
 
             base.OnClosed(e);

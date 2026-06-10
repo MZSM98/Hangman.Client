@@ -84,6 +84,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Models\Auth\AuthenticatedUserModel.cs" />
+    <Compile Include="Models\Auth\RequestPasswordResetFormModel.cs" />
+    <Compile Include="Models\Auth\ResetPasswordFormModel.cs" />
     <Compile Include="Validators\Auth\AuthFieldValidator.cs" />
     <Compile Include="Models\Auth\LoginFormModel.cs" />
     <Compile Include="Models\Auth\RegisterFormModel.cs" />
@@ -94,6 +96,8 @@
     <Compile Include="Validators\Auth\AuthValidationLimits.cs" />
     <Compile Include="Validators\Auth\LoginFormValidator.cs" />
     <Compile Include="Validators\Auth\RegisterFormValidator.cs" />
+    <Compile Include="Validators\Auth\RequestPasswordResetFormValidator.cs" />
+    <Compile Include="Validators\Auth\ResetPasswordFormValidator.cs" />
     <Compile Include="Validators\Auth\VerifyEmailFormValidator.cs" />
     <Compile Include="Validators\ClientValidationCode.cs" />
     <Compile Include="Validators\ClientValidationResult.cs" />
@@ -101,6 +105,8 @@
     <Compile Include="ViewModels\Base\RelayCommand.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\RequestPasswordResetViewModel.cs" />
+    <Compile Include="ViewModels\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\VerifyEmailViewModel.cs" />
     <Compile Include="Views\UserControls\MatchListView.xaml.cs">
       <DependentUpon>MatchListView.xaml</DependentUpon>
@@ -116,6 +122,12 @@
     </Compile>
     <Compile Include="Views\Windows\RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\RequestPasswordResetWindow.xaml.cs">
+      <DependentUpon>RequestPasswordResetWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\ResetPasswordWindow.xaml.cs">
+      <DependentUpon>ResetPasswordWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\VerifyEmailWindow.xaml.cs">
       <DependentUpon>VerifyEmailWindow.xaml</DependentUpon>
@@ -149,6 +161,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\RegisterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\RequestPasswordResetWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\ResetPasswordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

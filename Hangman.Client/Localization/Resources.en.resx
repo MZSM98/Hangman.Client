@@ -132,6 +132,9 @@
   <data name="Login_EmailLabel" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="Login_ForgotPassword" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
   <data name="Login_PasswordLabel" xml:space="preserve">
     <value>Password</value>
   </data>
@@ -194,6 +197,54 @@
   </data>
   <data name="Register_WindowTitle" xml:space="preserve">
     <value>Hangman - Register</value>
+  </data>
+  <data name="RequestPasswordReset_BackToLogin" xml:space="preserve">
+    <value>Back to login</value>
+  </data>
+  <data name="RequestPasswordReset_Button" xml:space="preserve">
+    <value>SEND CODE</value>
+  </data>
+  <data name="RequestPasswordReset_Description" xml:space="preserve">
+    <value>Enter your email and we will send you a recovery code.</value>
+  </data>
+  <data name="RequestPasswordReset_EmailLabel" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="RequestPasswordReset_Title" xml:space="preserve">
+    <value>Recover password</value>
+  </data>
+  <data name="RequestPasswordReset_WindowTitle" xml:space="preserve">
+    <value>Hangman - Recover password</value>
+  </data>
+  <data name="ResetPassword_BackToLogin" xml:space="preserve">
+    <value>Back to login</value>
+  </data>
+  <data name="ResetPassword_Button" xml:space="preserve">
+    <value>RESET PASSWORD</value>
+  </data>
+  <data name="ResetPassword_CodeLabel" xml:space="preserve">
+    <value>Recovery code</value>
+  </data>
+  <data name="ResetPassword_CodeTooltip" xml:space="preserve">
+    <value>Enter the 6-digit code sent to your email.</value>
+  </data>
+  <data name="ResetPassword_ConfirmPasswordLabel" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="ResetPassword_Description" xml:space="preserve">
+    <value>Enter the recovery code and your new password.</value>
+  </data>
+  <data name="ResetPassword_EmailLabel" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="ResetPassword_NewPasswordLabel" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="ResetPassword_Title" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="ResetPassword_WindowTitle" xml:space="preserve">
+    <value>Hangman - Reset password</value>
   </data>
   <data name="Server_Auth_AccountAlreadyVerified" xml:space="preserve">
     <value>The account is already verified.</value>
@@ -549,8 +600,23 @@
   <data name="Validation_PreferredLanguageTooShort" xml:space="preserve">
     <value>Language code is too short.</value>
   </data>
+  <data name="Validation_RecoveryCodeInvalidFormat" xml:space="preserve">
+    <value>Recovery code must contain only numbers.</value>
+  </data>
+  <data name="Validation_RecoveryCodeInvalidLength" xml:space="preserve">
+    <value>Recovery code must have 6 digits.</value>
+  </data>
+  <data name="Validation_RecoveryCodeRequired" xml:space="preserve">
+    <value>Recovery code is required.</value>
+  </data>
   <data name="Validation_RegisterFormRequired" xml:space="preserve">
     <value>Registration data is required.</value>
+  </data>
+  <data name="Validation_RequestPasswordResetFormRequired" xml:space="preserve">
+    <value>Password recovery data is required.</value>
+  </data>
+  <data name="Validation_ResetPasswordFormRequired" xml:space="preserve">
+    <value>Password reset data is required.</value>
   </data>
   <data name="Validation_VerificationCodeInvalidFormat" xml:space="preserve">
     <value>Verification code must contain only numbers.</value>

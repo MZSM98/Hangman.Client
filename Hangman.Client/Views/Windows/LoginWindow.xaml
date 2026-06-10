@@ -156,15 +156,31 @@
                 </Grid>
 
                 <StackPanel Grid.Row="4"
-                            Orientation="Horizontal"
+                            Orientation="Vertical"
                             HorizontalAlignment="Center"
                             Margin="0,0,0,30">
+                    
+                    <TextBlock Text="{localization:Loc Login_ForgotPassword}"
+                               FontSize="20"
+                               Foreground="#8C5A35"
+                               FontWeight="SemiBold"
+                               Cursor="Hand"
+                               TextDecorations="Underline"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,14">
+                        
+                        <TextBlock.InputBindings>
+                            <MouseBinding Gesture="LeftClick"
+                                          Command="{Binding OpenPasswordResetCommand}"/>
+                        </TextBlock.InputBindings>
+                    </TextBlock>
 
                     <TextBlock Text="{localization:Loc Login_CreateAccount}"
                                FontSize="20"
                                Foreground="#3D2314"
                                Cursor="Hand"
-                               TextDecorations="Underline">
+                               TextDecorations="Underline"
+                               HorizontalAlignment="Center">
 
                         <TextBlock.InputBindings>
                             <MouseBinding Gesture="LeftClick"
