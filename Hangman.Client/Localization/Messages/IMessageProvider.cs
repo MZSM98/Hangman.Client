@@ -2,7 +2,7 @@
 
 namespace Hangman.Client.Localization.Messages
 {
-    public interface IMessageProvider<TCode>
+    public interface IMessageProvider<in TCode>
     {
         string GetMessage(TCode code);
 

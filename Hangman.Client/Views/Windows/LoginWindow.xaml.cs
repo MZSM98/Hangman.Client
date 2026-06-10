@@ -31,7 +31,7 @@ namespace Hangman.Client.Views.Windows
 
             viewModel.SetPassword(LoginPasswordBox.Password);
 
-            if (ShowPasswordCheckBox.IsChecked == true)
+            if (ShowPasswordCheckBox.IsChecked is true)
             {
                 isSynchronizingPassword = true;
                 VisiblePasswordTextBox.Text = LoginPasswordBox.Password;
