@@ -67,6 +67,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ServiceReferenceProfile\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Infrastructure\Logging\ClientLoggerFactory.cs" />
     <Compile Include="Infrastructure\Logging\IClientLogger.cs" />
     <Compile Include="Infrastructure\Logging\Log4NetClientLogger.cs" />
@@ -86,6 +91,9 @@
     <Compile Include="Models\Auth\AuthenticatedUserModel.cs" />
     <Compile Include="Models\Auth\RequestPasswordResetFormModel.cs" />
     <Compile Include="Models\Auth\ResetPasswordFormModel.cs" />
+    <Compile Include="Models\Profile\ProfileFormModel.cs" />
+    <Compile Include="Services\Profile\IProfileClient.cs" />
+    <Compile Include="Services\Profile\ProfileClient.cs" />
     <Compile Include="Validators\Auth\AuthFieldValidator.cs" />
     <Compile Include="Models\Auth\LoginFormModel.cs" />
     <Compile Include="Models\Auth\RegisterFormModel.cs" />
@@ -101,11 +109,16 @@
     <Compile Include="Validators\Auth\VerifyEmailFormValidator.cs" />
     <Compile Include="Validators\ClientValidationCode.cs" />
     <Compile Include="Validators\ClientValidationResult.cs" />
+    <Compile Include="Validators\Common\PlayerValidationLimits.cs" />
+    <Compile Include="Validators\Profile\ProfileFormValidator.cs" />
     <Compile Include="ViewModels\Base\AuthViewModelBase.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\Base\RelayCommand.cs" />
+    <Compile Include="ViewModels\Base\ServiceViewModelBase.cs" />
     <Compile Include="ViewModels\LoginMenuViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MainMenuViewModel.cs" />
+    <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\RequestPasswordResetViewModel.cs" />
     <Compile Include="ViewModels\ResetPasswordViewModel.cs" />
@@ -220,6 +233,16 @@
     <None Include="Connected Services\ServiceReferenceAuth\item2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceReferenceProfile\ProfileService.wsdl" />
+    <None Include="Connected Services\ServiceReferenceProfile\ProfileService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceProfile\ProfileService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceProfile\ProfileService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Hangman.Contracts.Auth.LoginResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Auth.RegisterResponse.datasource" />
@@ -227,6 +250,9 @@
     <None Include="Properties\DataSources\Hangman.Contracts.Auth.ResendVerificationEmailResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Auth.ResetPasswordResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Auth.VerifyEmailResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Profile.DeleteProfileResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Profile.GetProfileResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Profile.UpdateProfileResponse.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -234,6 +260,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Connected Services\ServiceReferenceProfile\ProfileService.disco" />
+    <None Include="Connected Services\ServiceReferenceProfile\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceReferenceProfile\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceReferenceProfile\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -256,6 +289,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServiceReferenceAuth\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceReferenceProfile\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ServiceReferenceAuth\item.disco" />

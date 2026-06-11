@@ -3,21 +3,44 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:Hangman.Client.ViewModels"
+        xmlns:userControls="clr-namespace:Hangman.Client.Views.UserControls"
         mc:Ignorable="d"
-        Title="El Ahorcado - Menú Principal" Height="1080" Width="1920"
-        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Title="El Ahorcado - Menú Principal"
+        Height="1080"
+        Width="1920"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
         FontFamily="{StaticResource FuentePixel}">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+        <DataTemplate DataType="{x:Type viewModels:ProfileViewModel}">
+            <userControls:ProfileView/>
+        </DataTemplate>
+    </Window.Resources>
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Assets/HangmanBackground.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="/Assets/HangmanBackground.jpg"
+                        Stretch="UniformToFill"/>
         </Grid.Background>
 
-        <Border Width="800" Height="754" Background="#FAF3E6" 
-                BorderBrush="#B58B5C" BorderThickness="4" CornerRadius="10"
-                VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Border Width="800"
+                Height="754"
+                Background="#FAF3E6"
+                BorderBrush="#B58B5C"
+                BorderThickness="4"
+                CornerRadius="10"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Visibility="{Binding IsHomeVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
 
-            <Border BorderBrush="#462A1A" BorderThickness="2" Margin="15,15,15,29">
+            <Border BorderBrush="#462A1A"
+                    BorderThickness="2"
+                    Margin="15,15,15,29">
+
                 <Grid Margin="50">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -27,38 +50,97 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="EL AHORCADO" FontSize="70" Foreground="#462A1A" 
-                               HorizontalAlignment="Center" Margin="0,20,0,0">
+                    <TextBlock Grid.Row="0"
+                               Text="EL AHORCADO"
+                               FontSize="70"
+                               Foreground="#462A1A"
+                               HorizontalAlignment="Center"
+                               Margin="0,20,0,0">
+
                         <TextBlock.Effect>
-                            <DropShadowEffect Color="#8C5A35" BlurRadius="0" ShadowDepth="5" Direction="315" Opacity="0.7"/>
+                            <DropShadowEffect Color="#8C5A35"
+                                              BlurRadius="0"
+                                              ShadowDepth="5"
+                                              Direction="315"
+                                              Opacity="0.7"/>
                         </TextBlock.Effect>
                     </TextBlock>
 
                     <StackPanel Grid.Row="2" Width="550">
-                        <Button Content="CREAR NUEVA PARTIDA" Height="75" Style="{StaticResource BotonRetroStyle}"/>
-                        <Button Content="UNIRSE" Height="75" Style="{StaticResource BotonRetroStyle}"/>
-                        <Button Content="EDITAR PERFIL" Height="75" Style="{StaticResource BotonRetroStyle}"/>
-                        <Button Content="PUNTOS" Height="75" Style="{StaticResource BotonRetroStyle}"/>
+                        <Button Content="CREAR NUEVA PARTIDA"
+                                Height="75"
+                                Style="{StaticResource BotonRetroStyle}"/>
+
+                        <Button Content="UNIRSE"
+                                Height="75"
+                                Style="{StaticResource BotonRetroStyle}"/>
+
+                        <Button Content="EDITAR PERFIL"
+                                Height="75"
+                                Command="{Binding OpenProfileCommand}"
+                                Style="{StaticResource BotonRetroStyle}"/>
+
+                        <Button Content="PUNTOS"
+                                Height="75"
+                                Style="{StaticResource BotonRetroStyle}"/>
                     </StackPanel>
 
-                    <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <StackPanel Grid.Row="4"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,0,0,10">
 
-                        <StackPanel Orientation="Horizontal" Cursor="Hand" Background="Transparent">
-                            <TextBlock Text="⚙ " FontSize="22" FontFamily="Segoe UI" Foreground="#462A1A" VerticalAlignment="Center"/>
-                            <TextBlock Text="Configuración" FontSize="20" FontFamily="Segoe UI" FontWeight="Medium" Foreground="#462A1A" VerticalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal"
+                                    Cursor="Hand"
+                                    Background="Transparent">
+
+                            <TextBlock Text="⚙ "
+                                       FontSize="22"
+                                       FontFamily="Segoe UI"
+                                       Foreground="#462A1A"
+                                       VerticalAlignment="Center"/>
+
+                            <TextBlock Text="Configuración"
+                                       FontSize="20"
+                                       FontFamily="Segoe UI"
+                                       FontWeight="Medium"
+                                       Foreground="#462A1A"
+                                       VerticalAlignment="Center"/>
                         </StackPanel>
 
-                        <TextBlock Text=" | " FontSize="20" FontFamily="Segoe UI" Foreground="#462A1A" VerticalAlignment="Center" Margin="10,0"/>
+                        <TextBlock Text=" | "
+                                   FontSize="20"
+                                   FontFamily="Segoe UI"
+                                   Foreground="#462A1A"
+                                   VerticalAlignment="Center"
+                                   Margin="10,0"/>
 
-                        <StackPanel Orientation="Horizontal" Cursor="Hand" Background="Transparent">
-                            <TextBlock Text="[→ " FontSize="22" FontFamily="Segoe UI" Foreground="#462A1A" VerticalAlignment="Center"/>
-                            <TextBlock Text="Cerrar Sesión" FontSize="20" FontFamily="Segoe UI" FontWeight="Medium" Foreground="#462A1A" VerticalAlignment="Center"/>
-                        </StackPanel>
+                        <Button Command="{Binding LogoutCommand}"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Padding="0">
 
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="[→ "
+                                           FontSize="22"
+                                           FontFamily="Segoe UI"
+                                           Foreground="#462A1A"
+                                           VerticalAlignment="Center"/>
+
+                                <TextBlock Text="Cerrar Sesión"
+                                           FontSize="20"
+                                           FontFamily="Segoe UI"
+                                           FontWeight="Medium"
+                                           Foreground="#462A1A"
+                                           VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
-
                 </Grid>
             </Border>
         </Border>
+
+        <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>

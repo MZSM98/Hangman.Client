@@ -1,5 +1,6 @@
 ﻿using Hangman.Client.Validators;
 using Hangman.Client.Validators.Auth;
+using Hangman.Client.Validators.Common;
 using System;
 using System.Linq;
 using System.Net.Mail;
@@ -19,12 +20,12 @@ namespace Hangman.Client.Validators.Auth
 
             string trimmedFullName = fullName.Trim();
 
-            if (trimmedFullName.Length < AuthValidationLimits.FullNameMinimumLength)
+            if (trimmedFullName.Length < PlayerValidationLimits.FullNameMinimumLength)
             {
                 return ClientValidationResult.Fail(ClientValidationCode.FullNameTooShort);
             }
 
-            if (trimmedFullName.Length > AuthValidationLimits.FullNameMaximumLength)
+            if (trimmedFullName.Length > PlayerValidationLimits.FullNameMaximumLength)
             {
                 return ClientValidationResult.Fail(ClientValidationCode.FullNameTooLong);
             }
@@ -92,12 +93,12 @@ namespace Hangman.Client.Validators.Auth
 
             string normalizedLanguageCode = languageCode.Trim().ToLowerInvariant();
 
-            if (normalizedLanguageCode.Length < AuthValidationLimits.LanguageCodeMinimumLength)
+            if (normalizedLanguageCode.Length < PlayerValidationLimits.PreferredLanguageMinimumLength)
             {
                 return ClientValidationResult.Fail(ClientValidationCode.PreferredLanguageTooShort);
             }
 
-            if (normalizedLanguageCode.Length > AuthValidationLimits.LanguageCodeMaximumLength)
+            if (normalizedLanguageCode.Length > PlayerValidationLimits.PreferredLanguageMaximumLength)
             {
                 return ClientValidationResult.Fail(ClientValidationCode.PreferredLanguageTooLong);
             }

@@ -153,6 +153,48 @@
   <data name="Login_WindowTitle" xml:space="preserve">
     <value>Hangman - Login</value>
   </data>
+  <data name="Profile_AvatarLabel" xml:space="preserve">
+    <value>Player avatar</value>
+  </data>
+  <data name="Profile_BackButton" xml:space="preserve">
+    <value>CANCEL</value>
+  </data>
+  <data name="Profile_CancelButton" xml:space="preserve">
+    <value>CANCEL</value>
+  </data>
+  <data name="Profile_DateOfBirthLabel" xml:space="preserve">
+    <value>Date of birth:</value>
+  </data>
+  <data name="Profile_DeleteButton" xml:space="preserve">
+    <value>DELETE</value>
+  </data>
+  <data name="Profile_DeleteConfirmationMessage" xml:space="preserve">
+    <value>Are you sure you want to delete your profile? This action will log you out.</value>
+  </data>
+  <data name="Profile_DeleteConfirmationTitle" xml:space="preserve">
+    <value>Delete profile</value>
+  </data>
+  <data name="Profile_EditButton" xml:space="preserve">
+    <value>EDIT</value>
+  </data>
+  <data name="Profile_EmailLabel" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="Profile_FullNameLabel" xml:space="preserve">
+    <value>Full name:</value>
+  </data>
+  <data name="Profile_PhoneLabel" xml:space="preserve">
+    <value>Phone:</value>
+  </data>
+  <data name="Profile_PreferredLanguageLabel" xml:space="preserve">
+    <value>Preferred language:</value>
+  </data>
+  <data name="Profile_SaveButton" xml:space="preserve">
+    <value>SAVE</value>
+  </data>
+  <data name="Profile_Title" xml:space="preserve">
+    <value>PROFILE MANAGEMENT</value>
+  </data>
   <data name="Register_AlreadyHaveAccount" xml:space="preserve">
     <value>Already have an account?</value>
   </data>
@@ -513,6 +555,9 @@
   <data name="Server_Word_NoCategoriesFound" xml:space="preserve">
     <value>No categories were found.</value>
   </data>
+  <data name="Validation_AccountRequired" xml:space="preserve">
+    <value>No active session found to retrieve the profile.</value>
+  </data>
   <data name="Validation_ConfirmPasswordRequired" xml:space="preserve">
     <value>Password confirmation is required.</value>
   </data>
@@ -599,6 +644,9 @@
   </data>
   <data name="Validation_PreferredLanguageTooShort" xml:space="preserve">
     <value>Language code is too short.</value>
+  </data>
+  <data name="Validation_ProfileFormRequired" xml:space="preserve">
+    <value>Profile data is required.</value>
   </data>
   <data name="Validation_RecoveryCodeInvalidFormat" xml:space="preserve">
     <value>Recovery code must contain only numbers.</value>

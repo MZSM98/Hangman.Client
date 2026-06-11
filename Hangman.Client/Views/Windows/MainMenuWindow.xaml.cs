@@ -1,27 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hangman.Client.ViewModels;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Hangman.Client.Views.Windows
 {
-    /// <summary>
-    /// Lógica de interacción para MainMenuWindow.xaml
-    /// </summary>
     public partial class MainMenuWindow : Window
     {
+        private readonly MainMenuViewModel viewModel;
+
         public MainMenuWindow()
         {
             InitializeComponent();
+
+            viewModel = new MainMenuViewModel();
+            DataContext = viewModel;
+
+            viewModel.SessionClosed += OnSessionClosed;
+        }
+
+        private void OnSessionClosed(object sender, EventArgs e)
+        {
+            LoginMenuWindow loginMenuWindow = new LoginMenuWindow();
+            loginMenuWindow.Show();
+
+            Close();
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            viewModel.SessionClosed -= OnSessionClosed;
+            base.OnClosed(e);
         }
     }
 }

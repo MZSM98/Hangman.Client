@@ -169,6 +169,132 @@ namespace Hangman.Client.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Player avatar.
+        /// </summary>
+        internal static string Profile_AvatarLabel {
+            get {
+                return ResourceManager.GetString("Profile_AvatarLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a CANCEL.
+        /// </summary>
+        internal static string Profile_BackButton {
+            get {
+                return ResourceManager.GetString("Profile_BackButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a CANCEL.
+        /// </summary>
+        internal static string Profile_CancelButton {
+            get {
+                return ResourceManager.GetString("Profile_CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Date of birth:.
+        /// </summary>
+        internal static string Profile_DateOfBirthLabel {
+            get {
+                return ResourceManager.GetString("Profile_DateOfBirthLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a DELETE.
+        /// </summary>
+        internal static string Profile_DeleteButton {
+            get {
+                return ResourceManager.GetString("Profile_DeleteButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Are you sure you want to delete your profile? This action will log you out..
+        /// </summary>
+        internal static string Profile_DeleteConfirmationMessage {
+            get {
+                return ResourceManager.GetString("Profile_DeleteConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Delete profile.
+        /// </summary>
+        internal static string Profile_DeleteConfirmationTitle {
+            get {
+                return ResourceManager.GetString("Profile_DeleteConfirmationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a EDIT.
+        /// </summary>
+        internal static string Profile_EditButton {
+            get {
+                return ResourceManager.GetString("Profile_EditButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Email:.
+        /// </summary>
+        internal static string Profile_EmailLabel {
+            get {
+                return ResourceManager.GetString("Profile_EmailLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Full name:.
+        /// </summary>
+        internal static string Profile_FullNameLabel {
+            get {
+                return ResourceManager.GetString("Profile_FullNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Phone:.
+        /// </summary>
+        internal static string Profile_PhoneLabel {
+            get {
+                return ResourceManager.GetString("Profile_PhoneLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Preferred language:.
+        /// </summary>
+        internal static string Profile_PreferredLanguageLabel {
+            get {
+                return ResourceManager.GetString("Profile_PreferredLanguageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a SAVE.
+        /// </summary>
+        internal static string Profile_SaveButton {
+            get {
+                return ResourceManager.GetString("Profile_SaveButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a PROFILE MANAGEMENT.
+        /// </summary>
+        internal static string Profile_Title {
+            get {
+                return ResourceManager.GetString("Profile_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Already have an account?.
         /// </summary>
         internal static string Register_AlreadyHaveAccount {
@@ -1249,6 +1375,15 @@ namespace Hangman.Client.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No active session found to retrieve the profile..
+        /// </summary>
+        internal static string Validation_AccountRequired {
+            get {
+                return ResourceManager.GetString("Validation_AccountRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Password confirmation is required..
         /// </summary>
         internal static string Validation_ConfirmPasswordRequired {
@@ -1506,6 +1641,15 @@ namespace Hangman.Client.Localization {
         internal static string Validation_PreferredLanguageTooShort {
             get {
                 return ResourceManager.GetString("Validation_PreferredLanguageTooShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Profile data is required..
+        /// </summary>
+        internal static string Validation_ProfileFormRequired {
+            get {
+                return ResourceManager.GetString("Validation_ProfileFormRequired", resourceCulture);
             }
         }
         

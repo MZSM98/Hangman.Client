@@ -3,12 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d">
+             xmlns:localization="clr-namespace:Hangman.Client.Localization"
+             mc:Ignorable="d"
+             FontFamily="{StaticResource FuentePixel}">
 
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
 
     <Grid Background="#2A1B14">
         <Border Background="#FAF3E6" Margin="10">
-
             <Grid Margin="50">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -16,11 +20,16 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="GESTIÓN DE PERFIL" 
-                           FontFamily="{StaticResource FuentePixel}" FontSize="45" 
-                           Foreground="#462A1A" Margin="0,0,0,10"/>
+                <TextBlock Grid.Row="0"
+                           Text="{localization:LocExtension Key=Profile_Title}"
+                           FontSize="45"
+                           Foreground="#462A1A"
+                           Margin="0,0,0,10"/>
 
-                <Border Grid.Row="1" BorderBrush="#D09D6C" BorderThickness="0,0,0,2" Margin="0,0,0,50"/>
+                <Border Grid.Row="1"
+                        BorderBrush="#D09D6C"
+                        BorderThickness="0,0,0,2"
+                        Margin="0,0,0,50"/>
 
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
@@ -28,23 +37,44 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" Margin="0,0,80,0" VerticalAlignment="Top">
+                    <StackPanel Grid.Column="0"
+                                Margin="0,0,80,0"
+                                VerticalAlignment="Top">
 
-                        <Border Width="240" Height="240" CornerRadius="120" 
-                                BorderBrush="#D6A57A" BorderThickness="8" Background="White" 
-                                ClipToBounds="True" Margin="0,0,0,20">
+                        <Border Width="240"
+                                Height="240"
+                                CornerRadius="120"
+                                BorderBrush="#D6A57A"
+                                BorderThickness="8"
+                                Background="White"
+                                ClipToBounds="True"
+                                Margin="0,0,0,20">
+
                             <Grid>
-                                <Ellipse Width="75" Height="75" Fill="#D6A57A" VerticalAlignment="Top" Margin="0,40,0,0"/>
-                                <Ellipse Width="180" Height="140" Fill="#D6A57A" VerticalAlignment="Bottom" Margin="0,0,0,-50"/>
+                                <Ellipse Width="75"
+                                         Height="75"
+                                         Fill="#D6A57A"
+                                         VerticalAlignment="Top"
+                                         Margin="0,40,0,0"/>
+
+                                <Ellipse Width="180"
+                                         Height="140"
+                                         Fill="#D6A57A"
+                                         VerticalAlignment="Bottom"
+                                         Margin="0,0,0,-50"/>
                             </Grid>
                         </Border>
 
-                        <TextBlock Text="Avatar de Jugador" FontFamily="Segoe UI" FontSize="18" 
-                                   Foreground="#462A1A" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{localization:LocExtension Key=Profile_AvatarLabel}"
+                                   FontFamily="Segoe UI"
+                                   FontSize="18"
+                                   Foreground="#462A1A"
+                                   HorizontalAlignment="Center"/>
                     </StackPanel>
 
                     <Grid Grid.Column="1" VerticalAlignment="Top">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -59,35 +89,226 @@
                             </Grid.ColumnDefinitions>
 
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="Nombre:" FontFamily="Segoe UI" FontSize="18" Foreground="#2A1B14" Margin="0,0,0,5"/>
-                                <TextBox Text="" Background="White" BorderBrush="#2A1B14" BorderThickness="1" Padding="10,8" FontSize="18" Height="40"/>
+                                <TextBlock Text="{localization:LocExtension Key=Profile_FullNameLabel}"
+                                           FontFamily="Segoe UI"
+                                           FontSize="18"
+                                           Foreground="#2A1B14"
+                                           Margin="0,0,0,5"/>
+
+                                <TextBox Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"
+                                         IsReadOnly="{Binding IsReadOnlyMode}"
+                                         Background="White"
+                                         BorderBrush="#2A1B14"
+                                         BorderThickness="1"
+                                         Padding="10,8"
+                                         FontSize="18"
+                                         Height="40"/>
                             </StackPanel>
 
                             <StackPanel Grid.Column="2">
-                                <TextBlock Text="Teléfono:" FontFamily="Segoe UI" FontSize="18" Foreground="#2A1B14" Margin="0,0,0,5"/>
-                                <TextBox Text="" Background="White" BorderBrush="#2A1B14" BorderThickness="1" Padding="10,8" FontSize="18" Height="40"/>
+                                <TextBlock Text="{localization:LocExtension Key=Profile_PhoneLabel}"
+                                           FontFamily="Segoe UI"
+                                           FontSize="18"
+                                           Foreground="#2A1B14"
+                                           Margin="0,0,0,5"/>
+
+                                <TextBox x:Name="PhoneTextBox"
+                                         Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"
+                                         IsReadOnly="{Binding IsReadOnlyMode}"
+                                         Background="White"
+                                         BorderBrush="#2A1B14"
+                                         BorderThickness="1"
+                                         Padding="10,8"
+                                         FontSize="18"
+                                         Height="40"
+                                         MaxLength="20"
+                                         InputScope="Number"
+                                         PreviewTextInput="PhoneTextBox_PreviewTextInput"
+                                         DataObject.Pasting="PhoneTextBox_Pasting"/>
                             </StackPanel>
                         </Grid>
 
                         <StackPanel Grid.Row="1" Margin="0,0,0,25">
-                            <TextBlock Text="Correo Electrónico:" FontFamily="Segoe UI" FontSize="18" Foreground="#2A1B14" Margin="0,0,0,5"/>
-                            <TextBox Text="juan.perez@dominio.com" Background="#EAEAEA" BorderBrush="#2A1B14" BorderThickness="1" Padding="10,8" FontSize="18" Height="40" IsReadOnly="True" Foreground="#555555"/>
+                            <TextBlock Text="{localization:LocExtension Key=Profile_EmailLabel}"
+                                       FontFamily="Segoe UI"
+                                       FontSize="18"
+                                       Foreground="#2A1B14"
+                                       Margin="0,0,0,5"/>
+
+                            <TextBox Text="{Binding Email, Mode=OneWay}"
+                                     Background="#EAEAEA"
+                                     BorderBrush="#2A1B14"
+                                     BorderThickness="1"
+                                     Padding="10,8"
+                                     FontSize="18"
+                                     Height="40"
+                                     IsReadOnly="True"
+                                     Foreground="#555555"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="2" Margin="0,0,0,40">
-                            <TextBlock Text="Fecha de Nacimiento:" FontFamily="Segoe UI" FontSize="18" Foreground="#2A1B14" Margin="0,0,0,5"/>
-                            <DatePicker Text="" Background="White" BorderBrush="#2A1B14" BorderThickness="1" FontSize="18" Height="40"/>
+                        <Grid Grid.Row="2" Margin="0,0,0,25">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="{localization:LocExtension Key=Profile_DateOfBirthLabel}"
+                                           FontFamily="Segoe UI"
+                                           FontSize="18"
+                                           Foreground="#2A1B14"
+                                           Margin="0,0,0,5"/>
+
+                                <Grid x:Name="DateOfBirthSelector"
+                                      Height="45">
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="52"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Grid.ColumnSpan="2"
+                                            Background="{StaticResource ColorFondoInput}"
+                                            BorderBrush="{StaticResource ColorMaderaBorde}"
+                                            BorderThickness="2"/>
+
+                                    <TextBlock Grid.Column="0"
+                                               Text="{Binding DateOfBirth, StringFormat={}{0:dd/MM/yyyy}, TargetNullValue=''}"
+                                               FontSize="18"
+                                               Foreground="{StaticResource ColorTexto}"
+                                               VerticalAlignment="Center"
+                                               Margin="12,7,8,0"
+                                               IsHitTestVisible="False"/>
+
+                                    <Button Grid.Column="1"
+                                            Content="▼"
+                                            FontSize="18"
+                                            FontFamily="{StaticResource FuentePixel}"
+                                            Foreground="{StaticResource ColorTexto}"
+                                            Background="#E5C39C"
+                                            BorderBrush="#B58B5C"
+                                            BorderThickness="2"
+                                            Cursor="Hand"
+                                            IsEnabled="{Binding IsEditing}"
+                                            Click="OpenDateCalendarButton_Click"/>
+
+                                    <Popup x:Name="DateOfBirthPopup"
+                                           PlacementTarget="{Binding ElementName=DateOfBirthSelector}"
+                                           Placement="Bottom"
+                                           StaysOpen="False"
+                                           AllowsTransparency="True">
+
+                                        <Border Background="#FAF3E6"
+                                                BorderBrush="#B58B5C"
+                                                BorderThickness="3"
+                                                Padding="6">
+
+                                            <Calendar SelectedDate="{Binding DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      Style="{StaticResource RetroCalendarStyle}"
+                                                      SelectedDatesChanged="DateOfBirthCalendar_SelectedDatesChanged"/>
+                                        </Border>
+                                    </Popup>
+                                </Grid>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="{localization:LocExtension Key=Profile_PreferredLanguageLabel}"
+                                           FontFamily="Segoe UI"
+                                           FontSize="18"
+                                           Foreground="#2A1B14"
+                                           Margin="0,0,0,5"/>
+
+                                <ComboBox SelectedValue="{Binding PreferredLanguageCode, UpdateSourceTrigger=PropertyChanged}"
+                                          SelectedValuePath="Tag"
+                                          IsEnabled="{Binding IsEditing}"
+                                          Style="{StaticResource RetroComboBoxStyle}">
+
+                                    <ComboBoxItem Tag="es"
+                                                  Content="{localization:LocExtension Key=Language_Spanish}"/>
+
+                                    <ComboBoxItem Tag="en"
+                                                  Content="{localization:LocExtension Key=Language_English}"/>
+                                </ComboBox>
+                            </StackPanel>
+                        </Grid>
+
+                        <StackPanel Grid.Row="3" Margin="0,0,0,25">
+                            <TextBlock Text="{Binding ErrorMessage}"
+                                       FontSize="17"
+                                       Foreground="#9B1C1C"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Margin="0,0,0,8"/>
+
+                            <TextBlock Text="{Binding SuccessMessage}"
+                                       FontSize="17"
+                                       Foreground="#1F6B2A"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"
+                                       HorizontalAlignment="Center"/>
                         </StackPanel>
 
-                        <Button Grid.Row="3" Content="CANCELAR" 
-                                Width="220" Height="60" HorizontalAlignment="Right"
-                                FontFamily="{StaticResource FuentePixel}"
-                                Style="{StaticResource BotonRetroStyle}" Margin="0,0,4,20"/>
-                        <Button Grid.Row="3" Content="GUARDAR" 
-                            Width="220" Height="60" HorizontalAlignment="Left"
-                            FontFamily="{StaticResource FuentePixel}"
-                            Style="{StaticResource BotonRetroStyle}" Margin="266,0,0,20"/>
+                        <Grid Grid.Row="4" Margin="0,20,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
+                            <Button Grid.Column="0"
+                                    Content="{localization:LocExtension Key=Profile_DeleteButton}"
+                                    Width="220"
+                                    Height="60"
+                                    Margin="0"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Left"
+                                    Click="DeleteButton_Click"
+                                    Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                    Style="{StaticResource BotonRetroStyle}"/>
+
+                            <StackPanel Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        VerticalAlignment="Top"
+                                        HorizontalAlignment="Right">
+
+                                <Button Content="{localization:LocExtension Key=Profile_BackButton}"
+                                        Width="220"
+                                        Height="60"
+                                        Margin="0,0,20,0"
+                                        VerticalAlignment="Top"
+                                        Command="{Binding BackCommand}"
+                                        Visibility="{Binding IsReadOnlyMode, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        Style="{StaticResource BotonRetroStyle}"/>
+
+                                <Button Content="{localization:LocExtension Key=Profile_EditButton}"
+                                        Width="220"
+                                        Height="60"
+                                        Margin="0"
+                                        VerticalAlignment="Top"
+                                        Command="{Binding EditProfileCommand}"
+                                        Visibility="{Binding IsReadOnlyMode, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        Style="{StaticResource BotonRetroStyle}"/>
+
+                                <Button Content="{localization:LocExtension Key=Profile_CancelButton}"
+                                        Width="220"
+                                        Height="60"
+                                        Margin="0,0,20,0"
+                                        VerticalAlignment="Top"
+                                        Command="{Binding CancelEditCommand}"
+                                        Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        Style="{StaticResource BotonRetroStyle}"/>
+
+                                <Button Content="{localization:LocExtension Key=Profile_SaveButton}"
+                                        Width="220"
+                                        Height="60"
+                                        Margin="0"
+                                        VerticalAlignment="Top"
+                                        Command="{Binding UpdateProfileCommand}"
+                                        Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        Style="{StaticResource BotonRetroStyle}"/>
+                            </StackPanel>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
