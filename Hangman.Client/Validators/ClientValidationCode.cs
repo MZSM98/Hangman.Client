@@ -6,6 +6,8 @@
 
         LoginFormRequired,
         RegisterFormRequired,
+        ProfileFormRequired,
+        AccountRequired,
 
         FullNameRequired,
         FullNameTooShort,
