@@ -1,0 +1,46 @@
+﻿<Window x:Class="Hangman.Client.Views.Windows.LoginMenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:localization="clr-namespace:Hangman.Client.Localization"
+        xmlns:viewModels="clr-namespace:Hangman.Client.ViewModels"
+        xmlns:userControls="clr-namespace:Hangman.Client.Views.UserControls"
+        mc:Ignorable="d"
+        Height="1080"
+        Width="1920"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="{StaticResource FuentePixel}"
+        Title="{localization:Loc Login_WindowTitle}">
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
+            <userControls:LoginView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:RegisterViewModel}">
+            <userControls:RegisterView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:VerifyEmailViewModel}">
+            <userControls:VerifyEmailView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:RequestPasswordResetViewModel}">
+            <userControls:RequestPasswordResetView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:ResetPasswordViewModel}">
+            <userControls:ResetPasswordView/>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/HangmanBackground.jpg"
+                        Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <ContentControl Content="{Binding CurrentViewModel}"/>
+    </Grid>
+</Window>
