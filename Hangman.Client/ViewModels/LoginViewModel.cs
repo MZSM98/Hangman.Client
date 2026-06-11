@@ -7,27 +7,18 @@ using Hangman.Client.Validators.Auth;
 using Hangman.Client.ViewModels.Base;
 using Hangman.Contracts.Auth;
 using System;
-using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Hangman.Client.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModel : AuthViewModelBase
     {
-        private readonly IAuthClient authClient;
-        private readonly ClientValidationMessageProvider validationMessageProvider;
-        private readonly IServerMessageProvider serverMessageProvider;
-        private readonly IClientLogger logger;
-
         private readonly RelayCommand loginCommand;
         private readonly RelayCommand openRegisterCommand;
         private readonly RelayCommand openPasswordResetCommand;
 
         private readonly LoginFormModel loginForm;
-
-        private const string UnexpectedErrorCode = "UnexpectedError";
-        private const string RuntimeErrorCode = "RuntimeError";
 
         public LoginViewModel()
             : this(
@@ -43,36 +34,33 @@ namespace Hangman.Client.ViewModels
             ClientValidationMessageProvider validationMessageProvider,
             IServerMessageProvider serverMessageProvider,
             IClientLogger logger)
+            : base(
+                  authClient,
+                  validationMessageProvider,
+                  serverMessageProvider,
+                  logger)
         {
-            this.authClient = authClient ??
-                throw new ArgumentNullException(nameof(authClient));
-            this.validationMessageProvider = validationMessageProvider ??
-                throw new ArgumentNullException(nameof(validationMessageProvider));
-            this.serverMessageProvider = serverMessageProvider ??
-                throw new ArgumentNullException(nameof(serverMessageProvider));
-            this.logger = logger ??
-                throw new ArgumentNullException(nameof(logger));
-
             loginForm = new LoginFormModel();
 
             loginCommand = new RelayCommand(
                 async () => await LoginAsync(),
-                CanExecuteLogin);
+                CanExecuteWhenNotBusy);
 
             openRegisterCommand = new RelayCommand(
                 RequestOpenRegister,
-                CanExecuteNavigation);
+                CanExecuteWhenNotBusy);
 
             openPasswordResetCommand = new RelayCommand(
                 RequestOpenPasswordReset,
-                CanExecuteNavigation);
+                CanExecuteWhenNotBusy);
         }
 
         public event EventHandler LoginSucceeded;
 
         public event EventHandler RegisterRequested;
 
-        public event EventHandler<PasswordResetRequestedEventArgs> PasswordResetRequested;
+        public event EventHandler<PasswordResetRequestedEventArgs>
+            PasswordResetRequested;
 
         public event EventHandler PasswordClearRequested;
 
@@ -88,6 +76,7 @@ namespace Hangman.Client.ViewModels
 
                 loginForm.Email = value;
                 OnPropertyChanged();
+
                 loginCommand.RaiseCanExecuteChanged();
                 openPasswordResetCommand.RaiseCanExecuteChanged();
             }
@@ -118,127 +107,70 @@ namespace Hangman.Client.ViewModels
         {
             ClearMessages();
 
-            ClientValidationResult validationResult = LoginFormValidator.Validate(loginForm);
+            ClientValidationResult validationResult =
+                LoginFormValidator.Validate(loginForm);
 
             if (!validationResult.IsValid)
             {
-                SetError(validationMessageProvider.GetMessage(validationResult.Code));
+                SetValidationError(validationResult);
                 return;
             }
 
-            SetBusy(true);
-
-            try
-            {
-                LoginRequest request = new LoginRequest
-                {
-                    Email = loginForm.Email.Trim(),
-                    Password = loginForm.Password
-                };
-
-                LoginResponse response = await authClient.LoginAsync(request);
-
-                if (response == null)
-                {
-                    SetError(serverMessageProvider.GetMessage(
-                        ServerMessageModuleName.Common,
-                        UnexpectedErrorCode));
-
-                    logger.Warn("LoginAsync returned a null response.");
-                    return;
-                }
-
-                if (!response.Success)
-                {
-                    SetError(serverMessageProvider.GetMessage(
-                        ServerMessageModuleName.Auth,
-                        response.MessageCode));
-
-                    ClearPassword();
-                    return;
-                }
-
-                if (response.Player == null)
-                {
-                    SetError(serverMessageProvider.GetMessage(
-                        ServerMessageModuleName.Common,
-                        UnexpectedErrorCode));
-
-                    logger.Warn("LoginAsync succeeded but player data was null.");
-                    ClearPassword();
-                    return;
-                }
-
-                UserSession.Start(new AuthenticatedUserModel
-                {
-                    AccountId = response.Player.AccountId,
-                    PlayerId = response.Player.PlayerId,
-                    FullName = response.Player.FullName,
-                    Email = loginForm.Email.Trim(),
-                    PreferredLanguageCode = response.Player.PreferredLanguageCode
-                });
-
-                SetSuccess(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Auth,
-                    response.MessageCode));
-
-                ClearPassword();
-                RaiseLoginSucceeded();
-            }
-            catch (EndpointNotFoundException exception)
-            {
-                logger.Error("LoginAsync failed because the authentication service endpoint was not found.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    RuntimeErrorCode));
-
-                ClearPassword();
-            }
-            catch (TimeoutException exception)
-            {
-                logger.Error("LoginAsync failed due to timeout.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    RuntimeErrorCode));
-
-                ClearPassword();
-            }
-            catch (CommunicationException exception)
-            {
-                logger.Error("LoginAsync failed due to a WCF communication error.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    RuntimeErrorCode));
-
-                ClearPassword();
-            }
-            catch (Exception exception)
-            {
-                logger.Error("LoginAsync failed unexpectedly.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    UnexpectedErrorCode));
-
-                ClearPassword();
-            }
-            finally
-            {
-                SetBusy(false);
-            }
+            await ExecuteAuthOperationAsync(
+                "LoginAsync",
+                LoginCoreAsync,
+                ClearPassword,
+                loginCommand,
+                openRegisterCommand,
+                openPasswordResetCommand);
         }
 
-        private bool CanExecuteLogin()
+        private async Task LoginCoreAsync()
         {
-            return !IsBusy;
-        }
+            LoginRequest request = new LoginRequest
+            {
+                Email = loginForm.Email.Trim(),
+                Password = loginForm.Password
+            };
 
-        private bool CanExecuteNavigation()
-        {
-            return !IsBusy;
+            LoginResponse response = await AuthClient.LoginAsync(request);
+
+            if (response == null)
+            {
+                SetCommonUnexpectedError();
+                Logger.Warn("LoginAsync returned a null response.");
+                ClearPassword();
+                return;
+            }
+
+            if (!response.Success)
+            {
+                SetError(GetAuthServerMessage(response.MessageCode));
+                ClearPassword();
+                return;
+            }
+
+            if (response.Player == null)
+            {
+                SetCommonUnexpectedError();
+                Logger.Warn("LoginAsync succeeded but player data was null.");
+                ClearPassword();
+                return;
+            }
+
+            UserSession.Start(new AuthenticatedUserModel
+            {
+                AccountId = response.Player.AccountId,
+                PlayerId = response.Player.PlayerId,
+                FullName = response.Player.FullName,
+                Email = loginForm.Email.Trim(),
+                PreferredLanguageCode = response.Player.PreferredLanguageCode
+            });
+
+            SetSuccess(GetAuthServerMessage(response.MessageCode));
+
+            ClearPassword();
+            RaiseLoginSucceeded();
         }
 
         private void RequestOpenRegister()
@@ -261,14 +193,6 @@ namespace Hangman.Client.ViewModels
             RaisePasswordResetRequested();
         }
 
-        private void SetBusy(bool value)
-        {
-            IsBusy = value;
-            loginCommand.RaiseCanExecuteChanged();
-            openRegisterCommand.RaiseCanExecuteChanged();
-            openPasswordResetCommand.RaiseCanExecuteChanged();
-        }
-
         private void ClearPassword()
         {
             loginForm.ClearPassword();
@@ -289,6 +213,7 @@ namespace Hangman.Client.ViewModels
         private void RaisePasswordResetRequested()
         {
             string email = loginForm.Email ?? string.Empty;
+
             PasswordResetRequested?.Invoke(
                 this,
                 new PasswordResetRequestedEventArgs(email));
