@@ -7,26 +7,17 @@ using Hangman.Client.Validators.Auth;
 using Hangman.Client.ViewModels.Base;
 using Hangman.Contracts.Auth;
 using System;
-using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Hangman.Client.ViewModels
 {
-    public class ResetPasswordViewModel : BaseViewModel
+    public class ResetPasswordViewModel : AuthViewModelBase
     {
-        private readonly IAuthClient authClient;
-        private readonly ClientValidationMessageProvider validationMessageProvider;
-        private readonly IServerMessageProvider serverMessageProvider;
-        private readonly IClientLogger logger;
-
         private readonly RelayCommand resetPasswordCommand;
         private readonly RelayCommand openLoginCommand;
 
         private readonly ResetPasswordFormModel form;
-
-        private const string UnexpectedErrorCode = "UnexpectedError";
-        private const string RuntimeErrorCode = "RuntimeError";
 
         public ResetPasswordViewModel()
             : this(string.Empty)
@@ -49,16 +40,12 @@ namespace Hangman.Client.ViewModels
             ClientValidationMessageProvider validationMessageProvider,
             IServerMessageProvider serverMessageProvider,
             IClientLogger logger)
+            : base(
+                  authClient,
+                  validationMessageProvider,
+                  serverMessageProvider,
+                  logger)
         {
-            this.authClient = authClient ??
-                throw new ArgumentNullException(nameof(authClient));
-            this.validationMessageProvider = validationMessageProvider ??
-                throw new ArgumentNullException(nameof(validationMessageProvider));
-            this.serverMessageProvider = serverMessageProvider ??
-                throw new ArgumentNullException(nameof(serverMessageProvider));
-            this.logger = logger ??
-                throw new ArgumentNullException(nameof(logger));
-
             form = new ResetPasswordFormModel
             {
                 Email = email ?? string.Empty
@@ -66,14 +53,12 @@ namespace Hangman.Client.ViewModels
 
             resetPasswordCommand = new RelayCommand(
                 async () => await ResetPasswordAsync(),
-                CanExecuteAction);
+                CanExecuteWhenNotBusy);
 
             openLoginCommand = new RelayCommand(
                 RequestOpenLogin,
-                CanExecuteNavigation);
+                CanExecuteWhenNotBusy);
         }
-
-        public event EventHandler LoginRequested;
 
         public event EventHandler PasswordResetSucceeded;
 
@@ -142,121 +127,50 @@ namespace Hangman.Client.ViewModels
 
             if (!validationResult.IsValid)
             {
-                SetError(validationMessageProvider.GetMessage(validationResult.Code));
+                SetValidationError(validationResult);
                 return;
             }
 
-            SetBusy(true);
-
-            try
-            {
-                ResetPasswordRequest request = new ResetPasswordRequest
-                {
-                    Email = form.Email.Trim(),
-                    Code = form.Code.Trim(),
-                    NewPassword = form.NewPassword
-                };
-
-                ResetPasswordResponse response =
-                    await authClient.ResetPasswordAsync(request);
-
-                if (response == null)
-                {
-                    SetError(serverMessageProvider.GetMessage(
-                        ServerMessageModuleName.Common,
-                        UnexpectedErrorCode));
-
-                    logger.Warn("ResetPasswordAsync returned a null response.");
-                    ClearSensitiveData();
-                    return;
-                }
-
-                string translatedMessage = serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Auth,
-                    response.MessageCode);
-
-                if (!response.Success)
-                {
-                    SetError(translatedMessage);
-                    ClearSensitiveData();
-                    return;
-                }
-
-                SetSuccess(translatedMessage);
-                ClearSensitiveData();
-                RaisePasswordResetSucceeded();
-            }
-            catch (EndpointNotFoundException exception)
-            {
-                logger.Error("ResetPasswordAsync failed because the authentication service endpoint was not found.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    RuntimeErrorCode));
-
-                ClearSensitiveData();
-            }
-            catch (TimeoutException exception)
-            {
-                logger.Error("ResetPasswordAsync failed due to timeout.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    RuntimeErrorCode));
-
-                ClearSensitiveData();
-            }
-            catch (CommunicationException exception)
-            {
-                logger.Error("ResetPasswordAsync failed due to communication error.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    RuntimeErrorCode));
-
-                ClearSensitiveData();
-            }
-            catch (Exception exception)
-            {
-                logger.Error("ResetPasswordAsync failed unexpectedly.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    UnexpectedErrorCode));
-
-                ClearSensitiveData();
-            }
-            finally
-            {
-                SetBusy(false);
-            }
+            await ExecuteAuthOperationAsync(
+                "ResetPasswordAsync",
+                ResetPasswordCoreAsync,
+                ClearSensitiveData,
+                resetPasswordCommand,
+                openLoginCommand);
         }
 
-        private bool CanExecuteAction()
+        private async Task ResetPasswordCoreAsync()
         {
-            return !IsBusy;
-        }
-
-        private bool CanExecuteNavigation()
-        {
-            return !IsBusy;
-        }
-
-        private void RequestOpenLogin()
-        {
-            if (IsBusy)
+            ResetPasswordRequest request = new ResetPasswordRequest
             {
+                Email = form.Email.Trim(),
+                Code = form.Code.Trim(),
+                NewPassword = form.NewPassword
+            };
+
+            ResetPasswordResponse response =
+                await AuthClient.ResetPasswordAsync(request);
+
+            if (response == null)
+            {
+                SetCommonUnexpectedError();
+                Logger.Warn("ResetPasswordAsync returned a null response.");
+                ClearSensitiveData();
                 return;
             }
 
-            RaiseLoginRequested();
-        }
+            string translatedMessage = GetAuthServerMessage(response.MessageCode);
 
-        private void SetBusy(bool value)
-        {
-            IsBusy = value;
-            resetPasswordCommand.RaiseCanExecuteChanged();
-            openLoginCommand.RaiseCanExecuteChanged();
+            if (!response.Success)
+            {
+                SetError(translatedMessage);
+                ClearSensitiveData();
+                return;
+            }
+
+            SetSuccess(translatedMessage);
+            ClearSensitiveData();
+            RaisePasswordResetSucceeded();
         }
 
         private void ClearSensitiveData()
@@ -265,11 +179,6 @@ namespace Hangman.Client.ViewModels
             Code = string.Empty;
             RaiseSensitiveDataClearRequested();
             resetPasswordCommand.RaiseCanExecuteChanged();
-        }
-
-        private void RaiseLoginRequested()
-        {
-            LoginRequested?.Invoke(this, EventArgs.Empty);
         }
 
         private void RaisePasswordResetSucceeded()

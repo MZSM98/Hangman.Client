@@ -101,6 +101,7 @@
     <Compile Include="Validators\Auth\VerifyEmailFormValidator.cs" />
     <Compile Include="Validators\ClientValidationCode.cs" />
     <Compile Include="Validators\ClientValidationResult.cs" />
+    <Compile Include="ViewModels\Base\AuthViewModelBase.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\Base\RelayCommand.cs" />
     <Compile Include="ViewModels\LoginMenuViewModel.cs" />

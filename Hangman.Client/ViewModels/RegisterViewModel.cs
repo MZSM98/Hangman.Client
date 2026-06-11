@@ -7,19 +7,13 @@ using Hangman.Client.Validators.Auth;
 using Hangman.Client.ViewModels.Base;
 using Hangman.Contracts.Auth;
 using System;
-using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Hangman.Client.ViewModels
 {
-    public class RegisterViewModel : BaseViewModel
+    public class RegisterViewModel : AuthViewModelBase
     {
-        private readonly IAuthClient authClient;
-        private readonly ClientValidationMessageProvider validationMessageProvider;
-        private readonly IServerMessageProvider serverMessageProvider;
-        private readonly IClientLogger logger;
-
         private readonly RelayCommand registerCommand;
         private readonly RelayCommand openLoginCommand;
 
@@ -39,28 +33,22 @@ namespace Hangman.Client.ViewModels
             ClientValidationMessageProvider validationMessageProvider,
             IServerMessageProvider serverMessageProvider,
             IClientLogger logger)
+            : base(
+                  authClient,
+                  validationMessageProvider,
+                  serverMessageProvider,
+                  logger)
         {
-            this.authClient = authClient ?? 
-                throw new ArgumentNullException(nameof(authClient));
-            this.validationMessageProvider = validationMessageProvider ?? 
-                throw new ArgumentNullException(nameof(validationMessageProvider));
-            this.serverMessageProvider = serverMessageProvider ?? 
-                throw new ArgumentNullException(nameof(serverMessageProvider));
-            this.logger = logger ?? 
-                throw new ArgumentNullException(nameof(logger));
-
             registerForm = new RegisterFormModel();
 
             registerCommand = new RelayCommand(
                 async () => await RegisterAsync(),
-                CanExecuteRegister);
+                CanExecuteWhenNotBusy);
 
             openLoginCommand = new RelayCommand(
                 RequestOpenLogin,
-                CanExecuteNavigation);
+                CanExecuteWhenNotBusy);
         }
-
-        public event EventHandler LoginRequested;
 
         public event EventHandler PasswordClearRequested;
 
@@ -176,143 +164,64 @@ namespace Hangman.Client.ViewModels
         {
             ClearMessages();
 
-            ClientValidationResult validationResult = RegisterFormValidator.Validate(registerForm);
+            ClientValidationResult validationResult =
+                RegisterFormValidator.Validate(registerForm);
 
             if (!validationResult.IsValid)
             {
-                SetError(validationMessageProvider.GetMessage(validationResult.Code));
+                SetValidationError(validationResult);
                 return;
             }
 
-            SetBusy(true);
-
-            try
-            {
-                RegisterRequest request = new RegisterRequest
-                {
-                    FullName = registerForm.FullName.Trim(),
-                    DateOfBirth = registerForm.DateOfBirth.Value,
-                    Phone = registerForm.Phone.Trim(),
-                    PreferredLanguageCode = registerForm.PreferredLanguageCode.Trim().ToLowerInvariant(),
-                    Email = registerForm.Email.Trim(),
-                    Password = registerForm.Password
-                };
-
-                RegisterResponse response = await authClient.RegisterAsync(request);
-
-                if (response == null)
-                {
-                    SetError(serverMessageProvider.GetMessage(
-                        ServerMessageModuleName.Common,
-                        "UnexpectedError"));
-
-                    logger.Warn("RegisterAsync returned a null response.");
-                    ClearSensitiveData();
-                    return;
-                }
-
-                string translatedMessage = serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Auth,
-                    response.MessageCode);
-
-                if (!response.Success)
-                {
-                    SetError(translatedMessage);
-                    ClearSensitiveData();
-                    return;
-                }
-
-                string registeredEmail = registerForm.Email.Trim();
-
-                SetSuccess(translatedMessage);
-                ClearSensitiveData();
-
-                if (response.RequiresEmailVerification)
-                {
-                    RaiseVerificationRequired(registeredEmail);
-                }
-            }
-            catch (EndpointNotFoundException exception)
-            {
-                logger.Error("RegisterAsync failed because the authentication service endpoint was not found.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    "RuntimeError"));
-
-                ClearSensitiveData();
-            }
-            catch (TimeoutException exception)
-            {
-                logger.Error("RegisterAsync failed due to timeout.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    "RuntimeError"));
-
-                ClearSensitiveData();
-            }
-            catch (CommunicationException exception)
-            {
-                logger.Error("RegisterAsync failed due to communication error.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    "RuntimeError"));
-
-                ClearSensitiveData();
-            }
-            catch (Exception exception)
-            {
-                logger.Error("RegisterAsync failed unexpectedly.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    "UnexpectedError"));
-
-                ClearSensitiveData();
-            }
-            finally
-            {
-                SetBusy(false);
-            }
+            await ExecuteAuthOperationAsync(
+                "RegisterAsync",
+                RegisterCoreAsync,
+                ClearSensitiveData,
+                registerCommand,
+                openLoginCommand);
         }
 
-        private void RaiseVerificationRequired(string email)
+        private async Task RegisterCoreAsync()
         {
-            EventHandler<VerificationRequiredEventArgs> handler = VerificationRequired;
-
-            if (handler != null)
+            RegisterRequest request = new RegisterRequest
             {
-                handler(this, new VerificationRequiredEventArgs(email));
-            }
-        }
+                FullName = registerForm.FullName.Trim(),
+                DateOfBirth = registerForm.DateOfBirth.Value,
+                Phone = registerForm.Phone.Trim(),
+                PreferredLanguageCode =
+                    registerForm.PreferredLanguageCode.Trim().ToLowerInvariant(),
+                Email = registerForm.Email.Trim(),
+                Password = registerForm.Password
+            };
 
-        private bool CanExecuteRegister()
-        {
-            return !IsBusy;
-        }
+            RegisterResponse response = await AuthClient.RegisterAsync(request);
 
-        private bool CanExecuteNavigation()
-        {
-            return !IsBusy;
-        }
-
-        private void RequestOpenLogin()
-        {
-            if (IsBusy)
+            if (response == null)
             {
+                SetCommonUnexpectedError();
+                Logger.Warn("RegisterAsync returned a null response.");
+                ClearSensitiveData();
                 return;
             }
 
-            RaiseLoginRequested();
-        }
+            string translatedMessage = GetAuthServerMessage(response.MessageCode);
 
-        private void SetBusy(bool value)
-        {
-            IsBusy = value;
-            registerCommand.RaiseCanExecuteChanged();
-            openLoginCommand.RaiseCanExecuteChanged();
+            if (!response.Success)
+            {
+                SetError(translatedMessage);
+                ClearSensitiveData();
+                return;
+            }
+
+            string registeredEmail = registerForm.Email.Trim();
+
+            SetSuccess(translatedMessage);
+            ClearSensitiveData();
+
+            if (response.RequiresEmailVerification)
+            {
+                RaiseVerificationRequired(registeredEmail);
+            }
         }
 
         private void ClearSensitiveData()
@@ -322,9 +231,11 @@ namespace Hangman.Client.ViewModels
             registerCommand.RaiseCanExecuteChanged();
         }
 
-        private void RaiseLoginRequested()
+        private void RaiseVerificationRequired(string email)
         {
-            LoginRequested?.Invoke(this, EventArgs.Empty);
+            VerificationRequired?.Invoke(
+                this,
+                new VerificationRequiredEventArgs(email));
         }
 
         private void RaisePasswordClearRequested()

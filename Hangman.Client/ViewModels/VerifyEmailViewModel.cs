@@ -7,35 +7,21 @@ using Hangman.Client.Validators.Auth;
 using Hangman.Client.ViewModels.Base;
 using Hangman.Contracts.Auth;
 using System;
-using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Hangman.Client.ViewModels
 {
-    public class VerifyEmailViewModel : BaseViewModel
+    public class VerifyEmailViewModel : AuthViewModelBase
     {
-        private readonly IAuthClient authClient;
-        private readonly ClientValidationMessageProvider validationMessageProvider;
-        private readonly IServerMessageProvider serverMessageProvider;
-        private readonly IClientLogger logger;
-
         private readonly RelayCommand verifyEmailCommand;
         private readonly RelayCommand resendCodeCommand;
         private readonly RelayCommand openLoginCommand;
 
         private readonly VerifyEmailFormModel verifyEmailForm;
 
-        private const string UnexpectedErrorCode = "UnexpectedError";
-        private const string RuntimeErrorCode = "RuntimeError";
-
         public VerifyEmailViewModel()
-            : this(
-                  string.Empty,
-                  new AuthClient(),
-                  new ClientValidationMessageProvider(),
-                  new ServerMessageProvider(),
-                  ClientLoggerFactory.Create<VerifyEmailViewModel>())
+            : this(string.Empty)
         {
         }
 
@@ -55,16 +41,12 @@ namespace Hangman.Client.ViewModels
             ClientValidationMessageProvider validationMessageProvider,
             IServerMessageProvider serverMessageProvider,
             IClientLogger logger)
+            : base(
+                  authClient,
+                  validationMessageProvider,
+                  serverMessageProvider,
+                  logger)
         {
-            this.authClient = authClient ?? 
-                throw new ArgumentNullException(nameof(authClient));
-            this.validationMessageProvider = validationMessageProvider ?? 
-                throw new ArgumentNullException(nameof(validationMessageProvider));
-            this.serverMessageProvider = serverMessageProvider ?? 
-                throw new ArgumentNullException(nameof(serverMessageProvider));
-            this.logger = logger ?? 
-                throw new ArgumentNullException(nameof(logger));
-
             verifyEmailForm = new VerifyEmailFormModel
             {
                 Email = email ?? string.Empty
@@ -72,18 +54,16 @@ namespace Hangman.Client.ViewModels
 
             verifyEmailCommand = new RelayCommand(
                 async () => await VerifyEmailAsync(),
-                CanExecuteAction);
+                CanExecuteWhenNotBusy);
 
             resendCodeCommand = new RelayCommand(
                 async () => await ResendCodeAsync(),
-                CanExecuteAction);
+                CanExecuteWhenNotBusy);
 
             openLoginCommand = new RelayCommand(
                 RequestOpenLogin,
-                CanExecuteNavigation);
+                CanExecuteWhenNotBusy);
         }
-
-        public event EventHandler LoginRequested;
 
         public event EventHandler VerificationSucceeded;
 
@@ -101,7 +81,10 @@ namespace Hangman.Client.ViewModels
 
                 verifyEmailForm.Email = value;
                 OnPropertyChanged();
-                RaiseCommandsCanExecuteChanged();
+                RaiseCommandsCanExecuteChanged(
+                    verifyEmailCommand,
+                    resendCodeCommand,
+                    openLoginCommand);
             }
         }
 
@@ -140,96 +123,55 @@ namespace Hangman.Client.ViewModels
         {
             ClearMessages();
 
-            ClientValidationResult validationResult = VerifyEmailFormValidator.Validate(verifyEmailForm);
+            ClientValidationResult validationResult =
+                VerifyEmailFormValidator.Validate(verifyEmailForm);
 
             if (!validationResult.IsValid)
             {
-                SetError(validationMessageProvider.GetMessage(validationResult.Code));
+                SetValidationError(validationResult);
                 return;
             }
 
-            SetBusy(true);
+            await ExecuteAuthOperationAsync(
+                "VerifyEmailAsync",
+                VerifyEmailCoreAsync,
+                ClearCode,
+                verifyEmailCommand,
+                resendCodeCommand,
+                openLoginCommand);
+        }
 
-            try
+        private async Task VerifyEmailCoreAsync()
+        {
+            VerifyEmailRequest request = new VerifyEmailRequest
             {
-                VerifyEmailRequest request = new VerifyEmailRequest
-                {
-                    Email = verifyEmailForm.Email.Trim(),
-                    Code = verifyEmailForm.Code.Trim()
-                };
+                Email = verifyEmailForm.Email.Trim(),
+                Code = verifyEmailForm.Code.Trim()
+            };
 
-                VerifyEmailResponse response = await authClient.VerifyEmailAsync(request);
+            VerifyEmailResponse response =
+                await AuthClient.VerifyEmailAsync(request);
 
-                if (response == null)
-                {
-                    SetError(serverMessageProvider.GetMessage(
-                        ServerMessageModuleName.Common,
-                        UnexpectedErrorCode));
-
-                    logger.Warn("VerifyEmailAsync returned a null response.");
-                    ClearCode();
-                    return;
-                }
-
-                string translatedMessage = serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Auth,
-                    response.MessageCode);
-
-                if (!response.Success)
-                {
-                    SetError(translatedMessage);
-                    ClearCode();
-                    return;
-                }
-
-                SetSuccess(translatedMessage);
+            if (response == null)
+            {
+                SetCommonUnexpectedError();
+                Logger.Warn("VerifyEmailAsync returned a null response.");
                 ClearCode();
-                RaiseVerificationSucceeded();
+                return;
             }
-            catch (EndpointNotFoundException exception)
+
+            string translatedMessage = GetAuthServerMessage(response.MessageCode);
+
+            if (!response.Success)
             {
-                logger.Error("VerifyEmailAsync failed because the authentication service endpoint was not found.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    "RuntimeError"));
-
+                SetError(translatedMessage);
                 ClearCode();
+                return;
             }
-            catch (TimeoutException exception)
-            {
-                logger.Error("VerifyEmailAsync failed due to timeout.", exception);
 
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    RuntimeErrorCode));
-
-                ClearCode();
-            }
-            catch (CommunicationException exception)
-            {
-                logger.Error("VerifyEmailAsync failed due to communication error.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    RuntimeErrorCode));
-
-                ClearCode();
-            }
-            catch (Exception exception)
-            {
-                logger.Error("VerifyEmailAsync failed unexpectedly.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    UnexpectedErrorCode));
-
-                ClearCode();
-            }
-            finally
-            {
-                SetBusy(false);
-            }
+            SetSuccess(translatedMessage);
+            ClearCode();
+            RaiseVerificationSucceeded();
         }
 
         private async Task ResendCodeAsync()
@@ -238,107 +180,47 @@ namespace Hangman.Client.ViewModels
 
             if (string.IsNullOrWhiteSpace(verifyEmailForm.Email))
             {
-                SetError(validationMessageProvider.GetMessage(ClientValidationCode.EmailRequired));
+                SetError(GetValidationMessage(ClientValidationCode.EmailRequired));
                 return;
             }
 
-            SetBusy(true);
+            await ExecuteAuthOperationAsync(
+                "ResendVerificationEmailAsync",
+                ResendCodeCoreAsync,
+                null,
+                verifyEmailCommand,
+                resendCodeCommand,
+                openLoginCommand);
+        }
 
-            try
-            {
-                ResendVerificationEmailRequest request = new ResendVerificationEmailRequest
+        private async Task ResendCodeCoreAsync()
+        {
+            ResendVerificationEmailRequest request =
+                new ResendVerificationEmailRequest
                 {
                     Email = verifyEmailForm.Email.Trim()
                 };
 
-                ResendVerificationEmailResponse response =
-                    await authClient.ResendVerificationEmailAsync(request);
+            ResendVerificationEmailResponse response =
+                await AuthClient.ResendVerificationEmailAsync(request);
 
-                if (response == null)
-                {
-                    SetError(serverMessageProvider.GetMessage(
-                        ServerMessageModuleName.Common,
-                        UnexpectedErrorCode));
-
-                    logger.Warn("ResendVerificationEmailAsync returned a null response.");
-                    return;
-                }
-
-                string translatedMessage = serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Auth,
-                    response.MessageCode);
-
-                if (!response.Success)
-                {
-                    SetError(translatedMessage);
-                    return;
-                }
-
-                SetSuccess(translatedMessage);
-                ClearCode();
-            }
-            catch (EndpointNotFoundException exception)
+            if (response == null)
             {
-                logger.Error("ResendAsync failed because the authentication service endpoint was not found.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    "RuntimeError"));
-            }
-            catch (TimeoutException exception)
-            {
-                logger.Error("ResendVerificationEmailAsync failed due to timeout.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    RuntimeErrorCode));
-            }
-            catch (CommunicationException exception)
-            {
-                logger.Error("ResendVerificationEmailAsync failed due to communication error.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    RuntimeErrorCode));
-            }
-            catch (Exception exception)
-            {
-                logger.Error("ResendVerificationEmailAsync failed unexpectedly.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    UnexpectedErrorCode));
-            }
-            finally
-            {
-                SetBusy(false);
-            }
-        }
-
-        private bool CanExecuteAction()
-        {
-            return !IsBusy;
-        }
-
-        private bool CanExecuteNavigation()
-        {
-            return !IsBusy;
-        }
-
-        private void RequestOpenLogin()
-        {
-            if (IsBusy)
-            {
+                SetCommonUnexpectedError();
+                Logger.Warn("ResendVerificationEmailAsync returned a null response.");
                 return;
             }
 
-            RaiseLoginRequested();
-        }
+            string translatedMessage = GetAuthServerMessage(response.MessageCode);
 
-        private void SetBusy(bool value)
-        {
-            IsBusy = value;
-            RaiseCommandsCanExecuteChanged();
+            if (!response.Success)
+            {
+                SetError(translatedMessage);
+                return;
+            }
+
+            SetSuccess(translatedMessage);
+            ClearCode();
         }
 
         private void ClearCode()
@@ -348,41 +230,14 @@ namespace Hangman.Client.ViewModels
             RaiseCodeClearRequested();
         }
 
-        private void RaiseCommandsCanExecuteChanged()
-        {
-            verifyEmailCommand.RaiseCanExecuteChanged();
-            resendCodeCommand.RaiseCanExecuteChanged();
-            openLoginCommand.RaiseCanExecuteChanged();
-        }
-
-        private void RaiseLoginRequested()
-        {
-            EventHandler handler = LoginRequested;
-
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
-        }
-
         private void RaiseVerificationSucceeded()
         {
-            EventHandler handler = VerificationSucceeded;
-
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
+            VerificationSucceeded?.Invoke(this, EventArgs.Empty);
         }
 
         private void RaiseCodeClearRequested()
         {
-            EventHandler handler = CodeClearRequested;
-
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
+            CodeClearRequested?.Invoke(this, EventArgs.Empty);
         }
     }
 }

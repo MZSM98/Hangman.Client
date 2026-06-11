@@ -7,26 +7,17 @@ using Hangman.Client.Validators.Auth;
 using Hangman.Client.ViewModels.Base;
 using Hangman.Contracts.Auth;
 using System;
-using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Hangman.Client.ViewModels
 {
-    public class RequestPasswordResetViewModel : BaseViewModel
+    public class RequestPasswordResetViewModel : AuthViewModelBase
     {
-        private readonly IAuthClient authClient;
-        private readonly ClientValidationMessageProvider validationMessageProvider;
-        private readonly IServerMessageProvider serverMessageProvider;
-        private readonly IClientLogger logger;
-
         private readonly RelayCommand requestPasswordResetCommand;
         private readonly RelayCommand openLoginCommand;
 
         private readonly RequestPasswordResetFormModel form;
-
-        private const string UnexpectedErrorCode = "UnexpectedError";
-        private const string RuntimeErrorCode = "RuntimeError";
 
         public RequestPasswordResetViewModel()
             : this(string.Empty)
@@ -49,16 +40,12 @@ namespace Hangman.Client.ViewModels
             ClientValidationMessageProvider validationMessageProvider,
             IServerMessageProvider serverMessageProvider,
             IClientLogger logger)
+            : base(
+                  authClient,
+                  validationMessageProvider,
+                  serverMessageProvider,
+                  logger)
         {
-            this.authClient = authClient ??
-                throw new ArgumentNullException(nameof(authClient));
-            this.validationMessageProvider = validationMessageProvider ??
-                throw new ArgumentNullException(nameof(validationMessageProvider));
-            this.serverMessageProvider = serverMessageProvider ??
-                throw new ArgumentNullException(nameof(serverMessageProvider));
-            this.logger = logger ??
-                throw new ArgumentNullException(nameof(logger));
-
             form = new RequestPasswordResetFormModel
             {
                 Email = email ?? string.Empty
@@ -66,14 +53,12 @@ namespace Hangman.Client.ViewModels
 
             requestPasswordResetCommand = new RelayCommand(
                 async () => await RequestPasswordResetAsync(),
-                CanExecuteAction);
+                CanExecuteWhenNotBusy);
 
             openLoginCommand = new RelayCommand(
                 RequestOpenLogin,
-                CanExecuteNavigation);
+                CanExecuteWhenNotBusy);
         }
-
-        public event EventHandler LoginRequested;
 
         public event EventHandler<ResetCodeRequestedEventArgs> ResetCodeRequested;
 
@@ -112,115 +97,47 @@ namespace Hangman.Client.ViewModels
 
             if (!validationResult.IsValid)
             {
-                SetError(validationMessageProvider.GetMessage(validationResult.Code));
+                SetValidationError(validationResult);
                 return;
             }
 
-            SetBusy(true);
-
-            try
-            {
-                string email = form.Email.Trim();
-
-                RequestPasswordResetRequest request = new RequestPasswordResetRequest
-                {
-                    Email = email
-                };
-
-                RequestPasswordResetResponse response =
-                    await authClient.RequestPasswordResetAsync(request);
-
-                if (response == null)
-                {
-                    SetError(serverMessageProvider.GetMessage(
-                        ServerMessageModuleName.Common,
-                        UnexpectedErrorCode));
-
-                    logger.Warn("RequestPasswordResetAsync returned a null response.");
-                    return;
-                }
-
-                string translatedMessage = serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Auth,
-                    response.MessageCode);
-
-                if (!response.Success)
-                {
-                    SetError(translatedMessage);
-                    return;
-                }
-
-                SetSuccess(translatedMessage);
-                RaiseResetCodeRequested(email);
-            }
-            catch (EndpointNotFoundException exception)
-            {
-                logger.Error("RequestPasswordResetAsync failed because the authentication service endpoint was not found.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    RuntimeErrorCode));
-            }
-            catch (TimeoutException exception)
-            {
-                logger.Error("RequestPasswordResetAsync failed due to timeout.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    RuntimeErrorCode));
-            }
-            catch (CommunicationException exception)
-            {
-                logger.Error("RequestPasswordResetAsync failed due to communication error.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    RuntimeErrorCode));
-            }
-            catch (Exception exception)
-            {
-                logger.Error("RequestPasswordResetAsync failed unexpectedly.", exception);
-
-                SetError(serverMessageProvider.GetMessage(
-                    ServerMessageModuleName.Common,
-                    UnexpectedErrorCode));
-            }
-            finally
-            {
-                SetBusy(false);
-            }
+            await ExecuteAuthOperationAsync(
+                "RequestPasswordResetAsync",
+                RequestPasswordResetCoreAsync,
+                null,
+                requestPasswordResetCommand,
+                openLoginCommand);
         }
 
-        private bool CanExecuteAction()
+        private async Task RequestPasswordResetCoreAsync()
         {
-            return !IsBusy;
-        }
+            string email = form.Email.Trim();
 
-        private bool CanExecuteNavigation()
-        {
-            return !IsBusy;
-        }
-
-        private void RequestOpenLogin()
-        {
-            if (IsBusy)
+            RequestPasswordResetRequest request = new RequestPasswordResetRequest
             {
+                Email = email
+            };
+
+            RequestPasswordResetResponse response =
+                await AuthClient.RequestPasswordResetAsync(request);
+
+            if (response == null)
+            {
+                SetCommonUnexpectedError();
+                Logger.Warn("RequestPasswordResetAsync returned a null response.");
                 return;
             }
 
-            RaiseLoginRequested();
-        }
+            string translatedMessage = GetAuthServerMessage(response.MessageCode);
 
-        private void SetBusy(bool value)
-        {
-            IsBusy = value;
-            requestPasswordResetCommand.RaiseCanExecuteChanged();
-            openLoginCommand.RaiseCanExecuteChanged();
-        }
+            if (!response.Success)
+            {
+                SetError(translatedMessage);
+                return;
+            }
 
-        private void RaiseLoginRequested()
-        {
-            LoginRequested?.Invoke(this, EventArgs.Empty);
+            SetSuccess(translatedMessage);
+            RaiseResetCodeRequested(email);
         }
 
         private void RaiseResetCodeRequested(string email)
