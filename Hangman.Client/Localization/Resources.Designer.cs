@@ -628,6 +628,15 @@ namespace Hangman.Client.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Email address must not exceed 200 characters..
+        /// </summary>
+        internal static string Server_Auth_EmailTooLong {
+            get {
+                return ResourceManager.GetString("Server_Auth_EmailTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Email verification data is required..
         /// </summary>
         internal static string Server_Auth_EmailVerificationDataRequired {
@@ -700,6 +709,24 @@ namespace Hangman.Client.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Full name must not exceed 120 characters..
+        /// </summary>
+        internal static string Server_Auth_FullNameTooLong {
+            get {
+                return ResourceManager.GetString("Server_Auth_FullNameTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Full name must be at least 3 characters long..
+        /// </summary>
+        internal static string Server_Auth_FullNameTooShort {
+            get {
+                return ResourceManager.GetString("Server_Auth_FullNameTooShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Date of birth is not valid..
         /// </summary>
         internal static string Server_Auth_InvalidDateOfBirth {
@@ -741,6 +768,15 @@ namespace Hangman.Client.Localization {
         internal static string Server_Auth_InvalidPasswordResetCode {
             get {
                 return ResourceManager.GetString("Server_Auth_InvalidPasswordResetCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Phone number must contain digits only..
+        /// </summary>
+        internal static string Server_Auth_InvalidPhone {
+            get {
+                return ResourceManager.GetString("Server_Auth_InvalidPhone", resourceCulture);
             }
         }
         
@@ -939,6 +975,24 @@ namespace Hangman.Client.Localization {
         internal static string Server_Auth_PhoneRequired {
             get {
                 return ResourceManager.GetString("Server_Auth_PhoneRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Phone number must not exceed 20 digits..
+        /// </summary>
+        internal static string Server_Auth_PhoneTooLong {
+            get {
+                return ResourceManager.GetString("Server_Auth_PhoneTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Phone number must contain at least 7 digits..
+        /// </summary>
+        internal static string Server_Auth_PhoneTooShort {
+            get {
+                return ResourceManager.GetString("Server_Auth_PhoneTooShort", resourceCulture);
             }
         }
         
@@ -1249,6 +1303,24 @@ namespace Hangman.Client.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Full name must not exceed 120 characters..
+        /// </summary>
+        internal static string Server_Profile_FullNameTooLong {
+            get {
+                return ResourceManager.GetString("Server_Profile_FullNameTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Full name must be at least 3 characters long..
+        /// </summary>
+        internal static string Server_Profile_FullNameTooShort {
+            get {
+                return ResourceManager.GetString("Server_Profile_FullNameTooShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a The account is not valid..
         /// </summary>
         internal static string Server_Profile_InvalidAccountId {
@@ -1267,6 +1339,15 @@ namespace Hangman.Client.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Phone number must contain digits only..
+        /// </summary>
+        internal static string Server_Profile_InvalidPhone {
+            get {
+                return ResourceManager.GetString("Server_Profile_InvalidPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Selected language is not valid..
         /// </summary>
         internal static string Server_Profile_InvalidPreferredLanguage {
@@ -1281,6 +1362,24 @@ namespace Hangman.Client.Localization {
         internal static string Server_Profile_PhoneRequired {
             get {
                 return ResourceManager.GetString("Server_Profile_PhoneRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Phone number must not exceed 20 digits..
+        /// </summary>
+        internal static string Server_Profile_PhoneTooLong {
+            get {
+                return ResourceManager.GetString("Server_Profile_PhoneTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Phone number must contain at least 7 digits..
+        /// </summary>
+        internal static string Server_Profile_PhoneTooShort {
+            get {
+                return ResourceManager.GetString("Server_Profile_PhoneTooShort", resourceCulture);
             }
         }
         

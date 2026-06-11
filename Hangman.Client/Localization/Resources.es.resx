@@ -306,6 +306,9 @@
   <data name="Server_Auth_EmailAlreadyRegistered" xml:space="preserve">
     <value>El correo electrónico ya está registrado.</value>
   </data>
+  <data name="Server_Auth_EmailTooLong" xml:space="preserve">
+    <value>El correo electrónico no debe superar los 200 caracteres.</value>
+  </data>
   <data name="Server_Auth_EmailVerificationDataRequired" xml:space="preserve">
     <value>Los datos de verificación de correo son requeridos.</value>
   </data>
@@ -330,6 +333,12 @@
   <data name="Server_Auth_FullNameRequired" xml:space="preserve">
     <value>El nombre completo es requerido.</value>
   </data>
+  <data name="Server_Auth_FullNameTooLong" xml:space="preserve">
+    <value>El nombre no debe superar los 120 caracteres.</value>
+  </data>
+  <data name="Server_Auth_FullNameTooShort" xml:space="preserve">
+    <value>El nombre debe tener al menos 3 caracteres.</value>
+  </data>
   <data name="Server_Auth_InvalidDateOfBirth" xml:space="preserve">
     <value>La fecha de nacimiento no es válida.</value>
   </data>
@@ -344,6 +353,9 @@
   </data>
   <data name="Server_Auth_InvalidPasswordResetCode" xml:space="preserve">
     <value>El código de recuperación no es válido.</value>
+  </data>
+  <data name="Server_Auth_InvalidPhone" xml:space="preserve">
+    <value>El número telefónico solo debe contener dígitos.</value>
   </data>
   <data name="Server_Auth_InvalidPreferredLanguage" xml:space="preserve">
     <value>El idioma seleccionado no es válido.</value>
@@ -410,6 +422,12 @@
   </data>
   <data name="Server_Auth_PhoneRequired" xml:space="preserve">
     <value>El teléfono es requerido.</value>
+  </data>
+  <data name="Server_Auth_PhoneTooLong" xml:space="preserve">
+    <value>El número telefónico no debe superar los 20 dígitos.</value>
+  </data>
+  <data name="Server_Auth_PhoneTooShort" xml:space="preserve">
+    <value>El número telefónico debe tener al menos 7 dígitos.</value>
   </data>
   <data name="Server_Auth_PlayerProfileNotAvailable" xml:space="preserve">
     <value>El perfil del jugador no está disponible.</value>
@@ -513,17 +531,32 @@
   <data name="Server_Profile_FullNameRequired" xml:space="preserve">
     <value>El nombre completo es requerido.</value>
   </data>
+  <data name="Server_Profile_FullNameTooLong" xml:space="preserve">
+    <value>El nombre no debe superar los 120 caracteres.</value>
+  </data>
+  <data name="Server_Profile_FullNameTooShort" xml:space="preserve">
+    <value>El nombre debe tener al menos 3 caracteres.</value>
+  </data>
   <data name="Server_Profile_InvalidAccountId" xml:space="preserve">
     <value>La cuenta no es válida.</value>
   </data>
   <data name="Server_Profile_InvalidDateOfBirth" xml:space="preserve">
     <value>La fecha de nacimiento no es válida.</value>
   </data>
+  <data name="Server_Profile_InvalidPhone" xml:space="preserve">
+    <value>El número telefónico solo debe contener dígitos.</value>
+  </data>
   <data name="Server_Profile_InvalidPreferredLanguage" xml:space="preserve">
     <value>El idioma seleccionado no es válido.</value>
   </data>
   <data name="Server_Profile_PhoneRequired" xml:space="preserve">
     <value>El teléfono es requerido.</value>
+  </data>
+  <data name="Server_Profile_PhoneTooLong" xml:space="preserve">
+    <value>El número telefónico no debe superar los 20 dígitos.</value>
+  </data>
+  <data name="Server_Profile_PhoneTooShort" xml:space="preserve">
+    <value>El número telefónico debe tener al menos 7 dígitos.</value>
   </data>
   <data name="Server_Profile_PlayerProfileNotAvailable" xml:space="preserve">
     <value>El perfil del jugador no está disponible.</value>
