@@ -106,6 +106,15 @@ namespace Hangman.Client.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Forgot your password?.
+        /// </summary>
+        internal static string Login_ForgotPassword {
+            get {
+                return ResourceManager.GetString("Login_ForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Password.
         /// </summary>
         internal static string Login_PasswordLabel {
@@ -291,6 +300,150 @@ namespace Hangman.Client.Localization {
         internal static string Register_WindowTitle {
             get {
                 return ResourceManager.GetString("Register_WindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Back to login.
+        /// </summary>
+        internal static string RequestPasswordReset_BackToLogin {
+            get {
+                return ResourceManager.GetString("RequestPasswordReset_BackToLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a SEND CODE.
+        /// </summary>
+        internal static string RequestPasswordReset_Button {
+            get {
+                return ResourceManager.GetString("RequestPasswordReset_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Enter your email and we will send you a recovery code..
+        /// </summary>
+        internal static string RequestPasswordReset_Description {
+            get {
+                return ResourceManager.GetString("RequestPasswordReset_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Email.
+        /// </summary>
+        internal static string RequestPasswordReset_EmailLabel {
+            get {
+                return ResourceManager.GetString("RequestPasswordReset_EmailLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Recover password.
+        /// </summary>
+        internal static string RequestPasswordReset_Title {
+            get {
+                return ResourceManager.GetString("RequestPasswordReset_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hangman - Recover password.
+        /// </summary>
+        internal static string RequestPasswordReset_WindowTitle {
+            get {
+                return ResourceManager.GetString("RequestPasswordReset_WindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Back to login.
+        /// </summary>
+        internal static string ResetPassword_BackToLogin {
+            get {
+                return ResourceManager.GetString("ResetPassword_BackToLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a RESET PASSWORD.
+        /// </summary>
+        internal static string ResetPassword_Button {
+            get {
+                return ResourceManager.GetString("ResetPassword_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Recovery code.
+        /// </summary>
+        internal static string ResetPassword_CodeLabel {
+            get {
+                return ResourceManager.GetString("ResetPassword_CodeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Enter the 6-digit code sent to your email..
+        /// </summary>
+        internal static string ResetPassword_CodeTooltip {
+            get {
+                return ResourceManager.GetString("ResetPassword_CodeTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Confirm password.
+        /// </summary>
+        internal static string ResetPassword_ConfirmPasswordLabel {
+            get {
+                return ResourceManager.GetString("ResetPassword_ConfirmPasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Enter the recovery code and your new password..
+        /// </summary>
+        internal static string ResetPassword_Description {
+            get {
+                return ResourceManager.GetString("ResetPassword_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Email.
+        /// </summary>
+        internal static string ResetPassword_EmailLabel {
+            get {
+                return ResourceManager.GetString("ResetPassword_EmailLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a New password.
+        /// </summary>
+        internal static string ResetPassword_NewPasswordLabel {
+            get {
+                return ResourceManager.GetString("ResetPassword_NewPasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reset password.
+        /// </summary>
+        internal static string ResetPassword_Title {
+            get {
+                return ResourceManager.GetString("ResetPassword_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hangman - Reset password.
+        /// </summary>
+        internal static string ResetPassword_WindowTitle {
+            get {
+                return ResourceManager.GetString("ResetPassword_WindowTitle", resourceCulture);
             }
         }
         
@@ -1357,11 +1510,56 @@ namespace Hangman.Client.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Recovery code must contain only numbers..
+        /// </summary>
+        internal static string Validation_RecoveryCodeInvalidFormat {
+            get {
+                return ResourceManager.GetString("Validation_RecoveryCodeInvalidFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Recovery code must have 6 digits..
+        /// </summary>
+        internal static string Validation_RecoveryCodeInvalidLength {
+            get {
+                return ResourceManager.GetString("Validation_RecoveryCodeInvalidLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Recovery code is required..
+        /// </summary>
+        internal static string Validation_RecoveryCodeRequired {
+            get {
+                return ResourceManager.GetString("Validation_RecoveryCodeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Registration data is required..
         /// </summary>
         internal static string Validation_RegisterFormRequired {
             get {
                 return ResourceManager.GetString("Validation_RegisterFormRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Password recovery data is required..
+        /// </summary>
+        internal static string Validation_RequestPasswordResetFormRequired {
+            get {
+                return ResourceManager.GetString("Validation_RequestPasswordResetFormRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Password reset data is required..
+        /// </summary>
+        internal static string Validation_ResetPasswordFormRequired {
+            get {
+                return ResourceManager.GetString("Validation_ResetPasswordFormRequired", resourceCulture);
             }
         }
         

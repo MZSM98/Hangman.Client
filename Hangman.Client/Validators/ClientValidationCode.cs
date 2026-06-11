@@ -45,6 +45,13 @@
         VerifyEmailFormRequired,
         VerificationCodeRequired,
         VerificationCodeInvalidLength,
-        VerificationCodeInvalidFormat
+        VerificationCodeInvalidFormat,
+
+        RequestPasswordResetFormRequired,
+        ResetPasswordFormRequired,
+
+        RecoveryCodeRequired,
+        RecoveryCodeInvalidLength,
+        RecoveryCodeInvalidFormat
     }
 }

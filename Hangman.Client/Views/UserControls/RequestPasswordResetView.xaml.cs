@@ -2,9 +2,9 @@
 
 namespace Hangman.Client.Views.UserControls
 {
-    public partial class MatchListView : UserControl
+    public partial class RequestPasswordResetView : UserControl
     {
-        public MatchListView()
+        public RequestPasswordResetView()
         {
             InitializeComponent();
         }

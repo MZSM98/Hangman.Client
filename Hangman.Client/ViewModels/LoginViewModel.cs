@@ -22,8 +22,12 @@ namespace Hangman.Client.ViewModels
 
         private readonly RelayCommand loginCommand;
         private readonly RelayCommand openRegisterCommand;
+        private readonly RelayCommand openPasswordResetCommand;
 
         private readonly LoginFormModel loginForm;
+
+        private const string UnexpectedErrorCode = "UnexpectedError";
+        private const string RuntimeErrorCode = "RuntimeError";
 
         public LoginViewModel()
             : this(
@@ -40,13 +44,13 @@ namespace Hangman.Client.ViewModels
             IServerMessageProvider serverMessageProvider,
             IClientLogger logger)
         {
-            this.authClient = authClient ?? 
+            this.authClient = authClient ??
                 throw new ArgumentNullException(nameof(authClient));
-            this.validationMessageProvider = validationMessageProvider ?? 
+            this.validationMessageProvider = validationMessageProvider ??
                 throw new ArgumentNullException(nameof(validationMessageProvider));
-            this.serverMessageProvider = serverMessageProvider ?? 
+            this.serverMessageProvider = serverMessageProvider ??
                 throw new ArgumentNullException(nameof(serverMessageProvider));
-            this.logger = logger ?? 
+            this.logger = logger ??
                 throw new ArgumentNullException(nameof(logger));
 
             loginForm = new LoginFormModel();
@@ -58,11 +62,17 @@ namespace Hangman.Client.ViewModels
             openRegisterCommand = new RelayCommand(
                 RequestOpenRegister,
                 CanExecuteNavigation);
+
+            openPasswordResetCommand = new RelayCommand(
+                RequestOpenPasswordReset,
+                CanExecuteNavigation);
         }
 
         public event EventHandler LoginSucceeded;
 
         public event EventHandler RegisterRequested;
+
+        public event EventHandler<PasswordResetRequestedEventArgs> PasswordResetRequested;
 
         public event EventHandler PasswordClearRequested;
 
@@ -79,6 +89,7 @@ namespace Hangman.Client.ViewModels
                 loginForm.Email = value;
                 OnPropertyChanged();
                 loginCommand.RaiseCanExecuteChanged();
+                openPasswordResetCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -90,6 +101,11 @@ namespace Hangman.Client.ViewModels
         public ICommand OpenRegisterCommand
         {
             get { return openRegisterCommand; }
+        }
+
+        public ICommand OpenPasswordResetCommand
+        {
+            get { return openPasswordResetCommand; }
         }
 
         public void SetPassword(string password)
@@ -126,7 +142,7 @@ namespace Hangman.Client.ViewModels
                 {
                     SetError(serverMessageProvider.GetMessage(
                         ServerMessageModuleName.Common,
-                        "UnexpectedError"));
+                        UnexpectedErrorCode));
 
                     logger.Warn("LoginAsync returned a null response.");
                     return;
@@ -145,8 +161,8 @@ namespace Hangman.Client.ViewModels
                 if (response.Player == null)
                 {
                     SetError(serverMessageProvider.GetMessage(
-                        ServerMessageModuleName.Common, 
-                        "UnexpectedError"));
+                        ServerMessageModuleName.Common,
+                        UnexpectedErrorCode));
 
                     logger.Warn("LoginAsync succeeded but player data was null.");
                     ClearPassword();
@@ -169,13 +185,23 @@ namespace Hangman.Client.ViewModels
                 ClearPassword();
                 RaiseLoginSucceeded();
             }
+            catch (EndpointNotFoundException exception)
+            {
+                logger.Error("LoginAsync failed because the authentication service endpoint was not found.", exception);
+
+                SetError(serverMessageProvider.GetMessage(
+                    ServerMessageModuleName.Common,
+                    RuntimeErrorCode));
+
+                ClearPassword();
+            }
             catch (TimeoutException exception)
             {
                 logger.Error("LoginAsync failed due to timeout.", exception);
 
                 SetError(serverMessageProvider.GetMessage(
                     ServerMessageModuleName.Common,
-                    "RuntimeError"));
+                    RuntimeErrorCode));
 
                 ClearPassword();
             }
@@ -185,7 +211,7 @@ namespace Hangman.Client.ViewModels
 
                 SetError(serverMessageProvider.GetMessage(
                     ServerMessageModuleName.Common,
-                    "RuntimeError"));
+                    RuntimeErrorCode));
 
                 ClearPassword();
             }
@@ -195,7 +221,7 @@ namespace Hangman.Client.ViewModels
 
                 SetError(serverMessageProvider.GetMessage(
                     ServerMessageModuleName.Common,
-                    "UnexpectedError"));
+                    UnexpectedErrorCode));
 
                 ClearPassword();
             }
@@ -225,11 +251,22 @@ namespace Hangman.Client.ViewModels
             RaiseRegisterRequested();
         }
 
+        private void RequestOpenPasswordReset()
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+
+            RaisePasswordResetRequested();
+        }
+
         private void SetBusy(bool value)
         {
             IsBusy = value;
             loginCommand.RaiseCanExecuteChanged();
             openRegisterCommand.RaiseCanExecuteChanged();
+            openPasswordResetCommand.RaiseCanExecuteChanged();
         }
 
         private void ClearPassword()
@@ -249,9 +286,27 @@ namespace Hangman.Client.ViewModels
             RegisterRequested?.Invoke(this, EventArgs.Empty);
         }
 
+        private void RaisePasswordResetRequested()
+        {
+            string email = loginForm.Email ?? string.Empty;
+            PasswordResetRequested?.Invoke(
+                this,
+                new PasswordResetRequestedEventArgs(email));
+        }
+
         private void RaisePasswordClearRequested()
         {
             PasswordClearRequested?.Invoke(this, EventArgs.Empty);
         }
+    }
+
+    public class PasswordResetRequestedEventArgs : EventArgs
+    {
+        public PasswordResetRequestedEventArgs(string email)
+        {
+            Email = email ?? string.Empty;
+        }
+
+        public string Email { get; private set; }
     }
 }

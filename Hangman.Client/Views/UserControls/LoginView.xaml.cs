@@ -2,36 +2,51 @@
 using Hangman.Client.ViewModels;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 
-namespace Hangman.Client.Views.Windows
+namespace Hangman.Client.Views.UserControls
 {
-    public partial class LoginWindow : Window
+    public partial class LoginView : UserControl
     {
-        private readonly LoginViewModel viewModel;
+        private LoginViewModel viewModel;
         private bool isSynchronizingPassword;
 
-        public LoginWindow()
+        public LoginView()
         {
             InitializeComponent();
+            DataContextChanged += OnDataContextChanged;
+            Unloaded += OnUnloaded;
+        }
 
-            viewModel = new LoginViewModel();
-            DataContext = viewModel;
+        private void OnDataContextChanged(
+            object sender,
+            DependencyPropertyChangedEventArgs e)
+        {
+            LoginViewModel oldViewModel = e.OldValue as LoginViewModel;
 
-            viewModel.LoginSucceeded += OnLoginSucceeded;
-            viewModel.RegisterRequested += OnRegisterRequested;
-            viewModel.PasswordClearRequested += OnPasswordClearRequested;
+            if (oldViewModel != null)
+            {
+                oldViewModel.PasswordClearRequested -= OnPasswordClearRequested;
+            }
+
+            viewModel = e.NewValue as LoginViewModel;
+
+            if (viewModel != null)
+            {
+                viewModel.PasswordClearRequested += OnPasswordClearRequested;
+            }
         }
 
         private void LoginPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (isSynchronizingPassword)
+            if (isSynchronizingPassword || viewModel == null)
             {
                 return;
             }
 
             viewModel.SetPassword(LoginPasswordBox.Password);
 
-            if (ShowPasswordCheckBox.IsChecked is true)
+            if (ShowPasswordCheckBox.IsChecked ?? false)
             {
                 isSynchronizingPassword = true;
                 VisiblePasswordTextBox.Text = LoginPasswordBox.Password;
@@ -39,16 +54,20 @@ namespace Hangman.Client.Views.Windows
             }
         }
 
-        private void VisiblePasswordTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void VisiblePasswordTextBox_TextChanged(
+            object sender,
+            TextChangedEventArgs e)
         {
-            if (isSynchronizingPassword)
+            if (isSynchronizingPassword || viewModel == null)
             {
                 return;
             }
 
             isSynchronizingPassword = true;
+
             LoginPasswordBox.Password = VisiblePasswordTextBox.Text;
             viewModel.SetPassword(VisiblePasswordTextBox.Text);
+
             isSynchronizingPassword = false;
         }
 
@@ -83,22 +102,6 @@ namespace Hangman.Client.Views.Windows
                 MessageBoxImage.Information);
         }
 
-        private void OnLoginSucceeded(object sender, EventArgs e)
-        {
-            MainMenuWindow mainMenuWindow = new MainMenuWindow();
-            mainMenuWindow.Show();
-
-            Close();
-        }
-
-        private void OnRegisterRequested(object sender, EventArgs e)
-        {
-            RegisterWindow registerWindow = new RegisterWindow();
-            registerWindow.Show();
-
-            Close();
-        }
-
         private void OnPasswordClearRequested(object sender, EventArgs e)
         {
             isSynchronizingPassword = true;
@@ -109,13 +112,12 @@ namespace Hangman.Client.Views.Windows
             isSynchronizingPassword = false;
         }
 
-        protected override void OnClosed(EventArgs e)
+        private void OnUnloaded(object sender, RoutedEventArgs e)
         {
-            viewModel.LoginSucceeded -= OnLoginSucceeded;
-            viewModel.RegisterRequested -= OnRegisterRequested;
-            viewModel.PasswordClearRequested -= OnPasswordClearRequested;
-
-            base.OnClosed(e);
+            if (viewModel != null)
+            {
+                viewModel.PasswordClearRequested -= OnPasswordClearRequested;
+            }
         }
     }
 }

@@ -1,67 +1,66 @@
 ﻿using Hangman.Client.ViewModels;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Linq;
 using System.Windows.Input;
 
-namespace Hangman.Client.Views.Windows
+namespace Hangman.Client.Views.UserControls
 {
-    public partial class RegisterWindow : Window
+    public partial class RegisterView : UserControl
     {
-        private readonly RegisterViewModel viewModel;
+        private RegisterViewModel viewModel;
 
-        public RegisterWindow()
+        public RegisterView()
         {
             InitializeComponent();
+            DataContextChanged += OnDataContextChanged;
+            Unloaded += OnUnloaded;
+        }
 
-            viewModel = new RegisterViewModel();
-            DataContext = viewModel;
+        private void OnDataContextChanged(
+            object sender,
+            DependencyPropertyChangedEventArgs e)
+        {
+            RegisterViewModel oldViewModel = e.OldValue as RegisterViewModel;
 
-            viewModel.LoginRequested += OnLoginRequested;
-            viewModel.PasswordClearRequested += OnPasswordClearRequested;
-            viewModel.VerificationRequired += OnVerificationRequired;
+            if (oldViewModel != null)
+            {
+                oldViewModel.PasswordClearRequested -= OnPasswordClearRequested;
+            }
+
+            viewModel = e.NewValue as RegisterViewModel;
+
+            if (viewModel != null)
+            {
+                viewModel.PasswordClearRequested += OnPasswordClearRequested;
+            }
         }
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
+            if (viewModel == null)
+            {
+                return;
+            }
+
             viewModel.SetPassword(PasswordBox.Password);
         }
 
         private void ConfirmPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
+            if (viewModel == null)
+            {
+                return;
+            }
+
             viewModel.SetConfirmPassword(ConfirmPasswordBox.Password);
-        }
-
-        private void OnLoginRequested(object sender, EventArgs e)
-        {
-            LoginWindow loginWindow = new LoginWindow();
-            loginWindow.Show();
-
-            Close();
         }
 
         private void OnPasswordClearRequested(object sender, EventArgs e)
         {
             PasswordBox.Clear();
             ConfirmPasswordBox.Clear();
-        }
-
-        private void OnVerificationRequired(object sender, VerificationRequiredEventArgs e)
-        {
-            VerifyEmailWindow verifyEmailWindow = new VerifyEmailWindow(e.Email);
-            verifyEmailWindow.Show();
-
-            Close();
-        }
-
-        protected override void OnClosed(EventArgs e)
-        {
-            viewModel.LoginRequested -= OnLoginRequested;
-            viewModel.PasswordClearRequested -= OnPasswordClearRequested;
-            viewModel.VerificationRequired -= OnVerificationRequired;
-
-            base.OnClosed(e);
         }
 
         private void PhoneTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -95,6 +94,14 @@ namespace Hangman.Client.Views.Windows
             SelectionChangedEventArgs e)
         {
             DateOfBirthPopup.IsOpen = false;
+        }
+
+        private void OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            if (viewModel != null)
+            {
+                viewModel.PasswordClearRequested -= OnPasswordClearRequested;
+            }
         }
 
         private static bool IsOnlyDigits(string value)
