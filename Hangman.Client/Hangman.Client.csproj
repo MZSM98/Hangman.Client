@@ -67,6 +67,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ServiceReferenceMatchNotification\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ServiceReferenceMatch\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ServiceReferenceProfile\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -91,7 +101,15 @@
     <Compile Include="Models\Auth\AuthenticatedUserModel.cs" />
     <Compile Include="Models\Auth\RequestPasswordResetFormModel.cs" />
     <Compile Include="Models\Auth\ResetPasswordFormModel.cs" />
+    <Compile Include="Models\Match\AvailableLobbyModel.cs" />
+    <Compile Include="Models\Match\MatchLobbyModel.cs" />
     <Compile Include="Models\Profile\ProfileFormModel.cs" />
+    <Compile Include="Services\Match\IMatchClient.cs" />
+    <Compile Include="Services\Match\IMatchNotificationClient.cs" />
+    <Compile Include="Services\Match\MatchClient.cs" />
+    <Compile Include="Services\Match\MatchNotificationCallbackEventArgs.cs" />
+    <Compile Include="Services\Match\MatchNotificationCallbackHandler.cs" />
+    <Compile Include="Services\Match\MatchNotificationClient.cs" />
     <Compile Include="Services\Profile\IProfileClient.cs" />
     <Compile Include="Services\Profile\ProfileClient.cs" />
     <Compile Include="Validators\Auth\AuthFieldValidator.cs" />
@@ -118,6 +136,7 @@
     <Compile Include="ViewModels\LoginMenuViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
+    <Compile Include="ViewModels\MatchLobbyViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\RequestPasswordResetViewModel.cs" />
@@ -128,6 +147,9 @@
     </Compile>
     <Compile Include="Views\UserControls\MatchListView.xaml.cs">
       <DependentUpon>MatchListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\MatchLobbyView.xaml.cs">
+      <DependentUpon>MatchLobbyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ProfileView.xaml.cs">
       <DependentUpon>ProfileView.xaml</DependentUpon>
@@ -158,6 +180,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\MatchListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\MatchLobbyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,6 +259,26 @@
     <None Include="Connected Services\ServiceReferenceAuth\item2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceReferenceMatchNotification\Hangman.Contracts.Match.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceMatchNotification\service.wsdl" />
+    <None Include="Connected Services\ServiceReferenceMatchNotification\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceMatchNotification\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceMatch\MatchService.wsdl" />
+    <None Include="Connected Services\ServiceReferenceMatch\MatchService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceMatch\MatchService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceMatch\MatchService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceReferenceProfile\ProfileService.wsdl" />
     <None Include="Connected Services\ServiceReferenceProfile\ProfileService.xsd">
       <SubType>Designer</SubType>
@@ -250,6 +296,15 @@
     <None Include="Properties\DataSources\Hangman.Contracts.Auth.ResendVerificationEmailResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Auth.ResetPasswordResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Auth.VerifyEmailResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Match.CreateLobbyResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Match.GetAvailableLobbiesResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Match.GetCurrentLobbyResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Match.JoinLobbyResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Match.LeaveLobbyResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Match.SubscribeAvailableLobbiesResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Match.SubscribeMatchResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Match.UnsubscribeAvailableLobbiesResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Match.UnsubscribeMatchResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Profile.DeleteProfileResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Profile.GetProfileResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Profile.UpdateProfileResponse.datasource" />
@@ -264,6 +319,19 @@
     <None Include="Connected Services\ServiceReferenceProfile\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceReferenceProfile\configuration.svcinfo" />
     <None Include="Connected Services\ServiceReferenceProfile\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ServiceReferenceMatch\MatchService.disco" />
+    <None Include="Connected Services\ServiceReferenceMatch\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceReferenceMatch\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceReferenceMatch\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ServiceReferenceMatchNotification\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceReferenceMatchNotification\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceReferenceMatchNotification\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -289,6 +357,8 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServiceReferenceAuth\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceReferenceMatchNotification\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceReferenceMatch\" />
     <WCFMetadataStorage Include="Connected Services\ServiceReferenceProfile\" />
   </ItemGroup>
   <ItemGroup>

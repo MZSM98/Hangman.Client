@@ -169,6 +169,159 @@ namespace Hangman.Client.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Available matches.
+        /// </summary>
+        internal static string Match_AvailableLobbiesTitle {
+            get {
+                return ResourceManager.GetString("Match_AvailableLobbiesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Back.
+        /// </summary>
+        internal static string Match_BackButton {
+            get {
+                return ResourceManager.GetString("Match_BackButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Created.
+        /// </summary>
+        internal static string Match_CreatedAtLabel {
+            get {
+                return ResourceManager.GetString("Match_CreatedAtLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Create lobby.
+        /// </summary>
+        internal static string Match_CreateLobbyButton {
+            get {
+                return ResourceManager.GetString("Match_CreateLobbyButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Current lobby.
+        /// </summary>
+        internal static string Match_CurrentLobbyTitle {
+            get {
+                return ResourceManager.GetString("Match_CurrentLobbyTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Email.
+        /// </summary>
+        internal static string Match_EmailLabel {
+            get {
+                return ResourceManager.GetString("Match_EmailLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Guest.
+        /// </summary>
+        internal static string Match_GuestLabel {
+            get {
+                return ResourceManager.GetString("Match_GuestLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Host.
+        /// </summary>
+        internal static string Match_HostLabel {
+            get {
+                return ResourceManager.GetString("Match_HostLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ID.
+        /// </summary>
+        internal static string Match_IdLabel {
+            get {
+                return ResourceManager.GetString("Match_IdLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Join.
+        /// </summary>
+        internal static string Match_JoinLobbyButton {
+            get {
+                return ResourceManager.GetString("Match_JoinLobbyButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Language.
+        /// </summary>
+        internal static string Match_LanguageLabel {
+            get {
+                return ResourceManager.GetString("Match_LanguageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Leave.
+        /// </summary>
+        internal static string Match_LeaveLobbyButton {
+            get {
+                return ResourceManager.GetString("Match_LeaveLobbyButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a There are no available matches..
+        /// </summary>
+        internal static string Match_NoAvailableLobbies {
+            get {
+                return ResourceManager.GetString("Match_NoAvailableLobbies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have not created or joined any lobby yet..
+        /// </summary>
+        internal static string Match_NoCurrentLobby {
+            get {
+                return ResourceManager.GetString("Match_NoCurrentLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Refresh.
+        /// </summary>
+        internal static string Match_RefreshLobbiesButton {
+            get {
+                return ResourceManager.GetString("Match_RefreshLobbiesButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Status.
+        /// </summary>
+        internal static string Match_StatusLabel {
+            get {
+                return ResourceManager.GetString("Match_StatusLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Matches.
+        /// </summary>
+        internal static string Match_Title {
+            get {
+                return ResourceManager.GetString("Match_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Player avatar.
         /// </summary>
         internal static string Profile_AvatarLabel {
@@ -1150,11 +1303,83 @@ namespace Hangman.Client.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Available match notifications enabled..
+        /// </summary>
+        internal static string Server_Match_AvailableLobbySubscribed {
+            get {
+                return ResourceManager.GetString("Server_Match_AvailableLobbySubscribed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Available match notifications could not be enabled..
+        /// </summary>
+        internal static string Server_Match_AvailableLobbySubscriptionFailed {
+            get {
+                return ResourceManager.GetString("Server_Match_AvailableLobbySubscriptionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Available match notifications disabled..
+        /// </summary>
+        internal static string Server_Match_AvailableLobbyUnsubscribed {
+            get {
+                return ResourceManager.GetString("Server_Match_AvailableLobbyUnsubscribed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Available match notifications could not be disabled..
+        /// </summary>
+        internal static string Server_Match_AvailableLobbyUnsubscriptionFailed {
+            get {
+                return ResourceManager.GetString("Server_Match_AvailableLobbyUnsubscriptionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a You cannot join your own match..
         /// </summary>
         internal static string Server_Match_CannotJoinOwnMatch {
             get {
                 return ResourceManager.GetString("Server_Match_CannotJoinOwnMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a There is a server configuration error..
+        /// </summary>
+        internal static string Server_Match_ConfigurationError {
+            get {
+                return ResourceManager.GetString("Server_Match_ConfigurationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Could not connect to the database..
+        /// </summary>
+        internal static string Server_Match_DatabaseConnectionError {
+            get {
+                return ResourceManager.GetString("Server_Match_DatabaseConnectionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The database took too long to respond..
+        /// </summary>
+        internal static string Server_Match_DatabaseTimeout {
+            get {
+                return ResourceManager.GetString("Server_Match_DatabaseTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The database is not available..
+        /// </summary>
+        internal static string Server_Match_DatabaseUnavailable {
+            get {
+                return ResourceManager.GetString("Server_Match_DatabaseUnavailable", resourceCulture);
             }
         }
         
@@ -1195,6 +1420,15 @@ namespace Hangman.Client.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The match was finished because a player left..
+        /// </summary>
+        internal static string Server_Match_LobbyClosed {
+            get {
+                return ResourceManager.GetString("Server_Match_LobbyClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Lobby created successfully..
         /// </summary>
         internal static string Server_Match_LobbyCreated {
@@ -1231,6 +1465,42 @@ namespace Hangman.Client.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Lobby notifications enabled..
+        /// </summary>
+        internal static string Server_Match_LobbySubscribed {
+            get {
+                return ResourceManager.GetString("Server_Match_LobbySubscribed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The lobby notification could not be enabled..
+        /// </summary>
+        internal static string Server_Match_LobbySubscriptionFailed {
+            get {
+                return ResourceManager.GetString("Server_Match_LobbySubscriptionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Lobby notifications disabled..
+        /// </summary>
+        internal static string Server_Match_LobbyUnsubscribed {
+            get {
+                return ResourceManager.GetString("Server_Match_LobbyUnsubscribed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Lobby notifications could not be disabled..
+        /// </summary>
+        internal static string Server_Match_LobbyUnsubscriptionFailed {
+            get {
+                return ResourceManager.GetString("Server_Match_LobbyUnsubscriptionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a The match is no longer available..
         /// </summary>
         internal static string Server_Match_MatchNotAvailable {
@@ -1263,6 +1533,24 @@ namespace Hangman.Client.Localization {
         internal static string Server_Match_PlayerProfileNotAvailable {
             get {
                 return ResourceManager.GetString("Server_Match_PlayerProfileNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while processing the operation..
+        /// </summary>
+        internal static string Server_Match_RuntimeError {
+            get {
+                return ResourceManager.GetString("Server_Match_RuntimeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An unexpected error occurred..
+        /// </summary>
+        internal static string Server_Match_UnexpectedError {
+            get {
+                return ResourceManager.GetString("Server_Match_UnexpectedError", resourceCulture);
             }
         }
         

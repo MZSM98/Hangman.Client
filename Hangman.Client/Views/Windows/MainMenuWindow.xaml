@@ -19,6 +19,11 @@
         <DataTemplate DataType="{x:Type viewModels:ProfileViewModel}">
             <userControls:ProfileView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:MatchLobbyViewModel}">
+            <userControls:MatchLobbyView />
+        </DataTemplate>
+
     </Window.Resources>
 
     <Grid>
@@ -69,10 +74,12 @@
                     <StackPanel Grid.Row="2" Width="550">
                         <Button Content="CREAR NUEVA PARTIDA"
                                 Height="75"
+                                Command="{Binding OpenMatchLobbyCommand}"
                                 Style="{StaticResource BotonRetroStyle}"/>
 
                         <Button Content="UNIRSE"
                                 Height="75"
+                                Command="{Binding OpenMatchLobbyCommand}"
                                 Style="{StaticResource BotonRetroStyle}"/>
 
                         <Button Content="EDITAR PERFIL"

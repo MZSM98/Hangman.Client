@@ -11,6 +11,7 @@ namespace Hangman.Client.ViewModels
         private bool isHomeVisible;
 
         private readonly RelayCommand openProfileCommand;
+        private readonly RelayCommand openMatchLobbyCommand;
         private readonly RelayCommand logoutCommand;
 
         public MainMenuViewModel()
@@ -18,6 +19,7 @@ namespace Hangman.Client.ViewModels
             isHomeVisible = true;
 
             openProfileCommand = new RelayCommand(OpenProfile, CanExecuteNavigation);
+            openMatchLobbyCommand = new RelayCommand(OpenMatchLobby, CanExecuteNavigation);
             logoutCommand = new RelayCommand(Logout, CanExecuteNavigation);
         }
 
@@ -40,6 +42,11 @@ namespace Hangman.Client.ViewModels
             get { return openProfileCommand; }
         }
 
+        public ICommand OpenMatchLobbyCommand
+        {
+            get { return openMatchLobbyCommand; }
+        }
+
         public ICommand LogoutCommand
         {
             get { return logoutCommand; }
@@ -47,9 +54,11 @@ namespace Hangman.Client.ViewModels
 
         private void OpenProfile()
         {
+            CloseCurrentViewModel();
+
             ProfileViewModel profileViewModel = new ProfileViewModel();
 
-            profileViewModel.BackRequested += OnProfileBackRequested;
+            profileViewModel.BackRequested += OnChildBackRequested;
             profileViewModel.ProfileDeleted += OnProfileDeleted;
 
             CurrentViewModel = profileViewModel;
@@ -58,7 +67,21 @@ namespace Hangman.Client.ViewModels
             profileViewModel.LoadProfileCommand.Execute(null);
         }
 
-        private void OnProfileBackRequested(object sender, EventArgs e)
+        private void OpenMatchLobby()
+        {
+            CloseCurrentViewModel();
+
+            MatchLobbyViewModel matchLobbyViewModel = new MatchLobbyViewModel();
+
+            matchLobbyViewModel.BackRequested += OnChildBackRequested;
+
+            CurrentViewModel = matchLobbyViewModel;
+            IsHomeVisible = false;
+
+            matchLobbyViewModel.RefreshLobbiesCommand.Execute(null);
+        }
+
+        private void OnChildBackRequested(object sender, EventArgs e)
         {
             CloseCurrentViewModel();
             IsHomeVisible = true;
@@ -74,8 +97,20 @@ namespace Hangman.Client.ViewModels
         {
             if (CurrentViewModel is ProfileViewModel profileViewModel)
             {
-                profileViewModel.BackRequested -= OnProfileBackRequested;
+                profileViewModel.BackRequested -= OnChildBackRequested;
                 profileViewModel.ProfileDeleted -= OnProfileDeleted;
+            }
+
+            if (CurrentViewModel is MatchLobbyViewModel matchLobbyViewModel)
+            {
+                matchLobbyViewModel.BackRequested -= OnChildBackRequested;
+            }
+
+            IDisposable disposableViewModel = CurrentViewModel as IDisposable;
+
+            if (disposableViewModel != null)
+            {
+                disposableViewModel.Dispose();
             }
 
             CurrentViewModel = null;
@@ -83,6 +118,7 @@ namespace Hangman.Client.ViewModels
 
         private void Logout()
         {
+            CloseCurrentViewModel();
             UserSession.Clear();
             RaiseSessionClosed();
         }

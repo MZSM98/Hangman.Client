@@ -153,6 +153,57 @@
   <data name="Login_WindowTitle" xml:space="preserve">
     <value>Hangman - Login</value>
   </data>
+  <data name="Match_AvailableLobbiesTitle" xml:space="preserve">
+    <value>Available matches</value>
+  </data>
+  <data name="Match_BackButton" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Match_CreatedAtLabel" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="Match_CreateLobbyButton" xml:space="preserve">
+    <value>Create lobby</value>
+  </data>
+  <data name="Match_CurrentLobbyTitle" xml:space="preserve">
+    <value>Current lobby</value>
+  </data>
+  <data name="Match_EmailLabel" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Match_GuestLabel" xml:space="preserve">
+    <value>Guest</value>
+  </data>
+  <data name="Match_HostLabel" xml:space="preserve">
+    <value>Host</value>
+  </data>
+  <data name="Match_IdLabel" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Match_JoinLobbyButton" xml:space="preserve">
+    <value>Join</value>
+  </data>
+  <data name="Match_LanguageLabel" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Match_LeaveLobbyButton" xml:space="preserve">
+    <value>Leave</value>
+  </data>
+  <data name="Match_NoAvailableLobbies" xml:space="preserve">
+    <value>There are no available matches.</value>
+  </data>
+  <data name="Match_NoCurrentLobby" xml:space="preserve">
+    <value>You have not created or joined any lobby yet.</value>
+  </data>
+  <data name="Match_RefreshLobbiesButton" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="Match_StatusLabel" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Match_Title" xml:space="preserve">
+    <value>Matches</value>
+  </data>
   <data name="Profile_AvatarLabel" xml:space="preserve">
     <value>Player avatar</value>
   </data>
@@ -480,8 +531,32 @@
   <data name="Server_Match_AvailableLobbiesRetrieved" xml:space="preserve">
     <value>Available lobbies retrieved successfully.</value>
   </data>
+  <data name="Server_Match_AvailableLobbySubscribed" xml:space="preserve">
+    <value>Available match notifications enabled.</value>
+  </data>
+  <data name="Server_Match_AvailableLobbySubscriptionFailed" xml:space="preserve">
+    <value>Available match notifications could not be enabled.</value>
+  </data>
+  <data name="Server_Match_AvailableLobbyUnsubscribed" xml:space="preserve">
+    <value>Available match notifications disabled.</value>
+  </data>
+  <data name="Server_Match_AvailableLobbyUnsubscriptionFailed" xml:space="preserve">
+    <value>Available match notifications could not be disabled.</value>
+  </data>
   <data name="Server_Match_CannotJoinOwnMatch" xml:space="preserve">
     <value>You cannot join your own match.</value>
+  </data>
+  <data name="Server_Match_ConfigurationError" xml:space="preserve">
+    <value>There is a server configuration error.</value>
+  </data>
+  <data name="Server_Match_DatabaseConnectionError" xml:space="preserve">
+    <value>Could not connect to the database.</value>
+  </data>
+  <data name="Server_Match_DatabaseTimeout" xml:space="preserve">
+    <value>The database took too long to respond.</value>
+  </data>
+  <data name="Server_Match_DatabaseUnavailable" xml:space="preserve">
+    <value>The database is not available.</value>
   </data>
   <data name="Server_Match_EmailVerificationRequired" xml:space="preserve">
     <value>You must verify your email before continuing.</value>
@@ -495,6 +570,9 @@
   <data name="Server_Match_InvalidMatchId" xml:space="preserve">
     <value>The match is not valid.</value>
   </data>
+  <data name="Server_Match_LobbyClosed" xml:space="preserve">
+    <value>The match was finished because a player left.</value>
+  </data>
   <data name="Server_Match_LobbyCreated" xml:space="preserve">
     <value>Lobby created successfully.</value>
   </data>
@@ -507,6 +585,18 @@
   <data name="Server_Match_LobbyJoinFailed" xml:space="preserve">
     <value>Could not join the lobby.</value>
   </data>
+  <data name="Server_Match_LobbySubscribed" xml:space="preserve">
+    <value>Lobby notifications enabled.</value>
+  </data>
+  <data name="Server_Match_LobbySubscriptionFailed" xml:space="preserve">
+    <value>The lobby notification could not be enabled.</value>
+  </data>
+  <data name="Server_Match_LobbyUnsubscribed" xml:space="preserve">
+    <value>Lobby notifications disabled.</value>
+  </data>
+  <data name="Server_Match_LobbyUnsubscriptionFailed" xml:space="preserve">
+    <value>Lobby notifications could not be disabled.</value>
+  </data>
   <data name="Server_Match_MatchNotAvailable" xml:space="preserve">
     <value>The match is no longer available.</value>
   </data>
@@ -518,6 +608,12 @@
   </data>
   <data name="Server_Match_PlayerProfileNotAvailable" xml:space="preserve">
     <value>The player profile is not available.</value>
+  </data>
+  <data name="Server_Match_RuntimeError" xml:space="preserve">
+    <value>An error occurred while processing the operation.</value>
+  </data>
+  <data name="Server_Match_UnexpectedError" xml:space="preserve">
+    <value>An unexpected error occurred.</value>
   </data>
   <data name="Server_Profile_AccountNotAvailable" xml:space="preserve">
     <value>The account is not available.</value>
