@@ -82,9 +82,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Coordinators\Match\IMatchLobbyNotificationCoordinator.cs" />
+    <Compile Include="Coordinators\Match\MatchLobbyNotificationCoordinator.cs" />
     <Compile Include="Infrastructure\Logging\ClientLoggerFactory.cs" />
     <Compile Include="Infrastructure\Logging\IClientLogger.cs" />
     <Compile Include="Infrastructure\Logging\Log4NetClientLogger.cs" />
+    <Compile Include="Infrastructure\Threading\IUiDispatcher.cs" />
+    <Compile Include="Infrastructure\Threading\WpfUiDispatcher.cs" />
     <Compile Include="Localization\LocExtension.cs" />
     <Compile Include="Localization\Messages\ClientValidationMessageProvider.cs" />
     <Compile Include="Localization\Messages\IMessageProvider.cs" />
@@ -104,14 +108,22 @@
     <Compile Include="Models\Match\AvailableLobbyModel.cs" />
     <Compile Include="Models\Match\MatchLobbyModel.cs" />
     <Compile Include="Models\Profile\ProfileFormModel.cs" />
+    <Compile Include="Services\Match\AvailableLobbiesOperationResult.cs" />
+    <Compile Include="Services\Match\CurrentLobbyOperationResult.cs" />
     <Compile Include="Services\Match\IMatchClient.cs" />
+    <Compile Include="Services\Match\IMatchLobbyWorkflow.cs" />
     <Compile Include="Services\Match\IMatchNotificationClient.cs" />
     <Compile Include="Services\Match\MatchClient.cs" />
+    <Compile Include="Services\Match\MatchLobbyOperationResult.cs" />
+    <Compile Include="Services\Match\MatchLobbyWorkflow.cs" />
     <Compile Include="Services\Match\MatchNotificationCallbackEventArgs.cs" />
     <Compile Include="Services\Match\MatchNotificationCallbackHandler.cs" />
     <Compile Include="Services\Match\MatchNotificationClient.cs" />
+    <Compile Include="Services\Match\MatchWorkflowResultBase.cs" />
     <Compile Include="Services\Profile\IProfileClient.cs" />
     <Compile Include="Services\Profile\ProfileClient.cs" />
+    <Compile Include="Services\Session\IMatchSessionContext.cs" />
+    <Compile Include="Services\Session\MatchSessionContext.cs" />
     <Compile Include="Validators\Auth\AuthFieldValidator.cs" />
     <Compile Include="Models\Auth\LoginFormModel.cs" />
     <Compile Include="Models\Auth\RegisterFormModel.cs" />

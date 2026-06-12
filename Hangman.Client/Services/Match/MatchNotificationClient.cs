@@ -193,12 +193,7 @@ namespace Hangman.Client.Services.Match
 
         private void OnCallbackAvailableLobbiesChanged(object sender, EventArgs e)
         {
-            EventHandler handler = AvailableLobbiesChanged;
-
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
+            AvailableLobbiesChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public void Dispose()
@@ -252,24 +247,14 @@ namespace Hangman.Client.Services.Match
             object sender,
             MatchLobbyUpdatedEventArgs e)
         {
-            EventHandler<MatchLobbyUpdatedEventArgs> handler = LobbyUpdated;
-
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+            LobbyUpdated?.Invoke(this, e);
         }
 
         private void OnCallbackLobbyClosed(
             object sender,
             MatchLobbyClosedEventArgs e)
         {
-            EventHandler<MatchLobbyClosedEventArgs> handler = LobbyClosed;
-
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+            LobbyClosed?.Invoke(this, e);
         }
 
         private void OnCallbackMatchStatusChanged(

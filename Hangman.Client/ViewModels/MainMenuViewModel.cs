@@ -18,9 +18,9 @@ namespace Hangman.Client.ViewModels
         {
             isHomeVisible = true;
 
-            openProfileCommand = new RelayCommand(OpenProfile, CanExecuteNavigation);
-            openMatchLobbyCommand = new RelayCommand(OpenMatchLobby, CanExecuteNavigation);
-            logoutCommand = new RelayCommand(Logout, CanExecuteNavigation);
+            openProfileCommand = new RelayCommand(OpenProfile);
+            openMatchLobbyCommand = new RelayCommand(OpenMatchLobby);
+            logoutCommand = new RelayCommand(Logout);
         }
 
         public event EventHandler SessionClosed;
@@ -106,9 +106,7 @@ namespace Hangman.Client.ViewModels
                 matchLobbyViewModel.BackRequested -= OnChildBackRequested;
             }
 
-            IDisposable disposableViewModel = CurrentViewModel as IDisposable;
-
-            if (disposableViewModel != null)
+            if (CurrentViewModel is IDisposable disposableViewModel)
             {
                 disposableViewModel.Dispose();
             }
@@ -121,11 +119,6 @@ namespace Hangman.Client.ViewModels
             CloseCurrentViewModel();
             UserSession.Clear();
             RaiseSessionClosed();
-        }
-
-        private bool CanExecuteNavigation()
-        {
-            return true;
         }
 
         private void RaiseSessionClosed()

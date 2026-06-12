@@ -1,15 +1,15 @@
-﻿using Hangman.Client.Infrastructure.Logging;
+﻿using Hangman.Client.Coordinators.Match;
+using Hangman.Client.Infrastructure.Logging;
+using Hangman.Client.Infrastructure.Threading;
 using Hangman.Client.Localization.Messages;
-using Hangman.Client.Models.Auth;
 using Hangman.Client.Models.Match;
 using Hangman.Client.Services.Match;
+using Hangman.Client.Services.Session;
 using Hangman.Client.ViewModels.Base;
-using Hangman.Contracts.Match;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Hangman.Client.ViewModels
@@ -17,9 +17,14 @@ namespace Hangman.Client.ViewModels
     public sealed class MatchLobbyViewModel : ServiceViewModelBase, IDisposable
     {
         private const string MatchServiceName = "MatchService";
+        private const string LobbySubscriptionFailedCode = "LobbySubscriptionFailed";
+        private const string InvalidMatchIdCode = "InvalidMatchId";
+        private const string NoActiveLobbyCode = "NoActiveLobby";
+        private const string LobbyClosedCode = "LobbyClosed";
 
-        private readonly IMatchClient matchClient;
-        private readonly IMatchNotificationClient matchNotificationClient;
+        private readonly IMatchLobbyWorkflow matchLobbyWorkflow;
+        private readonly IMatchLobbyNotificationCoordinator notificationCoordinator;
+        private readonly IUiDispatcher uiDispatcher;
 
         private readonly RelayCommand createLobbyCommand;
         private readonly RelayCommand refreshLobbiesCommand;
@@ -27,20 +32,23 @@ namespace Hangman.Client.ViewModels
         private readonly RelayCommand leaveLobbyCommand;
         private readonly RelayCommand backCommand;
 
-        private ObservableCollection<AvailableLobbyModel> availableLobbies;
+        private readonly ObservableCollection<AvailableLobbyModel> availableLobbies;
         private AvailableLobbyModel selectedLobby;
         private MatchLobbyModel currentLobby;
 
-        private bool isAvailableLobbiesSubscriptionActive;
         private bool hasAvailableLobbies;
         private bool hasNoAvailableLobbies;
         private bool hasCurrentLobby;
         private bool hasNoCurrentLobby;
+        private bool isLoadingAvailableLobbiesFromNotification;
+        private bool disposed;
 
         public MatchLobbyViewModel()
             : this(
                   new MatchClient(),
                   new MatchNotificationClient(),
+                  new MatchSessionContext(),
+                  new WpfUiDispatcher(),
                   new ClientValidationMessageProvider(),
                   new ServerMessageProvider(),
                   ClientLoggerFactory.Create<MatchLobbyViewModel>())
@@ -50,16 +58,38 @@ namespace Hangman.Client.ViewModels
         internal MatchLobbyViewModel(
             IMatchClient matchClient,
             IMatchNotificationClient matchNotificationClient,
+            IMatchSessionContext sessionContext,
+            IUiDispatcher uiDispatcher,
+            ClientValidationMessageProvider validationMessageProvider,
+            IServerMessageProvider serverMessageProvider,
+            IClientLogger logger)
+            : this(
+                  new MatchLobbyWorkflow(matchClient, sessionContext),
+                  new MatchLobbyNotificationCoordinator(
+                      matchNotificationClient,
+                      sessionContext),
+                  uiDispatcher,
+                  validationMessageProvider,
+                  serverMessageProvider,
+                  logger)
+        {
+        }
+
+        internal MatchLobbyViewModel(
+            IMatchLobbyWorkflow matchLobbyWorkflow,
+            IMatchLobbyNotificationCoordinator notificationCoordinator,
+            IUiDispatcher uiDispatcher,
             ClientValidationMessageProvider validationMessageProvider,
             IServerMessageProvider serverMessageProvider,
             IClientLogger logger)
             : base(validationMessageProvider, serverMessageProvider, logger)
         {
-            this.matchClient = matchClient ??
-                throw new ArgumentNullException(nameof(matchClient));
-
-            this.matchNotificationClient = matchNotificationClient ??
-                throw new ArgumentNullException(nameof(matchNotificationClient));
+            this.matchLobbyWorkflow = matchLobbyWorkflow ??
+                throw new ArgumentNullException(nameof(matchLobbyWorkflow));
+            this.notificationCoordinator = notificationCoordinator ??
+                throw new ArgumentNullException(nameof(notificationCoordinator));
+            this.uiDispatcher = uiDispatcher ??
+                throw new ArgumentNullException(nameof(uiDispatcher));
 
             availableLobbies = new ObservableCollection<AvailableLobbyModel>();
 
@@ -80,7 +110,6 @@ namespace Hangman.Client.ViewModels
         public ObservableCollection<AvailableLobbyModel> AvailableLobbies
         {
             get { return availableLobbies; }
-            private set { SetProperty(ref availableLobbies, value); }
         }
 
         public AvailableLobbyModel SelectedLobby
@@ -161,8 +190,6 @@ namespace Hangman.Client.ViewModels
             return RefreshLobbiesAsync();
         }
 
-        private bool disposed;
-
         public void Dispose()
         {
             if (disposed)
@@ -174,7 +201,7 @@ namespace Hangman.Client.ViewModels
 
             UnsubscribeNotificationEvents();
 
-            matchNotificationClient?.Dispose();
+            notificationCoordinator.Dispose();
         }
 
         private async Task CreateLobbyAsync()
@@ -186,46 +213,39 @@ namespace Hangman.Client.ViewModels
                 {
                     ClearMessages();
 
-                    if (!HasValidSession())
+                    MatchLobbyOperationResult result =
+                        await matchLobbyWorkflow.CreateLobbyAsync();
+
+                    if (!result.Success)
                     {
-                        SetCommonRuntimeError();
+                        ApplyFailure(result);
                         return;
                     }
 
-                    CreateLobbyRequest request = new CreateLobbyRequest
-                    {
-                        HostAccountId = UserSession.CurrentUser.AccountId,
-                        HostLanguageCode = UserSession.CurrentUser.PreferredLanguageCode
-                    };
-
-                    CreateLobbyResponse response = await matchClient.CreateLobbyAsync(request);
-
-                    if (response == null)
+                    if (result.Lobby == null)
                     {
                         SetCommonUnexpectedError();
                         return;
                     }
 
-                    if (!response.Success)
-                    {
-                        SetError(GetMatchServerMessage(response.MessageCode));
-                        return;
-                    }
-
-                    CurrentLobby = MatchLobbyModel.FromDto(response.Lobby);
+                    CurrentLobby = result.Lobby;
                     SelectedLobby = null;
                     ClearAvailableLobbies();
 
-                    await SubscribeToCurrentLobbyAsync();
+                    bool subscribed =
+                        await notificationCoordinator.SubscribeToLobbyAsync(
+                            CurrentLobby.MatchId);
 
-                    SetSuccess(GetMatchServerMessage(response.MessageCode));
+                    if (!subscribed)
+                    {
+                        SetError(GetMatchServerMessage(LobbySubscriptionFailedCode));
+                        return;
+                    }
+
+                    SetSuccess(GetMatchServerMessage(result.MessageCode));
                 },
                 null,
-                createLobbyCommand,
-                refreshLobbiesCommand,
-                joinLobbyCommand,
-                leaveLobbyCommand,
-                backCommand);
+                GetLobbyCommands());
         }
 
         private async Task RefreshLobbiesAsync()
@@ -237,7 +257,7 @@ namespace Hangman.Client.ViewModels
                 {
                     ClearMessages();
 
-                    await SubscribeToAvailableLobbiesAsync();
+                    await notificationCoordinator.SubscribeToAvailableLobbiesAsync();
 
                     if (HasCurrentLobby)
                     {
@@ -247,11 +267,7 @@ namespace Hangman.Client.ViewModels
                     await LoadAvailableLobbiesAsync(false);
                 },
                 null,
-                createLobbyCommand,
-                refreshLobbiesCommand,
-                joinLobbyCommand,
-                leaveLobbyCommand,
-                backCommand);
+                GetLobbyCommands());
         }
 
         private async Task JoinLobbyAsync()
@@ -263,53 +279,45 @@ namespace Hangman.Client.ViewModels
                 {
                     ClearMessages();
 
-                    if (!HasValidSession())
-                    {
-                        SetCommonRuntimeError();
-                        return;
-                    }
-
                     if (SelectedLobby == null)
                     {
-                        SetError(GetMatchServerMessage("InvalidMatchId"));
+                        SetError(GetMatchServerMessage(InvalidMatchIdCode));
                         return;
                     }
 
-                    JoinLobbyRequest request = new JoinLobbyRequest
+                    MatchLobbyOperationResult result =
+                        await matchLobbyWorkflow.JoinLobbyAsync(SelectedLobby.MatchId);
+
+                    if (!result.Success)
                     {
-                        MatchId = SelectedLobby.MatchId,
-                        GuestAccountId = UserSession.CurrentUser.AccountId,
-                        GuestLanguageCode = UserSession.CurrentUser.PreferredLanguageCode
-                    };
+                        ApplyFailure(result);
+                        return;
+                    }
 
-                    JoinLobbyResponse response = await matchClient.JoinLobbyAsync(request);
-
-                    if (response == null)
+                    if (result.Lobby == null)
                     {
                         SetCommonUnexpectedError();
                         return;
                     }
 
-                    if (!response.Success)
-                    {
-                        SetError(GetMatchServerMessage(response.MessageCode));
-                        return;
-                    }
-
-                    CurrentLobby = MatchLobbyModel.FromDto(response.Lobby);
+                    CurrentLobby = result.Lobby;
                     SelectedLobby = null;
                     ClearAvailableLobbies();
 
-                    await SubscribeToCurrentLobbyAsync();
+                    bool subscribed =
+                        await notificationCoordinator.SubscribeToLobbyAsync(
+                            CurrentLobby.MatchId);
 
-                    SetSuccess(GetMatchServerMessage(response.MessageCode));
+                    if (!subscribed)
+                    {
+                        SetError(GetMatchServerMessage(LobbySubscriptionFailedCode));
+                        return;
+                    }
+
+                    SetSuccess(GetMatchServerMessage(result.MessageCode));
                 },
                 null,
-                createLobbyCommand,
-                refreshLobbiesCommand,
-                joinLobbyCommand,
-                leaveLobbyCommand,
-                backCommand);
+                GetLobbyCommands());
         }
 
         private async Task LeaveLobbyAsync()
@@ -321,271 +329,109 @@ namespace Hangman.Client.ViewModels
                 {
                     ClearMessages();
 
-                    if (!HasValidSession())
-                    {
-                        SetCommonRuntimeError();
-                        return;
-                    }
-
                     if (CurrentLobby == null)
                     {
-                        SetError(GetMatchServerMessage("NoActiveLobby"));
+                        SetError(GetMatchServerMessage(NoActiveLobbyCode));
                         return;
                     }
 
                     int matchId = CurrentLobby.MatchId;
 
-                    LeaveLobbyRequest request = new LeaveLobbyRequest
-                    {
-                        MatchId = matchId,
-                        AccountId = UserSession.CurrentUser.AccountId
-                    };
+                    MatchLobbyOperationResult result =
+                        await matchLobbyWorkflow.LeaveLobbyAsync(matchId);
 
-                    LeaveLobbyResponse response = await matchClient.LeaveLobbyAsync(request);
-
-                    if (response == null)
+                    if (!result.Success)
                     {
-                        SetCommonUnexpectedError();
+                        ApplyFailure(result);
                         return;
                     }
 
-                    if (!response.Success)
-                    {
-                        SetError(GetMatchServerMessage(response.MessageCode));
-                        return;
-                    }
-
-                    await UnsubscribeFromLobbyAsync(matchId);
+                    await notificationCoordinator.UnsubscribeFromLobbyAsync(matchId);
 
                     CurrentLobby = null;
                     SelectedLobby = null;
 
-                    await SubscribeToAvailableLobbiesAsync();
+                    await notificationCoordinator.SubscribeToAvailableLobbiesAsync();
                     await LoadAvailableLobbiesAsync(false);
 
-                    SetSuccess(GetMatchServerMessage(response.MessageCode));
+                    SetSuccess(GetMatchServerMessage(result.MessageCode));
                 },
                 null,
-                createLobbyCommand,
-                refreshLobbiesCommand,
-                joinLobbyCommand,
-                leaveLobbyCommand,
-                backCommand);
+                GetLobbyCommands());
         }
 
         private async Task LoadAvailableLobbiesAsync(bool showSuccessMessage)
         {
-            if (!HasValidSession())
-            {
-                SetCommonRuntimeError();
-                return;
-            }
+            AvailableLobbiesOperationResult result =
+                await matchLobbyWorkflow.GetAvailableLobbiesAsync();
 
-            GetAvailableLobbiesRequest request = new GetAvailableLobbiesRequest
-            {
-                AccountId = UserSession.CurrentUser.AccountId
-            };
-
-            GetAvailableLobbiesResponse response =
-                await matchClient.GetAvailableLobbiesAsync(request);
-
-            if (response == null)
-            {
-                SetCommonUnexpectedError();
-                return;
-            }
-
-            if (!response.Success)
+            if (!result.Success)
             {
                 ClearAvailableLobbies();
-                SetError(GetMatchServerMessage(response.MessageCode));
+                ApplyFailure(result);
                 return;
             }
 
             AvailableLobbies.Clear();
 
-            if (response.Lobbies != null)
+            foreach (AvailableLobbyModel lobby in result.Lobbies)
             {
-                foreach (AvailableLobbyModel lobby in response.Lobbies
-                    .Select(AvailableLobbyModel.FromDto)
-                    .Where(lobby => lobby != null))
-                {
-                    AvailableLobbies.Add(lobby);
-                }
+                AvailableLobbies.Add(lobby);
             }
 
             UpdateAvailableLobbyState();
 
             if (showSuccessMessage)
             {
-                SetSuccess(GetMatchServerMessage(response.MessageCode));
+                SetSuccess(GetMatchServerMessage(result.MessageCode));
             }
         }
 
         private async Task RefreshCurrentLobbyAsync()
         {
-            if (!HasValidSession())
+            CurrentLobbyOperationResult result =
+                await matchLobbyWorkflow.GetCurrentLobbyAsync();
+
+            if (!result.Success)
             {
+                ApplyFailure(result);
                 return;
             }
 
-            GetCurrentLobbyRequest request = new GetCurrentLobbyRequest
-            {
-                AccountId = UserSession.CurrentUser.AccountId
-            };
-
-            GetCurrentLobbyResponse response =
-                await matchClient.GetCurrentLobbyAsync(request);
-
-            if (response == null)
-            {
-                SetCommonUnexpectedError();
-                return;
-            }
-
-            if (!response.Success)
-            {
-                SetError(GetMatchServerMessage(response.MessageCode));
-                return;
-            }
-
-            if (response.Lobby == null)
+            if (result.Lobby == null)
             {
                 CurrentLobby = null;
                 SelectedLobby = null;
+
+                await notificationCoordinator.SubscribeToAvailableLobbiesAsync();
                 await LoadAvailableLobbiesAsync(false);
+
                 return;
             }
 
-            CurrentLobby = MatchLobbyModel.FromDto(response.Lobby);
+            CurrentLobby = result.Lobby;
             ClearAvailableLobbies();
-        }
-
-        private async Task SubscribeToCurrentLobbyAsync()
-        {
-            if (CurrentLobby == null || !HasValidSession())
-            {
-                return;
-            }
-
-            try
-            {
-                SubscribeMatchResponse response =
-                    await matchNotificationClient.SubscribeAsync(
-                        new SubscribeMatchRequest
-                        {
-                            MatchId = CurrentLobby.MatchId,
-                            AccountId = UserSession.CurrentUser.AccountId
-                        });
-
-                if (response == null || !response.Success)
-                {
-                    SetError(GetMatchServerMessage("LobbySubscriptionFailed"));
-                }
-            }
-            catch
-            {
-                SetError(GetMatchServerMessage("LobbySubscriptionFailed"));
-            }
-        }
-
-        private async Task UnsubscribeFromLobbyAsync(int matchId)
-        {
-            if (!HasValidSession())
-            {
-                return;
-            }
-
-            try
-            {
-                await matchNotificationClient.UnsubscribeAsync(
-                    new UnsubscribeMatchRequest
-                    {
-                        MatchId = matchId,
-                        AccountId = UserSession.CurrentUser.AccountId
-                    });
-            }
-            catch
-            {
-                matchNotificationClient.Close();
-                isAvailableLobbiesSubscriptionActive = false;
-            }
-        }
-
-        private async Task SubscribeToAvailableLobbiesAsync()
-        {
-            if (isAvailableLobbiesSubscriptionActive || !HasValidSession())
-            {
-                return;
-            }
-
-            try
-            {
-                SubscribeAvailableLobbiesResponse response =
-                    await matchNotificationClient.SubscribeAvailableLobbiesAsync(
-                        new SubscribeAvailableLobbiesRequest
-                        {
-                            AccountId = UserSession.CurrentUser.AccountId
-                        });
-
-                isAvailableLobbiesSubscriptionActive =
-                    response != null && response.Success;
-            }
-            catch
-            {
-                isAvailableLobbiesSubscriptionActive = false;
-            }
-        }
-
-        private async Task UnsubscribeFromAvailableLobbiesAsync()
-        {
-            if (!isAvailableLobbiesSubscriptionActive || !HasValidSession())
-            {
-                return;
-            }
-
-            try
-            {
-                await matchNotificationClient.UnsubscribeAvailableLobbiesAsync(
-                    new UnsubscribeAvailableLobbiesRequest
-                    {
-                        AccountId = UserSession.CurrentUser.AccountId
-                    });
-            }
-            catch
-            {
-                matchNotificationClient.Close();
-            }
-            finally
-            {
-                isAvailableLobbiesSubscriptionActive = false;
-            }
         }
 
         private void SubscribeNotificationEvents()
         {
-            matchNotificationClient.AvailableLobbiesChanged += OnAvailableLobbiesChanged;
-            matchNotificationClient.LobbyUpdated += OnLobbyUpdated;
-            matchNotificationClient.LobbyClosed += OnLobbyClosed;
-            matchNotificationClient.MatchStatusChanged += OnMatchStatusChanged;
+            notificationCoordinator.AvailableLobbiesChanged += OnAvailableLobbiesChanged;
+            notificationCoordinator.LobbyUpdated += OnLobbyUpdated;
+            notificationCoordinator.LobbyClosed += OnLobbyClosed;
+            notificationCoordinator.MatchStatusChanged += OnMatchStatusChanged;
         }
 
         private void UnsubscribeNotificationEvents()
         {
-            matchNotificationClient.AvailableLobbiesChanged -= OnAvailableLobbiesChanged;
-            matchNotificationClient.LobbyUpdated -= OnLobbyUpdated;
-            matchNotificationClient.LobbyClosed -= OnLobbyClosed;
-            matchNotificationClient.MatchStatusChanged -= OnMatchStatusChanged;
+            notificationCoordinator.AvailableLobbiesChanged -= OnAvailableLobbiesChanged;
+            notificationCoordinator.LobbyUpdated -= OnLobbyUpdated;
+            notificationCoordinator.LobbyClosed -= OnLobbyClosed;
+            notificationCoordinator.MatchStatusChanged -= OnMatchStatusChanged;
         }
-
-        private bool isLoadingAvailableLobbiesFromNotification;
 
         private void OnAvailableLobbiesChanged(object sender, EventArgs e)
         {
-            RunOnUiThread(async () =>
-            {
-                await ReloadAvailableLobbiesFromNotificationAsync();
-            });
+            uiDispatcher.RunAsync(ReloadAvailableLobbiesFromNotificationAsync);
         }
 
         private async Task ReloadAvailableLobbiesFromNotificationAsync()
@@ -609,78 +455,73 @@ namespace Hangman.Client.ViewModels
 
         private void OnLobbyUpdated(object sender, MatchLobbyUpdatedEventArgs e)
         {
-            if (CurrentLobby == null || CurrentLobby.MatchId != e.MatchId)
+            uiDispatcher.RunAsync(async () =>
             {
-                return;
-            }
-
-            RunOnUiThread(async () =>
-            {
-                if (!IsBusy)
+                if (CurrentLobby == null ||
+                    CurrentLobby.MatchId != e.MatchId ||
+                    IsBusy)
                 {
-                    await RefreshCurrentLobbyAsync();
+                    return;
                 }
+
+                await RefreshCurrentLobbyAsync();
             });
         }
 
         private void OnLobbyClosed(object sender, MatchLobbyClosedEventArgs e)
         {
-            if (CurrentLobby == null || CurrentLobby.MatchId != e.MatchId)
+            uiDispatcher.RunAsync(async () =>
             {
-                return;
-            }
+                if (CurrentLobby == null ||
+                    CurrentLobby.MatchId != e.MatchId)
+                {
+                    return;
+                }
 
-            RunOnUiThread(async () =>
-            {
                 CurrentLobby = null;
                 SelectedLobby = null;
 
-                await SubscribeToAvailableLobbiesAsync();
+                await notificationCoordinator.SubscribeToAvailableLobbiesAsync();
                 await LoadAvailableLobbiesAsync(false);
 
-                SetError(GetMatchServerMessage("LobbyClosed"));
+                string messageCode = string.IsNullOrWhiteSpace(e.MessageCode)
+                    ? LobbyClosedCode
+                    : e.MessageCode;
+
+                SetError(GetMatchServerMessage(messageCode));
             });
         }
 
         private void OnMatchStatusChanged(object sender, MatchStatusChangedEventArgs e)
         {
-            if (CurrentLobby == null || CurrentLobby.MatchId != e.MatchId)
+            uiDispatcher.RunAsync(async () =>
             {
-                return;
-            }
-
-            RunOnUiThread(async () =>
-            {
-                if (!IsBusy)
+                if (CurrentLobby == null ||
+                    CurrentLobby.MatchId != e.MatchId ||
+                    IsBusy)
                 {
-                    await RefreshCurrentLobbyAsync();
+                    return;
                 }
+
+                await RefreshCurrentLobbyAsync();
             });
         }
 
-        private void RunOnUiThread(Func<Task> operation)
+        private void ApplyFailure(MatchWorkflowResultBase result)
         {
-            if (operation == null)
+            if (result == null || result.IsUnexpectedError)
             {
-                return;
+                SetCommonUnexpectedError();
+                return; 
             }
 
-            if (Application.Current == null ||
-                Application.Current.Dispatcher.CheckAccess())
+            if (result.IsSessionInvalid)
             {
-                operation();
-                return;
+                SetCommonRuntimeError();
+                return; 
             }
 
-            Application.Current.Dispatcher.BeginInvoke(
-                new Action(async () => await operation()));
-        }
-
-        private bool HasValidSession()
-        {
-            return UserSession.IsAuthenticated &&
-                   UserSession.CurrentUser.AccountId > 0 &&
-                   !string.IsNullOrWhiteSpace(UserSession.CurrentUser.PreferredLanguageCode);
+            SetError(GetMatchServerMessage(result.MessageCode));
         }
 
         private bool CanCreateLobby()
@@ -729,11 +570,19 @@ namespace Hangman.Client.ViewModels
             HasCurrentLobby = CurrentLobby != null;
             HasNoCurrentLobby = !HasCurrentLobby;
 
-            createLobbyCommand.RaiseCanExecuteChanged();
-            refreshLobbiesCommand.RaiseCanExecuteChanged();
-            joinLobbyCommand.RaiseCanExecuteChanged();
-            leaveLobbyCommand.RaiseCanExecuteChanged();
-            backCommand.RaiseCanExecuteChanged();
+            RaiseCommandsCanExecuteChanged(GetLobbyCommands());
+        }
+
+        private RelayCommand[] GetLobbyCommands()
+        {
+            return new[]
+            {
+                createLobbyCommand,
+                refreshLobbiesCommand,
+                joinLobbyCommand,
+                leaveLobbyCommand,
+                backCommand
+            };
         }
 
         private string GetMatchServerMessage(string messageCode)
