@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="MatchNotificationService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IMatchNotificationService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000">
+          </wsrm:InactivityTimeout>
+          <wsrm:AcknowledgementInterval Milliseconds="200">
+          </wsrm:AcknowledgementInterval>
+        </wsrm:RMAssertion>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Hangman.Contracts.Match" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMatchNotificationService_Subscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:Subscribe" />
+  </wsdl:message>
+  <wsdl:message name="IMatchNotificationService_Subscribe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchNotificationService_Unsubscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:Unsubscribe" />
+  </wsdl:message>
+  <wsdl:message name="IMatchNotificationService_Unsubscribe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnsubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchNotificationService_SubscribeAvailableLobbies_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubscribeAvailableLobbies" />
+  </wsdl:message>
+  <wsdl:message name="IMatchNotificationService_SubscribeAvailableLobbies_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubscribeAvailableLobbiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchNotificationService_UnsubscribeAvailableLobbies_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnsubscribeAvailableLobbies" />
+  </wsdl:message>
+  <wsdl:message name="IMatchNotificationService_UnsubscribeAvailableLobbies_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnsubscribeAvailableLobbiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchNotificationService_OnLobbyUpdated_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnLobbyUpdated" />
+  </wsdl:message>
+  <wsdl:message name="IMatchNotificationService_OnLobbyClosed_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnLobbyClosed" />
+  </wsdl:message>
+  <wsdl:message name="IMatchNotificationService_OnMatchStatusChanged_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnMatchStatusChanged" />
+  </wsdl:message>
+  <wsdl:message name="IMatchNotificationService_OnAvailableLobbiesChanged_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnAvailableLobbiesChanged" />
+  </wsdl:message>
+  <wsdl:portType name="IMatchNotificationService">
+    <wsdl:operation name="Subscribe">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchNotificationService/Subscribe" message="tns:IMatchNotificationService_Subscribe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchNotificationService/SubscribeResponse" message="tns:IMatchNotificationService_Subscribe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Unsubscribe">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchNotificationService/Unsubscribe" message="tns:IMatchNotificationService_Unsubscribe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchNotificationService/UnsubscribeResponse" message="tns:IMatchNotificationService_Unsubscribe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubscribeAvailableLobbies">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchNotificationService/SubscribeAvailableLobbies" message="tns:IMatchNotificationService_SubscribeAvailableLobbies_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchNotificationService/SubscribeAvailableLobbiesResponse" message="tns:IMatchNotificationService_SubscribeAvailableLobbies_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UnsubscribeAvailableLobbies">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchNotificationService/UnsubscribeAvailableLobbies" message="tns:IMatchNotificationService_UnsubscribeAvailableLobbies_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchNotificationService/UnsubscribeAvailableLobbiesResponse" message="tns:IMatchNotificationService_UnsubscribeAvailableLobbies_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OnLobbyUpdated">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchNotificationService/OnLobbyUpdated" message="tns:IMatchNotificationService_OnLobbyUpdated_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OnLobbyClosed">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchNotificationService/OnLobbyClosed" message="tns:IMatchNotificationService_OnLobbyClosed_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OnMatchStatusChanged">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchNotificationService/OnMatchStatusChanged" message="tns:IMatchNotificationService_OnMatchStatusChanged_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OnAvailableLobbiesChanged">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchNotificationService/OnAvailableLobbiesChanged" message="tns:IMatchNotificationService_OnAvailableLobbiesChanged_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IMatchNotificationService" type="tns:IMatchNotificationService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IMatchNotificationService_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="Subscribe">
+      <soap12:operation soapAction="http://tempuri.org/IMatchNotificationService/Subscribe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Unsubscribe">
+      <soap12:operation soapAction="http://tempuri.org/IMatchNotificationService/Unsubscribe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubscribeAvailableLobbies">
+      <soap12:operation soapAction="http://tempuri.org/IMatchNotificationService/SubscribeAvailableLobbies" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnsubscribeAvailableLobbies">
+      <soap12:operation soapAction="http://tempuri.org/IMatchNotificationService/UnsubscribeAvailableLobbies" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnLobbyUpdated">
+      <soap12:operation soapAction="http://tempuri.org/IMatchNotificationService/OnLobbyUpdated" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnLobbyClosed">
+      <soap12:operation soapAction="http://tempuri.org/IMatchNotificationService/OnLobbyClosed" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnMatchStatusChanged">
+      <soap12:operation soapAction="http://tempuri.org/IMatchNotificationService/OnMatchStatusChanged" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnAvailableLobbiesChanged">
+      <soap12:operation soapAction="http://tempuri.org/IMatchNotificationService/OnAvailableLobbiesChanged" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MatchNotificationService">
+    <wsdl:port name="NetTcpBinding_IMatchNotificationService" binding="tns:NetTcpBinding_IMatchNotificationService">
+      <soap12:address location="net.tcp://localhost:8090/Hangman/MatchNotificationService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/Hangman/MatchNotificationService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

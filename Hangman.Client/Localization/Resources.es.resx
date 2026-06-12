@@ -153,6 +153,57 @@
   <data name="Login_WindowTitle" xml:space="preserve">
     <value>El Ahorcado - Inicio de sesión</value>
   </data>
+  <data name="Match_AvailableLobbiesTitle" xml:space="preserve">
+    <value>Partidas disponibles</value>
+  </data>
+  <data name="Match_BackButton" xml:space="preserve">
+    <value>Volver</value>
+  </data>
+  <data name="Match_CreatedAtLabel" xml:space="preserve">
+    <value>Creado</value>
+  </data>
+  <data name="Match_CreateLobbyButton" xml:space="preserve">
+    <value>Crear lobby</value>
+  </data>
+  <data name="Match_CurrentLobbyTitle" xml:space="preserve">
+    <value>Lobby actual</value>
+  </data>
+  <data name="Match_EmailLabel" xml:space="preserve">
+    <value>Correo</value>
+  </data>
+  <data name="Match_GuestLabel" xml:space="preserve">
+    <value>Invitado</value>
+  </data>
+  <data name="Match_HostLabel" xml:space="preserve">
+    <value>Host</value>
+  </data>
+  <data name="Match_IdLabel" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Match_JoinLobbyButton" xml:space="preserve">
+    <value>Unirse</value>
+  </data>
+  <data name="Match_LanguageLabel" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="Match_LeaveLobbyButton" xml:space="preserve">
+    <value>Salir</value>
+  </data>
+  <data name="Match_NoAvailableLobbies" xml:space="preserve">
+    <value>No hay partidas disponibles.</value>
+  </data>
+  <data name="Match_NoCurrentLobby" xml:space="preserve">
+    <value>No has creado ni unido a ningún lobby todavía.</value>
+  </data>
+  <data name="Match_RefreshLobbiesButton" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
+  <data name="Match_StatusLabel" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="Match_Title" xml:space="preserve">
+    <value>Partidas</value>
+  </data>
   <data name="Profile_AvatarLabel" xml:space="preserve">
     <value>Avatar de jugador</value>
   </data>
@@ -306,6 +357,9 @@
   <data name="Server_Auth_EmailAlreadyRegistered" xml:space="preserve">
     <value>El correo electrónico ya está registrado.</value>
   </data>
+  <data name="Server_Auth_EmailTooLong" xml:space="preserve">
+    <value>El correo electrónico no debe superar los 200 caracteres.</value>
+  </data>
   <data name="Server_Auth_EmailVerificationDataRequired" xml:space="preserve">
     <value>Los datos de verificación de correo son requeridos.</value>
   </data>
@@ -330,6 +384,12 @@
   <data name="Server_Auth_FullNameRequired" xml:space="preserve">
     <value>El nombre completo es requerido.</value>
   </data>
+  <data name="Server_Auth_FullNameTooLong" xml:space="preserve">
+    <value>El nombre no debe superar los 120 caracteres.</value>
+  </data>
+  <data name="Server_Auth_FullNameTooShort" xml:space="preserve">
+    <value>El nombre debe tener al menos 3 caracteres.</value>
+  </data>
   <data name="Server_Auth_InvalidDateOfBirth" xml:space="preserve">
     <value>La fecha de nacimiento no es válida.</value>
   </data>
@@ -344,6 +404,9 @@
   </data>
   <data name="Server_Auth_InvalidPasswordResetCode" xml:space="preserve">
     <value>El código de recuperación no es válido.</value>
+  </data>
+  <data name="Server_Auth_InvalidPhone" xml:space="preserve">
+    <value>El número telefónico solo debe contener dígitos.</value>
   </data>
   <data name="Server_Auth_InvalidPreferredLanguage" xml:space="preserve">
     <value>El idioma seleccionado no es válido.</value>
@@ -411,6 +474,12 @@
   <data name="Server_Auth_PhoneRequired" xml:space="preserve">
     <value>El teléfono es requerido.</value>
   </data>
+  <data name="Server_Auth_PhoneTooLong" xml:space="preserve">
+    <value>El número telefónico no debe superar los 20 dígitos.</value>
+  </data>
+  <data name="Server_Auth_PhoneTooShort" xml:space="preserve">
+    <value>El número telefónico debe tener al menos 7 dígitos.</value>
+  </data>
   <data name="Server_Auth_PlayerProfileNotAvailable" xml:space="preserve">
     <value>El perfil del jugador no está disponible.</value>
   </data>
@@ -462,8 +531,32 @@
   <data name="Server_Match_AvailableLobbiesRetrieved" xml:space="preserve">
     <value>Salas disponibles recuperadas correctamente.</value>
   </data>
+  <data name="Server_Match_AvailableLobbySubscribed" xml:space="preserve">
+    <value>Notificaciones de partidas disponibles activadas.</value>
+  </data>
+  <data name="Server_Match_AvailableLobbySubscriptionFailed" xml:space="preserve">
+    <value>No se pudieron activar las notificaciones de partidas disponibles.</value>
+  </data>
+  <data name="Server_Match_AvailableLobbyUnsubscribed" xml:space="preserve">
+    <value>Notificaciones de partidas disponibles desactivadas.</value>
+  </data>
+  <data name="Server_Match_AvailableLobbyUnsubscriptionFailed" xml:space="preserve">
+    <value>No se pudieron desactivar las notificaciones de partidas disponibles.</value>
+  </data>
   <data name="Server_Match_CannotJoinOwnMatch" xml:space="preserve">
     <value>No puedes unirte a tu propia partida.</value>
+  </data>
+  <data name="Server_Match_ConfigurationError" xml:space="preserve">
+    <value>Existe un error de configuración en el servidor.</value>
+  </data>
+  <data name="Server_Match_DatabaseConnectionError" xml:space="preserve">
+    <value>No se pudo conectar con la base de datos.</value>
+  </data>
+  <data name="Server_Match_DatabaseTimeout" xml:space="preserve">
+    <value>La base de datos tardó demasiado en responder.</value>
+  </data>
+  <data name="Server_Match_DatabaseUnavailable" xml:space="preserve">
+    <value>La base de datos no está disponible.</value>
   </data>
   <data name="Server_Match_EmailVerificationRequired" xml:space="preserve">
     <value>Debes verificar tu correo electrónico antes de continuar.</value>
@@ -477,6 +570,9 @@
   <data name="Server_Match_InvalidMatchId" xml:space="preserve">
     <value>La partida no es válida.</value>
   </data>
+  <data name="Server_Match_LobbyClosed" xml:space="preserve">
+    <value>La partida fue finalizada porque un jugador salió.</value>
+  </data>
   <data name="Server_Match_LobbyCreated" xml:space="preserve">
     <value>Sala creada correctamente.</value>
   </data>
@@ -488,6 +584,18 @@
   </data>
   <data name="Server_Match_LobbyJoinFailed" xml:space="preserve">
     <value>No se pudo unir a la sala.</value>
+  </data>
+  <data name="Server_Match_LobbySubscribed" xml:space="preserve">
+    <value>Notificaciones del lobby activadas.</value>
+  </data>
+  <data name="Server_Match_LobbySubscriptionFailed" xml:space="preserve">
+    <value>No se pudo activar la notificación del lobby.</value>
+  </data>
+  <data name="Server_Match_LobbyUnsubscribed" xml:space="preserve">
+    <value>Notificaciones del lobby desactivadas.</value>
+  </data>
+  <data name="Server_Match_LobbyUnsubscriptionFailed" xml:space="preserve">
+    <value>No se pudieron desactivar las notificaciones del lobby.</value>
   </data>
   <data name="Server_Match_MatchNotAvailable" xml:space="preserve">
     <value>La partida ya no está disponible.</value>
@@ -501,6 +609,12 @@
   <data name="Server_Match_PlayerProfileNotAvailable" xml:space="preserve">
     <value>El perfil del jugador no está disponible.</value>
   </data>
+  <data name="Server_Match_RuntimeError" xml:space="preserve">
+    <value>Ocurrió un error al procesar la operación.</value>
+  </data>
+  <data name="Server_Match_UnexpectedError" xml:space="preserve">
+    <value>Ocurrió un error inesperado.</value>
+  </data>
   <data name="Server_Profile_AccountNotAvailable" xml:space="preserve">
     <value>La cuenta no está disponible.</value>
   </data>
@@ -513,17 +627,32 @@
   <data name="Server_Profile_FullNameRequired" xml:space="preserve">
     <value>El nombre completo es requerido.</value>
   </data>
+  <data name="Server_Profile_FullNameTooLong" xml:space="preserve">
+    <value>El nombre no debe superar los 120 caracteres.</value>
+  </data>
+  <data name="Server_Profile_FullNameTooShort" xml:space="preserve">
+    <value>El nombre debe tener al menos 3 caracteres.</value>
+  </data>
   <data name="Server_Profile_InvalidAccountId" xml:space="preserve">
     <value>La cuenta no es válida.</value>
   </data>
   <data name="Server_Profile_InvalidDateOfBirth" xml:space="preserve">
     <value>La fecha de nacimiento no es válida.</value>
   </data>
+  <data name="Server_Profile_InvalidPhone" xml:space="preserve">
+    <value>El número telefónico solo debe contener dígitos.</value>
+  </data>
   <data name="Server_Profile_InvalidPreferredLanguage" xml:space="preserve">
     <value>El idioma seleccionado no es válido.</value>
   </data>
   <data name="Server_Profile_PhoneRequired" xml:space="preserve">
     <value>El teléfono es requerido.</value>
+  </data>
+  <data name="Server_Profile_PhoneTooLong" xml:space="preserve">
+    <value>El número telefónico no debe superar los 20 dígitos.</value>
+  </data>
+  <data name="Server_Profile_PhoneTooShort" xml:space="preserve">
+    <value>El número telefónico debe tener al menos 7 dígitos.</value>
   </data>
   <data name="Server_Profile_PlayerProfileNotAvailable" xml:space="preserve">
     <value>El perfil del jugador no está disponible.</value>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="4ea56d54-0675-486d-8233-05ed83277d02" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="Hangman.Contracts" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.tcp://localhost:8090/Hangman/MatchNotificationService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="c3b4010b-d677-41ce-a923-fe26dcf92247" SourceId="1" SourceUrl="net.tcp://localhost:8090/Hangman/MatchNotificationService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="7e916a75-31f0-4655-8602-a3e5b896f101" SourceId="1" SourceUrl="net.tcp://localhost:8090/Hangman/MatchNotificationService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="7739f148-3e7d-4eb4-9cd4-a93486a3168a" SourceId="1" SourceUrl="net.tcp://localhost:8090/Hangman/MatchNotificationService/mex" />
+    <MetadataFile FileName="Hangman.Contracts.Match.xsd" MetadataType="Schema" ID="8ae6bd33-2401-44d3-bb46-409678bb822d" SourceId="1" SourceUrl="net.tcp://localhost:8090/Hangman/MatchNotificationService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

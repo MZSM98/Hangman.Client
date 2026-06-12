@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="9e4574f3-63c4-43c4-bb55-6ee580931838" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="Hangman.Contracts" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8085/Hangman/MatchService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MatchService.wsdl" MetadataType="Wsdl" ID="e99e57ef-7b8b-4358-80e2-3f1075e251ff" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchService?wsdl" />
+    <MetadataFile FileName="MatchService.xsd" MetadataType="Schema" ID="1d3d8067-312d-4ad5-a88d-49ac7ad8dea3" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchService?xsd=xsd1" />
+    <MetadataFile FileName="MatchService1.xsd" MetadataType="Schema" ID="bb276904-7d38-49b7-9dbe-5c5c1f52dd15" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchService?xsd=xsd2" />
+    <MetadataFile FileName="MatchService.disco" MetadataType="Disco" ID="938ef5b6-803e-4836-b10c-0e8394886db0" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchService?disco" />
+    <MetadataFile FileName="MatchService2.xsd" MetadataType="Schema" ID="bc2db3e1-7f25-4d54-837f-fdf96b89ca97" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchService?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

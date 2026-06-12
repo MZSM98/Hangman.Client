@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Hangman.Contracts.Match" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Hangman.Contracts.Match" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="SubscribeMatchRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="xs:int" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SubscribeMatchRequest" nillable="true" type="tns:SubscribeMatchRequest" />
+  <xs:complexType name="SubscribeMatchResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MessageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SubscribeMatchResponse" nillable="true" type="tns:SubscribeMatchResponse" />
+  <xs:complexType name="UnsubscribeMatchRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="xs:int" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UnsubscribeMatchRequest" nillable="true" type="tns:UnsubscribeMatchRequest" />
+  <xs:complexType name="UnsubscribeMatchResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MessageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UnsubscribeMatchResponse" nillable="true" type="tns:UnsubscribeMatchResponse" />
+  <xs:complexType name="SubscribeAvailableLobbiesRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SubscribeAvailableLobbiesRequest" nillable="true" type="tns:SubscribeAvailableLobbiesRequest" />
+  <xs:complexType name="SubscribeAvailableLobbiesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MessageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SubscribeAvailableLobbiesResponse" nillable="true" type="tns:SubscribeAvailableLobbiesResponse" />
+  <xs:complexType name="UnsubscribeAvailableLobbiesRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UnsubscribeAvailableLobbiesRequest" nillable="true" type="tns:UnsubscribeAvailableLobbiesRequest" />
+  <xs:complexType name="UnsubscribeAvailableLobbiesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MessageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UnsubscribeAvailableLobbiesResponse" nillable="true" type="tns:UnsubscribeAvailableLobbiesResponse" />
+</xs:schema>

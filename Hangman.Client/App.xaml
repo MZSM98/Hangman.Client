@@ -5,6 +5,8 @@
              StartupUri="Views/Windows/LoginMenuWindow.xaml">
     
     <Application.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        
         <FontFamily x:Key="FuentePixel">pack://application:,,,/Assets/Minecraftia-Regular.ttf#Minecraftia</FontFamily>
         <SolidColorBrush x:Key="ColorTexto" Color="#3D2314"/>
         <SolidColorBrush x:Key="ColorMaderaClara" Color="#E5C39C"/>
