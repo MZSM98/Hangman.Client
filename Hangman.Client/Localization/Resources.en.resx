@@ -153,6 +153,81 @@
   <data name="Login_WindowTitle" xml:space="preserve">
     <value>Hangman - Login</value>
   </data>
+  <data name="MatchChat_SendButton" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="MatchChat_Title" xml:space="preserve">
+    <value>Match chat</value>
+  </data>
+  <data name="MatchGameplay_CategoryColumn" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="MatchGameplay_CategoryVotingTitle" xml:space="preserve">
+    <value>Category voting</value>
+  </data>
+  <data name="MatchGameplay_InProgressMessage" xml:space="preserve">
+    <value>The word has already been selected. The next step will be to open the game screen.</value>
+  </data>
+  <data name="MatchGameplay_InProgressTitle" xml:space="preserve">
+    <value>Match in progress</value>
+  </data>
+  <data name="MatchGameplay_NoVotes" xml:space="preserve">
+    <value>No votes registered yet</value>
+  </data>
+  <data name="MatchGameplay_PlayerColumn" xml:space="preserve">
+    <value>Player</value>
+  </data>
+  <data name="MatchGameplay_RemainingSecondsLabel" xml:space="preserve">
+    <value>Time remaining</value>
+  </data>
+  <data name="MatchGameplay_SelectCategoryLabel" xml:space="preserve">
+    <value>Select a category</value>
+  </data>
+  <data name="MatchGameplay_SelectedCategoryLabel" xml:space="preserve">
+    <value>Selected category</value>
+  </data>
+  <data name="MatchGameplay_SelectWordButton" xml:space="preserve">
+    <value>Select word</value>
+  </data>
+  <data name="MatchGameplay_SelectWordLabel" xml:space="preserve">
+    <value>Select the word</value>
+  </data>
+  <data name="MatchGameplay_Title" xml:space="preserve">
+    <value>Match flow</value>
+  </data>
+  <data name="MatchGameplay_VoteButton" xml:space="preserve">
+    <value>Vote</value>
+  </data>
+  <data name="MatchGameplay_VotesTitle" xml:space="preserve">
+    <value>Registered votes</value>
+  </data>
+  <data name="MatchGameplay_WaitingForHostWord" xml:space="preserve">
+    <value>Waiting for the host to select the word.</value>
+  </data>
+  <data name="MatchGameplay_WordSelectionTitle" xml:space="preserve">
+    <value>Word selection</value>
+  </data>
+  <data name="MatchResult_EmailLabel" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="MatchResult_ExitButton" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="MatchResult_NameLabel" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="MatchResult_Title" xml:space="preserve">
+    <value>MATCH FINISHED!</value>
+  </data>
+  <data name="MatchResult_WinnerLabel" xml:space="preserve">
+    <value>Winner</value>
+  </data>
+  <data name="MatchResult_YouLost" xml:space="preserve">
+    <value>YOU LOST!</value>
+  </data>
+  <data name="MatchResult_YouWon" xml:space="preserve">
+    <value>YOU WON!</value>
+  </data>
   <data name="Match_AvailableLobbiesTitle" xml:space="preserve">
     <value>Available matches</value>
   </data>
@@ -546,6 +621,30 @@
   <data name="Server_Match_CannotJoinOwnMatch" xml:space="preserve">
     <value>You cannot join your own match.</value>
   </data>
+  <data name="Server_Match_CategoryNotAvailable" xml:space="preserve">
+    <value>The selected category is not available.</value>
+  </data>
+  <data name="Server_Match_CategoryVoteRegistered" xml:space="preserve">
+    <value>Your category vote was registered successfully.</value>
+  </data>
+  <data name="Server_Match_CategoryVoteUpdated" xml:space="preserve">
+    <value>Your category vote was updated successfully.</value>
+  </data>
+  <data name="Server_Match_CategoryVotingExpired" xml:space="preserve">
+    <value>The time to vote for a category has ended.</value>
+  </data>
+  <data name="Server_Match_CategoryVotingNotActive" xml:space="preserve">
+    <value>Category voting is not active.</value>
+  </data>
+  <data name="Server_Match_CategoryVotingResolved" xml:space="preserve">
+    <value>Category voting was resolved successfully.</value>
+  </data>
+  <data name="Server_Match_CategoryVotingResolveFailed" xml:space="preserve">
+    <value>Category voting could not be resolved.</value>
+  </data>
+  <data name="Server_Match_CategoryVotingStateRetrieved" xml:space="preserve">
+    <value>The category voting state was retrieved successfully.</value>
+  </data>
   <data name="Server_Match_ConfigurationError" xml:space="preserve">
     <value>There is a server configuration error.</value>
   </data>
@@ -564,11 +663,20 @@
   <data name="Server_Match_InvalidAccountId" xml:space="preserve">
     <value>The account is not valid.</value>
   </data>
+  <data name="Server_Match_InvalidCategoryId" xml:space="preserve">
+    <value>The selected category is not valid.</value>
+  </data>
   <data name="Server_Match_InvalidLanguageCode" xml:space="preserve">
     <value>Selected language is not valid.</value>
   </data>
   <data name="Server_Match_InvalidMatchId" xml:space="preserve">
     <value>The match is not valid.</value>
+  </data>
+  <data name="Server_Match_InvalidWordId" xml:space="preserve">
+    <value>The selected word is not valid.</value>
+  </data>
+  <data name="Server_Match_LobbyAbandoned" xml:space="preserve">
+    <value>The match was abandoned and the corresponding penalty was applied.</value>
   </data>
   <data name="Server_Match_LobbyClosed" xml:space="preserve">
     <value>The match was finished because a player left.</value>
@@ -597,6 +705,9 @@
   <data name="Server_Match_LobbyUnsubscriptionFailed" xml:space="preserve">
     <value>Lobby notifications could not be disabled.</value>
   </data>
+  <data name="Server_Match_MatchAlreadyResolved" xml:space="preserve">
+    <value>The match has already ended.</value>
+  </data>
   <data name="Server_Match_MatchNotAvailable" xml:space="preserve">
     <value>The match is no longer available.</value>
   </data>
@@ -606,6 +717,12 @@
   <data name="Server_Match_PlayerAlreadyInActiveMatch" xml:space="preserve">
     <value>The player is already in an active match.</value>
   </data>
+  <data name="Server_Match_PlayerNotHost" xml:space="preserve">
+    <value>Only the host can select the word.</value>
+  </data>
+  <data name="Server_Match_PlayerNotInMatch" xml:space="preserve">
+    <value>You do not belong to this match.</value>
+  </data>
   <data name="Server_Match_PlayerProfileNotAvailable" xml:space="preserve">
     <value>The player profile is not available.</value>
   </data>
@@ -614,6 +731,30 @@
   </data>
   <data name="Server_Match_UnexpectedError" xml:space="preserve">
     <value>An unexpected error occurred.</value>
+  </data>
+  <data name="Server_Match_WordNotAvailable" xml:space="preserve">
+    <value>The selected word is not available.</value>
+  </data>
+  <data name="Server_Match_WordSelected" xml:space="preserve">
+    <value>The word was selected successfully.</value>
+  </data>
+  <data name="Server_Match_WordSelectionExpired" xml:space="preserve">
+    <value>The time to select the word has ended.</value>
+  </data>
+  <data name="Server_Match_WordSelectionFailed" xml:space="preserve">
+    <value>The word could not be selected.</value>
+  </data>
+  <data name="Server_Match_WordSelectionNotActive" xml:space="preserve">
+    <value>Word selection is not active.</value>
+  </data>
+  <data name="Server_Match_WordSelectionNotAllowed" xml:space="preserve">
+    <value>You are not allowed to select the word.</value>
+  </data>
+  <data name="Server_Match_WordSelectionStarted" xml:space="preserve">
+    <value>Word selection has started.</value>
+  </data>
+  <data name="Server_Match_WordSelectionStateRetrieved" xml:space="preserve">
+    <value>The available words were retrieved successfully.</value>
   </data>
   <data name="Server_Profile_AccountNotAvailable" xml:space="preserve">
     <value>The account is not available.</value>

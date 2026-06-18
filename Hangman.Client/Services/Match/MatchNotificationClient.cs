@@ -24,6 +24,7 @@ namespace Hangman.Client.Services.Match
             callbackHandler.LobbyUpdated += OnCallbackLobbyUpdated;
             callbackHandler.LobbyClosed += OnCallbackLobbyClosed;
             callbackHandler.MatchStatusChanged += OnCallbackMatchStatusChanged;
+            callbackHandler.ChatMessageReceived += OnCallbackChatMessageReceived;
         }
 
         public event EventHandler AvailableLobbiesChanged;
@@ -33,6 +34,8 @@ namespace Hangman.Client.Services.Match
         public event EventHandler<MatchLobbyClosedEventArgs> LobbyClosed;
 
         public event EventHandler<MatchStatusChangedEventArgs> MatchStatusChanged;
+
+        public event EventHandler<MatchChatMessageReceivedEventArgs> ChatMessageReceived;
 
         public async Task<SubscribeMatchResponse> SubscribeAsync(
             SubscribeMatchRequest request)
@@ -134,7 +137,7 @@ namespace Hangman.Client.Services.Match
         }
 
         public async Task<SubscribeAvailableLobbiesResponse> SubscribeAvailableLobbiesAsync(
-    SubscribeAvailableLobbiesRequest request)
+            SubscribeAvailableLobbiesRequest request)
         {
             try
             {
@@ -202,6 +205,7 @@ namespace Hangman.Client.Services.Match
             callbackHandler.LobbyUpdated -= OnCallbackLobbyUpdated;
             callbackHandler.LobbyClosed -= OnCallbackLobbyClosed;
             callbackHandler.MatchStatusChanged -= OnCallbackMatchStatusChanged;
+            callbackHandler.ChatMessageReceived -= OnCallbackChatMessageReceived;
 
             Close();
         }
@@ -262,6 +266,13 @@ namespace Hangman.Client.Services.Match
             MatchStatusChangedEventArgs e)
         {
             MatchStatusChanged?.Invoke(this, e);
+        }
+
+        private void OnCallbackChatMessageReceived(
+            object sender,
+            MatchChatMessageReceivedEventArgs e)
+        {
+            ChatMessageReceived?.Invoke(this, e);
         }
     }
 }

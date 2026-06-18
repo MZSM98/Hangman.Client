@@ -20,6 +20,7 @@
       <xs:element minOccurs="0" name="CategoryVotingEndsAt" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="CategoryVotingStartedAt" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="CreatedAt" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FinishedAt" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="GuestFullName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="GuestId" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="GuestLanguageCode" nillable="true" type="xs:string" />
@@ -29,6 +30,14 @@
       <xs:element minOccurs="0" name="JoinedAt" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="MatchId" type="xs:int" />
       <xs:element minOccurs="0" name="MatchStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PenalizedUserId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SelectedCategoryId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SelectedCategoryName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SelectedWordId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="StartedAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="WinnerId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="WordSelectionEndsAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="WordSelectionStartedAt" nillable="true" type="xs:dateTime" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="MatchLobbyDto" nillable="true" type="tns:MatchLobbyDto" />

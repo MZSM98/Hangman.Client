@@ -14,6 +14,8 @@ namespace Hangman.Client.Services.Match
 
         event EventHandler AvailableLobbiesChanged;
 
+        event EventHandler<MatchChatMessageReceivedEventArgs> ChatMessageReceived;
+
         Task<SubscribeAvailableLobbiesResponse> SubscribeAvailableLobbiesAsync(
             SubscribeAvailableLobbiesRequest request);
 

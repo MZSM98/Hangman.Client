@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8085/Hangman/MatchGuessService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Hangman.Contracts.Match" />
+  <xs:element name="GetGameState">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Hangman.Contracts.Match" minOccurs="0" name="request" nillable="true" type="q1:GetMatchGameStateRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetGameStateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Hangman.Contracts.Match" minOccurs="0" name="GetGameStateResult" nillable="true" type="q2:GetMatchGameStateResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GuessLetter">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Hangman.Contracts.Match" minOccurs="0" name="request" nillable="true" type="q3:GuessLetterRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GuessLetterResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Hangman.Contracts.Match" minOccurs="0" name="GuessLetterResult" nillable="true" type="q4:GuessLetterResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GuessWord">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Hangman.Contracts.Match" minOccurs="0" name="request" nillable="true" type="q5:GuessWordRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GuessWordResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Hangman.Contracts.Match" minOccurs="0" name="GuessWordResult" nillable="true" type="q6:GuessWordResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ResolveGuessTimeout">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Hangman.Contracts.Match" minOccurs="0" name="request" nillable="true" type="q7:ResolveGuessTimeoutRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ResolveGuessTimeoutResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Hangman.Contracts.Match" minOccurs="0" name="ResolveGuessTimeoutResult" nillable="true" type="q8:ResolveGuessTimeoutResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

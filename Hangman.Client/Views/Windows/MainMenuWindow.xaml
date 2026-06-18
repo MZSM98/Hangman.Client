@@ -7,10 +7,12 @@
         xmlns:userControls="clr-namespace:Hangman.Client.Views.UserControls"
         mc:Ignorable="d"
         Title="El Ahorcado - Menú Principal"
-        Height="1080"
-        Width="1920"
+        Height="720"
+        Width="1280"
+        MinHeight="540"
+        MinWidth="960"
+        ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen"
-        WindowState="Maximized"
         FontFamily="{StaticResource FuentePixel}">
 
     <Window.Resources>
@@ -24,6 +26,17 @@
             <userControls:MatchLobbyView />
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModels:MatchGameplayViewModel}">
+            <userControls:MatchGameplayView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:MatchGuessViewModel}">
+            <userControls:MatchGuessView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:MatchResultViewModel}">
+            <userControls:MatchResultView/>
+        </DataTemplate>
     </Window.Resources>
 
     <Grid>
@@ -32,122 +45,110 @@
                         Stretch="UniformToFill"/>
         </Grid.Background>
 
-        <Border Width="800"
-                Height="754"
-                Background="#FAF3E6"
-                BorderBrush="#B58B5C"
-                BorderThickness="4"
-                CornerRadius="10"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Visibility="{Binding IsHomeVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <Viewbox Stretch="Uniform"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center">
 
-            <Border BorderBrush="#462A1A"
-                    BorderThickness="2"
-                    Margin="15,15,15,29">
+            <Grid Width="1920"
+                  Height="1080">
 
-                <Grid Margin="50">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                <Border Width="800"
+                        Height="754"
+                        Background="#FAF3E6"
+                        BorderBrush="#B58B5C"
+                        BorderThickness="4"
+                        CornerRadius="10"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Visibility="{Binding IsHomeVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
 
-                    <TextBlock Grid.Row="0"
-                               Text="EL AHORCADO"
-                               FontSize="70"
-                               Foreground="#462A1A"
-                               HorizontalAlignment="Center"
-                               Margin="0,20,0,0">
+                    <Border BorderBrush="#462A1A"
+                            BorderThickness="2"
+                            Margin="15,15,15,29">
 
-                        <TextBlock.Effect>
-                            <DropShadowEffect Color="#8C5A35"
-                                              BlurRadius="0"
-                                              ShadowDepth="5"
-                                              Direction="315"
-                                              Opacity="0.7"/>
-                        </TextBlock.Effect>
-                    </TextBlock>
+                        <Grid Margin="50">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Row="2" Width="550">
-                        <Button Content="CREAR NUEVA PARTIDA"
-                                Height="75"
-                                Command="{Binding OpenMatchLobbyCommand}"
-                                Style="{StaticResource BotonRetroStyle}"/>
-
-                        <Button Content="UNIRSE"
-                                Height="75"
-                                Command="{Binding OpenMatchLobbyCommand}"
-                                Style="{StaticResource BotonRetroStyle}"/>
-
-                        <Button Content="EDITAR PERFIL"
-                                Height="75"
-                                Command="{Binding OpenProfileCommand}"
-                                Style="{StaticResource BotonRetroStyle}"/>
-
-                        <Button Content="PUNTOS"
-                                Height="75"
-                                Style="{StaticResource BotonRetroStyle}"/>
-                    </StackPanel>
-
-                    <StackPanel Grid.Row="4"
-                                Orientation="Horizontal"
-                                HorizontalAlignment="Center"
-                                Margin="0,0,0,10">
-
-                        <StackPanel Orientation="Horizontal"
-                                    Cursor="Hand"
-                                    Background="Transparent">
-
-                            <TextBlock Text="⚙ "
-                                       FontSize="22"
-                                       FontFamily="Segoe UI"
+                            <TextBlock Grid.Row="0"
+                                       Text="EL AHORCADO"
+                                       FontSize="70"
                                        Foreground="#462A1A"
-                                       VerticalAlignment="Center"/>
+                                       HorizontalAlignment="Center"
+                                       Margin="0,20,0,0">
 
-                            <TextBlock Text="Configuración"
-                                       FontSize="20"
-                                       FontFamily="Segoe UI"
-                                       FontWeight="Medium"
-                                       Foreground="#462A1A"
-                                       VerticalAlignment="Center"/>
-                        </StackPanel>
+                                <TextBlock.Effect>
+                                    <DropShadowEffect Color="#8C5A35"
+                                                      BlurRadius="0"
+                                                      ShadowDepth="5"
+                                                      Direction="315"
+                                                      Opacity="0.7"/>
+                                </TextBlock.Effect>
+                            </TextBlock>
 
-                        <TextBlock Text=" | "
-                                   FontSize="20"
-                                   FontFamily="Segoe UI"
-                                   Foreground="#462A1A"
-                                   VerticalAlignment="Center"
-                                   Margin="10,0"/>
+                            <StackPanel Grid.Row="2" Width="550">
+                                <Button Content="PARTIDA"
+                                        Height="75"
+                                        Command="{Binding OpenMatchLobbyCommand}"
+                                        Style="{StaticResource BotonRetroStyle}"/>
 
-                        <Button Command="{Binding LogoutCommand}"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Cursor="Hand"
-                                Padding="0">
+                                <Button Content="EDITAR PERFIL"
+                                        Height="75"
+                                        Command="{Binding OpenProfileCommand}"
+                                        Style="{StaticResource BotonRetroStyle}"/>
 
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="[→ "
-                                           FontSize="22"
-                                           FontFamily="Segoe UI"
-                                           Foreground="#462A1A"
-                                           VerticalAlignment="Center"/>
+                                <Button Content="PUNTOS"
+                                        Height="75"
+                                        Style="{StaticResource BotonRetroStyle}"/>
+                            </StackPanel>
 
-                                <TextBlock Text="Cerrar Sesión"
+                            <StackPanel Grid.Row="4"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                        Margin="0,0,0,10">
+
+                                <TextBlock Text=" | "
                                            FontSize="20"
                                            FontFamily="Segoe UI"
-                                           FontWeight="Medium"
                                            Foreground="#462A1A"
-                                           VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </Button>
-                    </StackPanel>
-                </Grid>
-            </Border>
-        </Border>
+                                           VerticalAlignment="Center"
+                                           Margin="10,0"/>
 
-        <ContentControl Content="{Binding CurrentViewModel}"/>
+                                <Button Command="{Binding LogoutCommand}"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Cursor="Hand"
+                                        Padding="0">
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="[→ "
+                                                   FontSize="22"
+                                                   FontFamily="Segoe UI"
+                                                   Foreground="#462A1A"
+                                                   VerticalAlignment="Center"/>
+
+                                        <TextBlock Text="Cerrar Sesión"
+                                                   FontSize="20"
+                                                   FontFamily="Segoe UI"
+                                                   FontWeight="Medium"
+                                                   Foreground="#462A1A"
+                                                   VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Border>
+
+                <ContentControl Content="{Binding CurrentViewModel}"/>
+            </Grid>
+        </Viewbox>
     </Grid>
 </Window>
+    
+    

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="3104328f-779e-43a6-b272-db4a415da297" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="Hangman.Contracts" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8085/Hangman/MatchGuessService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MatchGuessService.xsd" MetadataType="Schema" ID="63891741-c1c0-4332-8f37-0817bd5cd076" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchGuessService?xsd=xsd1" />
+    <MetadataFile FileName="MatchGuessService1.xsd" MetadataType="Schema" ID="fb4f13c3-1a63-4498-b3a4-1f2d714d3aa6" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchGuessService?xsd=xsd2" />
+    <MetadataFile FileName="MatchGuessService2.xsd" MetadataType="Schema" ID="97c0b300-d57b-44dc-9919-f402647c2f84" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchGuessService?xsd=xsd0" />
+    <MetadataFile FileName="MatchGuessService.wsdl" MetadataType="Wsdl" ID="03e128b9-0589-4877-9e4c-b2dea5765f05" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchGuessService?wsdl" />
+    <MetadataFile FileName="MatchGuessService.disco" MetadataType="Disco" ID="2f1737fb-ea7e-4dd0-bd1d-d309ec0e1090" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchGuessService?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

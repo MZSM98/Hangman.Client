@@ -85,4 +85,11 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="OnMatchChatMessageReceived">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Hangman.Contracts.Match" minOccurs="0" name="message" nillable="true" type="q9:MatchChatMessageDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

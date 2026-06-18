@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="MatchGameplayService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8085/Hangman/MatchGameplayService?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8085/Hangman/MatchGameplayService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8085/Hangman/MatchGameplayService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Hangman.Contracts.Match" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMatchGameplayService_VoteCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:VoteCategory" />
+  </wsdl:message>
+  <wsdl:message name="IMatchGameplayService_VoteCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VoteCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchGameplayService_GetCategoryVotingState_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCategoryVotingState" />
+  </wsdl:message>
+  <wsdl:message name="IMatchGameplayService_GetCategoryVotingState_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCategoryVotingStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchGameplayService_ResolveCategoryVoting_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResolveCategoryVoting" />
+  </wsdl:message>
+  <wsdl:message name="IMatchGameplayService_ResolveCategoryVoting_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResolveCategoryVotingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchGameplayService_GetSelectableWords_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSelectableWords" />
+  </wsdl:message>
+  <wsdl:message name="IMatchGameplayService_GetSelectableWords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSelectableWordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchGameplayService_SelectWord_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectWord" />
+  </wsdl:message>
+  <wsdl:message name="IMatchGameplayService_SelectWord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectWordResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IMatchGameplayService">
+    <wsdl:operation name="VoteCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchGameplayService/VoteCategory" message="tns:IMatchGameplayService_VoteCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchGameplayService/VoteCategoryResponse" message="tns:IMatchGameplayService_VoteCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCategoryVotingState">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchGameplayService/GetCategoryVotingState" message="tns:IMatchGameplayService_GetCategoryVotingState_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchGameplayService/GetCategoryVotingStateResponse" message="tns:IMatchGameplayService_GetCategoryVotingState_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResolveCategoryVoting">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchGameplayService/ResolveCategoryVoting" message="tns:IMatchGameplayService_ResolveCategoryVoting_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchGameplayService/ResolveCategoryVotingResponse" message="tns:IMatchGameplayService_ResolveCategoryVoting_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSelectableWords">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchGameplayService/GetSelectableWords" message="tns:IMatchGameplayService_GetSelectableWords_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchGameplayService/GetSelectableWordsResponse" message="tns:IMatchGameplayService_GetSelectableWords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectWord">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchGameplayService/SelectWord" message="tns:IMatchGameplayService_SelectWord_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchGameplayService/SelectWordResponse" message="tns:IMatchGameplayService_SelectWord_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IMatchGameplayService" type="tns:IMatchGameplayService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="VoteCategory">
+      <soap:operation soapAction="http://tempuri.org/IMatchGameplayService/VoteCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCategoryVotingState">
+      <soap:operation soapAction="http://tempuri.org/IMatchGameplayService/GetCategoryVotingState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResolveCategoryVoting">
+      <soap:operation soapAction="http://tempuri.org/IMatchGameplayService/ResolveCategoryVoting" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSelectableWords">
+      <soap:operation soapAction="http://tempuri.org/IMatchGameplayService/GetSelectableWords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectWord">
+      <soap:operation soapAction="http://tempuri.org/IMatchGameplayService/SelectWord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MatchGameplayService">
+    <wsdl:port name="BasicHttpBinding_IMatchGameplayService" binding="tns:BasicHttpBinding_IMatchGameplayService">
+      <soap:address location="http://localhost:8085/Hangman/MatchGameplayService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

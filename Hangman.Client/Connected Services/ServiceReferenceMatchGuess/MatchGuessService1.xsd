@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Hangman.Contracts.Match" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Hangman.Contracts.Match" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="GetMatchGameStateRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="xs:int" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetMatchGameStateRequest" nillable="true" type="tns:GetMatchGameStateRequest" />
+  <xs:complexType name="GetMatchGameStateResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GameState" nillable="true" type="tns:MatchGameStateDto" />
+      <xs:element minOccurs="0" name="MessageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetMatchGameStateResponse" nillable="true" type="tns:GetMatchGameStateResponse" />
+  <xs:complexType name="MatchGameStateDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FailedAttempts" type="xs:int" />
+      <xs:element minOccurs="0" name="GuessHistory" nillable="true" type="tns:ArrayOfGuessHistoryDto" />
+      <xs:element minOccurs="0" name="GuessTurnEndsAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="GuessTurnStartedAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="GuestFullName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GuestId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="HangmanFigure" nillable="true" type="tns:HangmanFigureDto" />
+      <xs:element minOccurs="0" name="HostFullName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HostId" type="xs:int" />
+      <xs:element minOccurs="0" name="IsFinished" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LetterSlots" nillable="true" type="tns:ArrayOfLetterSlotDto" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:int" />
+      <xs:element minOccurs="0" name="MatchStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MaxAttempts" type="xs:int" />
+      <xs:element minOccurs="0" name="RemainingSeconds" type="xs:int" />
+      <xs:element minOccurs="0" name="WinnerId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MatchGameStateDto" nillable="true" type="tns:MatchGameStateDto" />
+  <xs:complexType name="ArrayOfGuessHistoryDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GuessHistoryDto" nillable="true" type="tns:GuessHistoryDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGuessHistoryDto" nillable="true" type="tns:ArrayOfGuessHistoryDto" />
+  <xs:complexType name="GuessHistoryDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreatedAt" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="GuessType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsCorrect" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GuessHistoryDto" nillable="true" type="tns:GuessHistoryDto" />
+  <xs:complexType name="HangmanFigureDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FailedAttempts" type="xs:int" />
+      <xs:element minOccurs="0" name="MaxAttempts" type="xs:int" />
+      <xs:element minOccurs="0" name="ShowHead" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ShowLeftArm" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ShowLeftLeg" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ShowRightArm" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ShowRightLeg" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ShowTorso" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HangmanFigureDto" nillable="true" type="tns:HangmanFigureDto" />
+  <xs:complexType name="ArrayOfLetterSlotDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LetterSlotDto" nillable="true" type="tns:LetterSlotDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLetterSlotDto" nillable="true" type="tns:ArrayOfLetterSlotDto" />
+  <xs:complexType name="LetterSlotDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsRevealed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Letter" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Position" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LetterSlotDto" nillable="true" type="tns:LetterSlotDto" />
+  <xs:complexType name="GuessLetterRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="xs:int" />
+      <xs:element minOccurs="0" name="Letter" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GuessLetterRequest" nillable="true" type="tns:GuessLetterRequest" />
+  <xs:complexType name="GuessLetterResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GameState" nillable="true" type="tns:MatchGameStateDto" />
+      <xs:element minOccurs="0" name="IsCorrect" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MatchFinished" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MessageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GuessLetterResponse" nillable="true" type="tns:GuessLetterResponse" />
+  <xs:complexType name="GuessWordRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="xs:int" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:int" />
+      <xs:element minOccurs="0" name="Word" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GuessWordRequest" nillable="true" type="tns:GuessWordRequest" />
+  <xs:complexType name="GuessWordResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GameState" nillable="true" type="tns:MatchGameStateDto" />
+      <xs:element minOccurs="0" name="IsCorrect" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MatchFinished" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MessageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GuessWordResponse" nillable="true" type="tns:GuessWordResponse" />
+  <xs:complexType name="ResolveGuessTimeoutRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="xs:int" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResolveGuessTimeoutRequest" nillable="true" type="tns:ResolveGuessTimeoutRequest" />
+  <xs:complexType name="ResolveGuessTimeoutResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GameState" nillable="true" type="tns:MatchGameStateDto" />
+      <xs:element minOccurs="0" name="MatchFinished" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MessageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResolveGuessTimeoutResponse" nillable="true" type="tns:ResolveGuessTimeoutResponse" />
+</xs:schema>

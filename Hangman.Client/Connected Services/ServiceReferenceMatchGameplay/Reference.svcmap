@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="7b709806-d849-48db-a20e-e0175c2ebacc" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="Hangman.Contracts" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8085/Hangman/MatchGameplayService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MatchGameplayService.disco" MetadataType="Disco" ID="caad11cc-39ef-44da-8e83-73ebfea21828" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchGameplayService?disco" />
+    <MetadataFile FileName="MatchGameplayService.xsd" MetadataType="Schema" ID="f928dc70-1a27-4b69-ae25-eaa2dd20ff37" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchGameplayService?xsd=xsd0" />
+    <MetadataFile FileName="MatchGameplayService1.xsd" MetadataType="Schema" ID="2d2a5aef-64b2-4d45-aa04-8bf1b0f9f694" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchGameplayService?xsd=xsd1" />
+    <MetadataFile FileName="MatchGameplayService2.xsd" MetadataType="Schema" ID="404a4618-074e-42dd-b713-5a573102f314" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchGameplayService?xsd=xsd2" />
+    <MetadataFile FileName="MatchGameplayService.wsdl" MetadataType="Wsdl" ID="3815b5d3-bca6-4119-9426-ad553a8d3733" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchGameplayService?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

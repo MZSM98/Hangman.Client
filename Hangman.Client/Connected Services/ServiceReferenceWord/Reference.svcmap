@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="a1842936-a79f-4a00-b7a4-85298392ed0d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="Hangman.Contracts" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8085/Hangman/WordService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="WordService.disco" MetadataType="Disco" ID="6c9f58fc-727c-45ac-9d57-bcfcefc62c3d" SourceId="1" SourceUrl="http://localhost:8085/Hangman/WordService?disco" />
+    <MetadataFile FileName="WordService.xsd" MetadataType="Schema" ID="989a688c-ac91-49c2-be77-eaa7bceaade5" SourceId="1" SourceUrl="http://localhost:8085/Hangman/WordService?xsd=xsd2" />
+    <MetadataFile FileName="WordService1.xsd" MetadataType="Schema" ID="8f1770fa-0dd2-48c7-8d62-aad6e5e9807b" SourceId="1" SourceUrl="http://localhost:8085/Hangman/WordService?xsd=xsd0" />
+    <MetadataFile FileName="WordService.wsdl" MetadataType="Wsdl" ID="619ab429-2a35-442b-881e-dacef6c91a31" SourceId="1" SourceUrl="http://localhost:8085/Hangman/WordService?wsdl" />
+    <MetadataFile FileName="WordService2.xsd" MetadataType="Schema" ID="1be54679-ce5f-42c7-aac1-bc7ba630b8c7" SourceId="1" SourceUrl="http://localhost:8085/Hangman/WordService?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

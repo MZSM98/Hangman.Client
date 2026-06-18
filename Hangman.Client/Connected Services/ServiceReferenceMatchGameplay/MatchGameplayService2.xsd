@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Hangman.Contracts.Match" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Hangman.Contracts.Match" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="VoteCategoryRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="xs:int" />
+      <xs:element minOccurs="0" name="CategoryId" type="xs:int" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VoteCategoryRequest" nillable="true" type="tns:VoteCategoryRequest" />
+  <xs:complexType name="VoteCategoryResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MessageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+      <xs:element minOccurs="0" name="VotingState" nillable="true" type="tns:CategoryVotingStateDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VoteCategoryResponse" nillable="true" type="tns:VoteCategoryResponse" />
+  <xs:complexType name="CategoryVotingStateDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CanCurrentPlayerSelectWord" type="xs:boolean" />
+      <xs:element minOccurs="0" name="CanVote" type="xs:boolean" />
+      <xs:element minOccurs="0" name="CategoryVotingEndsAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CategoryVotingStartedAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IsVotingResolved" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:int" />
+      <xs:element minOccurs="0" name="MatchStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RemainingVotingSeconds" type="xs:int" />
+      <xs:element minOccurs="0" name="SelectedCategoryId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SelectedCategoryName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Votes" nillable="true" type="tns:ArrayOfCategoryVoteDto" />
+      <xs:element minOccurs="0" name="WordSelectionEndsAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="WordSelectionStartedAt" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CategoryVotingStateDto" nillable="true" type="tns:CategoryVotingStateDto" />
+  <xs:complexType name="ArrayOfCategoryVoteDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CategoryVoteDto" nillable="true" type="tns:CategoryVoteDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCategoryVoteDto" nillable="true" type="tns:ArrayOfCategoryVoteDto" />
+  <xs:complexType name="CategoryVoteDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CategoryId" type="xs:int" />
+      <xs:element minOccurs="0" name="CategoryName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedAt" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LanguageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PlayerId" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdatedAt" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CategoryVoteDto" nillable="true" type="tns:CategoryVoteDto" />
+  <xs:complexType name="GetCategoryVotingStateRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="xs:int" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetCategoryVotingStateRequest" nillable="true" type="tns:GetCategoryVotingStateRequest" />
+  <xs:complexType name="GetCategoryVotingStateResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MessageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+      <xs:element minOccurs="0" name="VotingState" nillable="true" type="tns:CategoryVotingStateDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetCategoryVotingStateResponse" nillable="true" type="tns:GetCategoryVotingStateResponse" />
+  <xs:complexType name="ResolveCategoryVotingRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="xs:int" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResolveCategoryVotingRequest" nillable="true" type="tns:ResolveCategoryVotingRequest" />
+  <xs:complexType name="ResolveCategoryVotingResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Lobby" nillable="true" type="tns:MatchLobbyDto" />
+      <xs:element minOccurs="0" name="MessageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+      <xs:element minOccurs="0" name="VotingState" nillable="true" type="tns:CategoryVotingStateDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResolveCategoryVotingResponse" nillable="true" type="tns:ResolveCategoryVotingResponse" />
+  <xs:complexType name="MatchLobbyDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CategoryVotingEndsAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CategoryVotingStartedAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreatedAt" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FinishedAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="GuestFullName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GuestId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="GuestLanguageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HostFullName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HostId" type="xs:int" />
+      <xs:element minOccurs="0" name="HostLanguageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="JoinedAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:int" />
+      <xs:element minOccurs="0" name="MatchStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PenalizedUserId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SelectedCategoryId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SelectedCategoryName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SelectedWordId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="StartedAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="WinnerId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="WordSelectionEndsAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="WordSelectionStartedAt" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MatchLobbyDto" nillable="true" type="tns:MatchLobbyDto" />
+  <xs:complexType name="GetSelectableWordsRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="xs:int" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetSelectableWordsRequest" nillable="true" type="tns:GetSelectableWordsRequest" />
+  <xs:complexType name="GetSelectableWordsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MessageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Words" nillable="true" type="tns:ArrayOfSelectableWordDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetSelectableWordsResponse" nillable="true" type="tns:GetSelectableWordsResponse" />
+  <xs:complexType name="ArrayOfSelectableWordDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SelectableWordDto" nillable="true" type="tns:SelectableWordDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSelectableWordDto" nillable="true" type="tns:ArrayOfSelectableWordDto" />
+  <xs:complexType name="SelectableWordDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CategoryId" type="xs:int" />
+      <xs:element minOccurs="0" name="CategoryName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LanguageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WordId" type="xs:int" />
+      <xs:element minOccurs="0" name="WordText" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SelectableWordDto" nillable="true" type="tns:SelectableWordDto" />
+  <xs:complexType name="SelectWordRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="xs:int" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:int" />
+      <xs:element minOccurs="0" name="WordId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SelectWordRequest" nillable="true" type="tns:SelectWordRequest" />
+  <xs:complexType name="SelectWordResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Lobby" nillable="true" type="tns:MatchLobbyDto" />
+      <xs:element minOccurs="0" name="MessageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SelectWordResponse" nillable="true" type="tns:SelectWordResponse" />
+</xs:schema>
