@@ -54,4 +54,15 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="UnsubscribeAvailableLobbiesResponse" nillable="true" type="tns:UnsubscribeAvailableLobbiesResponse" />
+  <xs:complexType name="MatchChatMessageDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MatchId" type="xs:int" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SenderAccountId" type="xs:int" />
+      <xs:element minOccurs="0" name="SenderFullName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SenderPlayerId" type="xs:int" />
+      <xs:element minOccurs="0" name="SentAt" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MatchChatMessageDto" nillable="true" type="tns:MatchChatMessageDto" />
 </xs:schema>

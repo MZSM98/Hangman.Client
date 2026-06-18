@@ -1,0 +1,163 @@
+﻿<UserControl x:Class="Hangman.Client.Views.UserControls.MatchResultView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:localization="clr-namespace:Hangman.Client.Localization"
+             xmlns:userControls="clr-namespace:Hangman.Client.Views.UserControls"
+             Background="Transparent"
+             MinWidth="800"
+             MinHeight="500">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+
+    <Grid Background="Transparent">
+        <Border Width="1250"
+                Height="760"
+                Background="#FAF3E6"
+                BorderBrush="#B58B5C"
+                BorderThickness="4"
+                CornerRadius="10"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+
+            <Border BorderBrush="#462A1A"
+                    BorderThickness="2"
+                    Margin="15">
+
+                <Grid Margin="36">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.15*"/>
+                        <ColumnDefinition Width="0.85*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="0"
+                               Text="{localization:Loc MatchResult_Title}"
+                               FontSize="38"
+                               Foreground="#462A1A"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center"
+                               Margin="0,8,0,12">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="#8C5A35"
+                                              BlurRadius="0"
+                                              ShadowDepth="4"
+                                              Direction="315"
+                                              Opacity="0.7"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="0"
+                               Text="{localization:Loc MatchResult_YouWon}"
+                               FontSize="27"
+                               Foreground="#2F4A23"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center"
+                               Margin="0,0,0,8"
+                               Visibility="{Binding IsCurrentUserWinner, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="0"
+                               Text="{localization:Loc MatchResult_YouLost}"
+                               FontSize="27"
+                               Foreground="#9E3222"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center"
+                               Margin="0,0,0,8"
+                               Visibility="{Binding IsCurrentUserLoser, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="0"
+                               Text="🏆"
+                               FontSize="94"
+                               FontFamily="Segoe UI Emoji"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,8"/>
+
+                    <Border Grid.Row="3"
+                            Grid.Column="0"
+                            Background="#F7E7CF"
+                            BorderBrush="#B58B5C"
+                            BorderThickness="2"
+                            CornerRadius="8"
+                            Padding="24,18"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Center"
+                            Width="620"
+                            MinHeight="210"
+                            Margin="0,6,0,0">
+
+                        <StackPanel HorizontalAlignment="Center">
+
+                            <TextBlock Text="{localization:Loc MatchResult_WinnerLabel}"
+                                       FontSize="22"
+                                       Foreground="#7A5A3A"
+                                       HorizontalAlignment="Center"
+                                       TextAlignment="Center"
+                                       Margin="0,0,0,16"/>
+
+                            <TextBlock Text="{localization:Loc MatchResult_NameLabel}"
+                                       FontSize="15"
+                                       Foreground="#7A5A3A"
+                                       HorizontalAlignment="Center"
+                                       TextAlignment="Center"
+                                       Margin="0,0,0,4"/>
+
+                            <TextBlock Text="{Binding WinnerFullName}"
+                                       FontSize="17"
+                                       Foreground="#462A1A"
+                                       HorizontalAlignment="Center"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap"
+                                       MaxWidth="540"
+                                       Margin="0,0,0,14"/>
+
+                            <TextBlock Text="{localization:Loc MatchResult_EmailLabel}"
+                                       FontSize="15"
+                                       Foreground="#7A5A3A"
+                                       HorizontalAlignment="Center"
+                                       TextAlignment="Center"
+                                       Margin="0,0,0,4"/>
+
+                            <TextBlock Text="{Binding WinnerEmail}"
+                                       FontSize="15"
+                                       Foreground="#462A1A"
+                                       HorizontalAlignment="Center"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap"
+                                       MaxWidth="540"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Button Grid.Row="4"
+                            Grid.Column="0"
+                            Content="{localization:Loc MatchResult_ExitButton}"
+                            Command="{Binding ExitCommand}"
+                            Width="210"
+                            Height="62"
+                            FontSize="20"
+                            HorizontalAlignment="Center"
+                            Margin="0,24,0,0"
+                            Style="{StaticResource BotonRetroStyle}"/>
+
+                    <userControls:MatchChatView Grid.Row="0"
+                                                Grid.RowSpan="5"
+                                                Grid.Column="1"
+                                                DataContext="{Binding Chat}"
+                                                Margin="30,0,0,0"
+                                                VerticalAlignment="Stretch"/>
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</UserControl>

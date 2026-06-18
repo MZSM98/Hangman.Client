@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="5407b333-8dee-4706-a3ef-a5733917b627" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="Hangman.Contracts" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8085/Hangman/MatchChatService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MatchChatService.xsd" MetadataType="Schema" ID="5135f0ff-8638-4879-8021-14328ead0454" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchChatService?xsd=xsd1" />
+    <MetadataFile FileName="MatchChatService1.xsd" MetadataType="Schema" ID="24f59128-6c6f-4f6d-ad1f-530a001c0015" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchChatService?xsd=xsd0" />
+    <MetadataFile FileName="MatchChatService.wsdl" MetadataType="Wsdl" ID="c697a0b0-27fd-4611-a11e-4b27812b7d7a" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchChatService?wsdl" />
+    <MetadataFile FileName="MatchChatService2.xsd" MetadataType="Schema" ID="f2daa2ed-de0a-41aa-9ae2-26458c4f1354" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchChatService?xsd=xsd2" />
+    <MetadataFile FileName="MatchChatService.disco" MetadataType="Disco" ID="cb20832b-4339-4f08-b609-23b95a3358da" SourceId="1" SourceUrl="http://localhost:8085/Hangman/MatchChatService?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

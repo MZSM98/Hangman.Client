@@ -67,6 +67,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ServiceReferenceChat\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ServiceReferenceMatchGameplay\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ServiceReferenceMatchGuess\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ServiceReferenceMatchNotification\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -78,6 +93,11 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\ServiceReferenceProfile\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ServiceReferenceWord\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -106,24 +126,57 @@
     <Compile Include="Models\Auth\RequestPasswordResetFormModel.cs" />
     <Compile Include="Models\Auth\ResetPasswordFormModel.cs" />
     <Compile Include="Models\Match\AvailableLobbyModel.cs" />
+    <Compile Include="Models\Match\CategoryOptionModel.cs" />
+    <Compile Include="Models\Match\CategoryVoteModel.cs" />
+    <Compile Include="Models\Match\CategoryVotingStateModel.cs" />
+    <Compile Include="Models\Match\GuessHistoryModel.cs" />
+    <Compile Include="Models\Match\HangmanFigureModel.cs" />
+    <Compile Include="Models\Match\LetterKeyModel.cs" />
+    <Compile Include="Models\Match\LetterSlotModel.cs" />
+    <Compile Include="Models\Match\MatchChatMessageModel.cs" />
+    <Compile Include="Models\Match\MatchGameStateModel.cs" />
+    <Compile Include="Models\Match\MatchGuessSlotLayoutModel.cs" />
     <Compile Include="Models\Match\MatchLobbyModel.cs" />
+    <Compile Include="Models\Match\SelectableWordModel.cs" />
     <Compile Include="Models\Profile\ProfileFormModel.cs" />
     <Compile Include="Services\Match\AvailableLobbiesOperationResult.cs" />
+    <Compile Include="Services\Match\CategoryOptionsOperationResult.cs" />
+    <Compile Include="Services\Match\CategoryVotingOperationResult.cs" />
     <Compile Include="Services\Match\CurrentLobbyOperationResult.cs" />
+    <Compile Include="Services\Match\IMatchChatClient.cs" />
+    <Compile Include="Services\Match\IMatchChatWorkflow.cs" />
     <Compile Include="Services\Match\IMatchClient.cs" />
+    <Compile Include="Services\Match\IMatchGameplayClient.cs" />
+    <Compile Include="Services\Match\IMatchGameplayWorkflow.cs" />
+    <Compile Include="Services\Match\IMatchGuessClient.cs" />
+    <Compile Include="Services\Match\IMatchGuessWorkflow.cs" />
     <Compile Include="Services\Match\IMatchLobbyWorkflow.cs" />
     <Compile Include="Services\Match\IMatchNotificationClient.cs" />
+    <Compile Include="Services\Match\MatchChatClient.cs" />
+    <Compile Include="Services\Match\MatchChatMessageReceivedEventArgs.cs" />
+    <Compile Include="Services\Match\MatchChatOperationResult.cs" />
+    <Compile Include="Services\Match\MatchChatWorkflow.cs" />
     <Compile Include="Services\Match\MatchClient.cs" />
+    <Compile Include="Services\Match\MatchGameplayClient.cs" />
+    <Compile Include="Services\Match\MatchGameplayWorkflow.cs" />
+    <Compile Include="Services\Match\MatchGuessClient.cs" />
+    <Compile Include="Services\Match\MatchGuessMapper.cs" />
+    <Compile Include="Services\Match\MatchGuessOperationResult.cs" />
+    <Compile Include="Services\Match\MatchGuessWorkflow.cs" />
     <Compile Include="Services\Match\MatchLobbyOperationResult.cs" />
     <Compile Include="Services\Match\MatchLobbyWorkflow.cs" />
     <Compile Include="Services\Match\MatchNotificationCallbackEventArgs.cs" />
     <Compile Include="Services\Match\MatchNotificationCallbackHandler.cs" />
     <Compile Include="Services\Match\MatchNotificationClient.cs" />
     <Compile Include="Services\Match\MatchWorkflowResultBase.cs" />
+    <Compile Include="Services\Match\SelectableWordsOperationResult.cs" />
+    <Compile Include="Services\Match\WordSelectionOperationResult.cs" />
     <Compile Include="Services\Profile\IProfileClient.cs" />
     <Compile Include="Services\Profile\ProfileClient.cs" />
     <Compile Include="Services\Session\IMatchSessionContext.cs" />
     <Compile Include="Services\Session\MatchSessionContext.cs" />
+    <Compile Include="Services\Word\IWordClient.cs" />
+    <Compile Include="Services\Word\WordClient.cs" />
     <Compile Include="Validators\Auth\AuthFieldValidator.cs" />
     <Compile Include="Models\Auth\LoginFormModel.cs" />
     <Compile Include="Models\Auth\RegisterFormModel.cs" />
@@ -148,7 +201,30 @@
     <Compile Include="ViewModels\LoginMenuViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
+    <Compile Include="ViewModels\MatchChatViewModel.cs" />
+    <Compile Include="ViewModels\MatchGameplayRequestedEventArgs.cs" />
+    <Compile Include="ViewModels\MatchGameplayViewModel.cs" />
+    <Compile Include="ViewModels\MatchGuessRequestedEventArgs.cs" />
+    <Compile Include="ViewModels\MatchGuessViewModel.cs" />
     <Compile Include="ViewModels\MatchLobbyViewModel.cs" />
+    <Compile Include="ViewModels\MatchResultRequestedEventArgs.cs" />
+    <Compile Include="ViewModels\MatchResultViewModel.cs" />
+    <Compile Include="ViewModels\Match\IMatchGuessCountdownController.cs" />
+    <Compile Include="ViewModels\Match\IMatchGuessKeyboardController.cs" />
+    <Compile Include="ViewModels\Match\IMatchGuessNotificationController.cs" />
+    <Compile Include="ViewModels\Match\IMatchGuessOperationHandler.cs" />
+    <Compile Include="ViewModels\Match\IMatchGuessRoleEvaluator.cs" />
+    <Compile Include="ViewModels\Match\IMatchGuessSlotLayoutCalculator.cs" />
+    <Compile Include="ViewModels\Match\IMatchGuessStateProjector.cs" />
+    <Compile Include="ViewModels\Match\MatchGuessCountdownController.cs" />
+    <Compile Include="ViewModels\Match\MatchGuessKeyboardController.cs" />
+    <Compile Include="ViewModels\Match\MatchGuessNotificationController.cs" />
+    <Compile Include="ViewModels\Match\MatchGuessOperationHandler.cs" />
+    <Compile Include="ViewModels\Match\MatchGuessRoleEvaluator.cs" />
+    <Compile Include="ViewModels\Match\MatchGuessSlotLayoutCalculator.cs" />
+    <Compile Include="ViewModels\Match\MatchGuessStateProjection.cs" />
+    <Compile Include="ViewModels\Match\MatchGuessStateProjector.cs" />
+    <Compile Include="ViewModels\Match\MatchGuessViewModelDependencies.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\RequestPasswordResetViewModel.cs" />
@@ -157,11 +233,20 @@
     <Compile Include="Views\UserControls\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\MatchListView.xaml.cs">
-      <DependentUpon>MatchListView.xaml</DependentUpon>
+    <Compile Include="Views\UserControls\MatchChatView.xaml.cs">
+      <DependentUpon>MatchChatView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\MatchGameplayView.xaml.cs">
+      <DependentUpon>MatchGameplayView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\MatchGuessView.xaml.cs">
+      <DependentUpon>MatchGuessView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\MatchLobbyView.xaml.cs">
       <DependentUpon>MatchLobbyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\MatchResultView.xaml.cs">
+      <DependentUpon>MatchResultView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ProfileView.xaml.cs">
       <DependentUpon>ProfileView.xaml</DependentUpon>
@@ -191,11 +276,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\MatchListView.xaml">
+    <Page Include="Views\UserControls\MatchChatView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\MatchGameplayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\MatchGuessView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\MatchLobbyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\MatchResultView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -271,6 +368,36 @@
     <None Include="Connected Services\ServiceReferenceAuth\item2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceReferenceChat\MatchChatService.wsdl" />
+    <None Include="Connected Services\ServiceReferenceChat\MatchChatService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceChat\MatchChatService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceChat\MatchChatService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceMatchGameplay\MatchGameplayService.wsdl" />
+    <None Include="Connected Services\ServiceReferenceMatchGameplay\MatchGameplayService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceMatchGameplay\MatchGameplayService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceMatchGameplay\MatchGameplayService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceMatchGuess\MatchGuessService.wsdl" />
+    <None Include="Connected Services\ServiceReferenceMatchGuess\MatchGuessService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceMatchGuess\MatchGuessService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceMatchGuess\MatchGuessService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceReferenceMatchNotification\Hangman.Contracts.Match.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -301,6 +428,16 @@
     <None Include="Connected Services\ServiceReferenceProfile\ProfileService2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceReferenceWord\WordService.wsdl" />
+    <None Include="Connected Services\ServiceReferenceWord\WordService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceWord\WordService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceWord\WordService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Hangman.Contracts.Auth.LoginResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Auth.RegisterResponse.datasource" />
@@ -310,16 +447,27 @@
     <None Include="Properties\DataSources\Hangman.Contracts.Auth.VerifyEmailResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Match.CreateLobbyResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Match.GetAvailableLobbiesResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Match.GetCategoryVotingStateResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Match.GetCurrentLobbyResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Match.GetMatchGameStateResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Match.GetSelectableWordsResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Match.GuessLetterResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Match.GuessWordResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Match.JoinLobbyResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Match.LeaveLobbyResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Match.ResolveCategoryVotingResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Match.ResolveGuessTimeoutResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Match.SelectWordResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Match.SendMatchChatMessageResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Match.SubscribeAvailableLobbiesResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Match.SubscribeMatchResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Match.UnsubscribeAvailableLobbiesResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Match.UnsubscribeMatchResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Match.VoteCategoryResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Profile.DeleteProfileResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Profile.GetProfileResponse.datasource" />
     <None Include="Properties\DataSources\Hangman.Contracts.Profile.UpdateProfileResponse.datasource" />
+    <None Include="Properties\DataSources\Hangman.Contracts.Word.GetCategoriesByLanguageResponse.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -347,6 +495,34 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Connected Services\ServiceReferenceMatchGameplay\MatchGameplayService.disco" />
+    <None Include="Connected Services\ServiceReferenceMatchGameplay\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceReferenceMatchGameplay\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceReferenceMatchGameplay\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ServiceReferenceWord\WordService.disco" />
+    <None Include="Connected Services\ServiceReferenceWord\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceReferenceWord\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceReferenceWord\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ServiceReferenceMatchGuess\MatchGuessService.disco" />
+    <None Include="Connected Services\ServiceReferenceMatchGuess\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceReferenceMatchGuess\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceReferenceMatchGuess\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ServiceReferenceChat\MatchChatService.disco" />
+    <None Include="Connected Services\ServiceReferenceChat\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceReferenceChat\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceReferenceChat\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -369,9 +545,13 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServiceReferenceAuth\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceReferenceChat\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceReferenceMatchGameplay\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceReferenceMatchGuess\" />
     <WCFMetadataStorage Include="Connected Services\ServiceReferenceMatchNotification\" />
     <WCFMetadataStorage Include="Connected Services\ServiceReferenceMatch\" />
     <WCFMetadataStorage Include="Connected Services\ServiceReferenceProfile\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceReferenceWord\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ServiceReferenceAuth\item.disco" />

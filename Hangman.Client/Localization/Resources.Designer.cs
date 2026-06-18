@@ -322,6 +322,231 @@ namespace Hangman.Client.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Send.
+        /// </summary>
+        internal static string MatchChat_SendButton {
+            get {
+                return ResourceManager.GetString("MatchChat_SendButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Match chat.
+        /// </summary>
+        internal static string MatchChat_Title {
+            get {
+                return ResourceManager.GetString("MatchChat_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Category.
+        /// </summary>
+        internal static string MatchGameplay_CategoryColumn {
+            get {
+                return ResourceManager.GetString("MatchGameplay_CategoryColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Category voting.
+        /// </summary>
+        internal static string MatchGameplay_CategoryVotingTitle {
+            get {
+                return ResourceManager.GetString("MatchGameplay_CategoryVotingTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The word has already been selected. The next step will be to open the game screen..
+        /// </summary>
+        internal static string MatchGameplay_InProgressMessage {
+            get {
+                return ResourceManager.GetString("MatchGameplay_InProgressMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Match in progress.
+        /// </summary>
+        internal static string MatchGameplay_InProgressTitle {
+            get {
+                return ResourceManager.GetString("MatchGameplay_InProgressTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No votes registered yet.
+        /// </summary>
+        internal static string MatchGameplay_NoVotes {
+            get {
+                return ResourceManager.GetString("MatchGameplay_NoVotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Player.
+        /// </summary>
+        internal static string MatchGameplay_PlayerColumn {
+            get {
+                return ResourceManager.GetString("MatchGameplay_PlayerColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Time remaining.
+        /// </summary>
+        internal static string MatchGameplay_RemainingSecondsLabel {
+            get {
+                return ResourceManager.GetString("MatchGameplay_RemainingSecondsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Select a category.
+        /// </summary>
+        internal static string MatchGameplay_SelectCategoryLabel {
+            get {
+                return ResourceManager.GetString("MatchGameplay_SelectCategoryLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Selected category.
+        /// </summary>
+        internal static string MatchGameplay_SelectedCategoryLabel {
+            get {
+                return ResourceManager.GetString("MatchGameplay_SelectedCategoryLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Select word.
+        /// </summary>
+        internal static string MatchGameplay_SelectWordButton {
+            get {
+                return ResourceManager.GetString("MatchGameplay_SelectWordButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Select the word.
+        /// </summary>
+        internal static string MatchGameplay_SelectWordLabel {
+            get {
+                return ResourceManager.GetString("MatchGameplay_SelectWordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Match flow.
+        /// </summary>
+        internal static string MatchGameplay_Title {
+            get {
+                return ResourceManager.GetString("MatchGameplay_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Vote.
+        /// </summary>
+        internal static string MatchGameplay_VoteButton {
+            get {
+                return ResourceManager.GetString("MatchGameplay_VoteButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Registered votes.
+        /// </summary>
+        internal static string MatchGameplay_VotesTitle {
+            get {
+                return ResourceManager.GetString("MatchGameplay_VotesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Waiting for the host to select the word..
+        /// </summary>
+        internal static string MatchGameplay_WaitingForHostWord {
+            get {
+                return ResourceManager.GetString("MatchGameplay_WaitingForHostWord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Word selection.
+        /// </summary>
+        internal static string MatchGameplay_WordSelectionTitle {
+            get {
+                return ResourceManager.GetString("MatchGameplay_WordSelectionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Email:.
+        /// </summary>
+        internal static string MatchResult_EmailLabel {
+            get {
+                return ResourceManager.GetString("MatchResult_EmailLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Exit.
+        /// </summary>
+        internal static string MatchResult_ExitButton {
+            get {
+                return ResourceManager.GetString("MatchResult_ExitButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Name:.
+        /// </summary>
+        internal static string MatchResult_NameLabel {
+            get {
+                return ResourceManager.GetString("MatchResult_NameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a MATCH FINISHED!.
+        /// </summary>
+        internal static string MatchResult_Title {
+            get {
+                return ResourceManager.GetString("MatchResult_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Winner.
+        /// </summary>
+        internal static string MatchResult_WinnerLabel {
+            get {
+                return ResourceManager.GetString("MatchResult_WinnerLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a YOU LOST!.
+        /// </summary>
+        internal static string MatchResult_YouLost {
+            get {
+                return ResourceManager.GetString("MatchResult_YouLost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a YOU WON!.
+        /// </summary>
+        internal static string MatchResult_YouWon {
+            get {
+                return ResourceManager.GetString("MatchResult_YouWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Player avatar.
         /// </summary>
         internal static string Profile_AvatarLabel {
@@ -1348,6 +1573,78 @@ namespace Hangman.Client.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The selected category is not available..
+        /// </summary>
+        internal static string Server_Match_CategoryNotAvailable {
+            get {
+                return ResourceManager.GetString("Server_Match_CategoryNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your category vote was registered successfully..
+        /// </summary>
+        internal static string Server_Match_CategoryVoteRegistered {
+            get {
+                return ResourceManager.GetString("Server_Match_CategoryVoteRegistered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your category vote was updated successfully..
+        /// </summary>
+        internal static string Server_Match_CategoryVoteUpdated {
+            get {
+                return ResourceManager.GetString("Server_Match_CategoryVoteUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The time to vote for a category has ended..
+        /// </summary>
+        internal static string Server_Match_CategoryVotingExpired {
+            get {
+                return ResourceManager.GetString("Server_Match_CategoryVotingExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Category voting is not active..
+        /// </summary>
+        internal static string Server_Match_CategoryVotingNotActive {
+            get {
+                return ResourceManager.GetString("Server_Match_CategoryVotingNotActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Category voting was resolved successfully..
+        /// </summary>
+        internal static string Server_Match_CategoryVotingResolved {
+            get {
+                return ResourceManager.GetString("Server_Match_CategoryVotingResolved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Category voting could not be resolved..
+        /// </summary>
+        internal static string Server_Match_CategoryVotingResolveFailed {
+            get {
+                return ResourceManager.GetString("Server_Match_CategoryVotingResolveFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The category voting state was retrieved successfully..
+        /// </summary>
+        internal static string Server_Match_CategoryVotingStateRetrieved {
+            get {
+                return ResourceManager.GetString("Server_Match_CategoryVotingStateRetrieved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a There is a server configuration error..
         /// </summary>
         internal static string Server_Match_ConfigurationError {
@@ -1402,6 +1699,15 @@ namespace Hangman.Client.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The selected category is not valid..
+        /// </summary>
+        internal static string Server_Match_InvalidCategoryId {
+            get {
+                return ResourceManager.GetString("Server_Match_InvalidCategoryId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Selected language is not valid..
         /// </summary>
         internal static string Server_Match_InvalidLanguageCode {
@@ -1416,6 +1722,24 @@ namespace Hangman.Client.Localization {
         internal static string Server_Match_InvalidMatchId {
             get {
                 return ResourceManager.GetString("Server_Match_InvalidMatchId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The selected word is not valid..
+        /// </summary>
+        internal static string Server_Match_InvalidWordId {
+            get {
+                return ResourceManager.GetString("Server_Match_InvalidWordId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The match was abandoned and the corresponding penalty was applied..
+        /// </summary>
+        internal static string Server_Match_LobbyAbandoned {
+            get {
+                return ResourceManager.GetString("Server_Match_LobbyAbandoned", resourceCulture);
             }
         }
         
@@ -1501,6 +1825,15 @@ namespace Hangman.Client.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The match has already ended..
+        /// </summary>
+        internal static string Server_Match_MatchAlreadyResolved {
+            get {
+                return ResourceManager.GetString("Server_Match_MatchAlreadyResolved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a The match is no longer available..
         /// </summary>
         internal static string Server_Match_MatchNotAvailable {
@@ -1528,6 +1861,24 @@ namespace Hangman.Client.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Only the host can select the word..
+        /// </summary>
+        internal static string Server_Match_PlayerNotHost {
+            get {
+                return ResourceManager.GetString("Server_Match_PlayerNotHost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You do not belong to this match..
+        /// </summary>
+        internal static string Server_Match_PlayerNotInMatch {
+            get {
+                return ResourceManager.GetString("Server_Match_PlayerNotInMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a The player profile is not available..
         /// </summary>
         internal static string Server_Match_PlayerProfileNotAvailable {
@@ -1551,6 +1902,78 @@ namespace Hangman.Client.Localization {
         internal static string Server_Match_UnexpectedError {
             get {
                 return ResourceManager.GetString("Server_Match_UnexpectedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The selected word is not available..
+        /// </summary>
+        internal static string Server_Match_WordNotAvailable {
+            get {
+                return ResourceManager.GetString("Server_Match_WordNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The word was selected successfully..
+        /// </summary>
+        internal static string Server_Match_WordSelected {
+            get {
+                return ResourceManager.GetString("Server_Match_WordSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The time to select the word has ended..
+        /// </summary>
+        internal static string Server_Match_WordSelectionExpired {
+            get {
+                return ResourceManager.GetString("Server_Match_WordSelectionExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The word could not be selected..
+        /// </summary>
+        internal static string Server_Match_WordSelectionFailed {
+            get {
+                return ResourceManager.GetString("Server_Match_WordSelectionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Word selection is not active..
+        /// </summary>
+        internal static string Server_Match_WordSelectionNotActive {
+            get {
+                return ResourceManager.GetString("Server_Match_WordSelectionNotActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You are not allowed to select the word..
+        /// </summary>
+        internal static string Server_Match_WordSelectionNotAllowed {
+            get {
+                return ResourceManager.GetString("Server_Match_WordSelectionNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Word selection has started..
+        /// </summary>
+        internal static string Server_Match_WordSelectionStarted {
+            get {
+                return ResourceManager.GetString("Server_Match_WordSelectionStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The available words were retrieved successfully..
+        /// </summary>
+        internal static string Server_Match_WordSelectionStateRetrieved {
+            get {
+                return ResourceManager.GetString("Server_Match_WordSelectionStateRetrieved", resourceCulture);
             }
         }
         

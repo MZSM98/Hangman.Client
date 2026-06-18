@@ -122,10 +122,6 @@
                                 <Run Text="{localization:Loc Match_HostLabel}"/>
                                 <Run Text=": "/>
                                 <Run Text="{Binding CurrentLobby.HostFullName}"/>
-                                <Run Text="   |   "/>
-                                <Run Text="{localization:Loc Match_StatusLabel}"/>
-                                <Run Text=": "/>
-                                <Run Text="{Binding CurrentLobby.MatchStatus}"/>
                             </TextBlock>
 
                             <TextBlock Foreground="#462A1A"

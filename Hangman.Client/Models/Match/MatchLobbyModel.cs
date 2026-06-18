@@ -19,6 +19,24 @@ namespace Hangman.Client.Models.Match
 
         public string GuestLanguageCode { get; set; }
 
+        public int? SelectedCategoryId { get; set; }
+
+        public string SelectedCategoryName { get; set; }
+
+        public int? SelectedWordId { get; set; }
+
+        public DateTime? WordSelectionStartedAt { get; set; }
+
+        public DateTime? WordSelectionEndsAt { get; set; }
+
+        public DateTime? StartedAt { get; set; }
+
+        public DateTime? FinishedAt { get; set; }
+
+        public int? WinnerId { get; set; }
+
+        public int? PenalizedUserId { get; set; }
+
         public string MatchStatus { get; set; }
 
         public DateTime CreatedAt { get; set; }
@@ -44,6 +62,36 @@ namespace Hangman.Client.Models.Match
             get { return MatchStatus == "VotingCategory"; }
         }
 
+        public bool IsWaitingForHostWord
+        {
+            get { return MatchStatus == "WaitingForHostWord"; }
+        }
+
+        public bool IsInProgress
+        {
+            get { return MatchStatus == "InProgress"; }
+        }
+
+        public bool IsResolved
+        {
+            get
+            {
+                return MatchStatus == "Finished" ||
+                       MatchStatus == "Abandoned" ||
+                       MatchStatus == "Cancelled";
+            }
+        }
+
+        public bool HasSelectedCategory
+        {
+            get { return SelectedCategoryId.HasValue; }
+        }
+
+        public bool HasSelectedWord
+        {
+            get { return SelectedWordId.HasValue; }
+        }
+
         public static MatchLobbyModel FromDto(MatchLobbyDto dto)
         {
             if (dto == null)
@@ -60,6 +108,17 @@ namespace Hangman.Client.Models.Match
                 GuestId = dto.GuestId,
                 GuestFullName = dto.GuestFullName,
                 GuestLanguageCode = dto.GuestLanguageCode,
+
+                SelectedCategoryId = dto.SelectedCategoryId,
+                SelectedCategoryName = dto.SelectedCategoryName,
+                SelectedWordId = dto.SelectedWordId,
+                WordSelectionStartedAt = dto.WordSelectionStartedAt,
+                WordSelectionEndsAt = dto.WordSelectionEndsAt,
+                StartedAt = dto.StartedAt,
+                FinishedAt = dto.FinishedAt,
+                WinnerId = dto.WinnerId,
+                PenalizedUserId = dto.PenalizedUserId,
+
                 MatchStatus = dto.MatchStatus,
                 CreatedAt = dto.CreatedAt,
                 JoinedAt = dto.JoinedAt,

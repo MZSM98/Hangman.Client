@@ -35,6 +35,8 @@ namespace Hangman.Client.Coordinators.Match
 
         public event EventHandler<MatchStatusChangedEventArgs> MatchStatusChanged;
 
+        public event EventHandler<MatchChatMessageReceivedEventArgs> ChatMessageReceived;
+
         public async Task<bool> SubscribeToLobbyAsync(int matchId)
         {
             if (matchId <= 0 || !sessionContext.HasValidSession)
@@ -136,6 +138,7 @@ namespace Hangman.Client.Coordinators.Match
             notificationClient.LobbyUpdated += OnLobbyUpdated;
             notificationClient.LobbyClosed += OnLobbyClosed;
             notificationClient.MatchStatusChanged += OnMatchStatusChanged;
+            notificationClient.ChatMessageReceived += OnChatMessageReceived;
         }
 
         private void UnsubscribeNotificationEvents()
@@ -144,6 +147,7 @@ namespace Hangman.Client.Coordinators.Match
             notificationClient.LobbyUpdated -= OnLobbyUpdated;
             notificationClient.LobbyClosed -= OnLobbyClosed;
             notificationClient.MatchStatusChanged -= OnMatchStatusChanged;
+            notificationClient.ChatMessageReceived -= OnChatMessageReceived;
         }
 
         private void OnAvailableLobbiesChanged(object sender, EventArgs e)
@@ -164,6 +168,11 @@ namespace Hangman.Client.Coordinators.Match
         private void OnMatchStatusChanged(object sender, MatchStatusChangedEventArgs e)
         {
             MatchStatusChanged?.Invoke(this, e);
+        }
+
+        private void OnChatMessageReceived(object sender, MatchChatMessageReceivedEventArgs e)
+        {
+            ChatMessageReceived?.Invoke(this, e);
         }
     }
 }

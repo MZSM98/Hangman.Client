@@ -7,8 +7,11 @@
         xmlns:viewModels="clr-namespace:Hangman.Client.ViewModels"
         xmlns:userControls="clr-namespace:Hangman.Client.Views.UserControls"
         mc:Ignorable="d"
-        Height="1080"
-        Width="1920"
+        Height="720"
+        Width="1280"
+        MinHeight="540"
+        MinWidth="960"
+        ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen"
         FontFamily="{StaticResource FuentePixel}"
         Title="{localization:Loc Login_WindowTitle}">
@@ -41,6 +44,15 @@
                         Stretch="UniformToFill"/>
         </Grid.Background>
 
-        <ContentControl Content="{Binding CurrentViewModel}"/>
+        <Viewbox Stretch="Uniform"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center">
+
+            <Grid Width="1920"
+                  Height="1080">
+
+                <ContentControl Content="{Binding CurrentViewModel}"/>
+            </Grid>
+        </Viewbox>
     </Grid>
 </Window>

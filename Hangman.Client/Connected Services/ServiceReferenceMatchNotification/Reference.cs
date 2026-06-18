@@ -54,6 +54,9 @@ namespace Hangman.Client.ServiceReferenceMatchNotification {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchNotificationService/OnAvailableLobbiesChanged")]
         void OnAvailableLobbiesChanged();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchNotificationService/OnMatchChatMessageReceived")]
+        void OnMatchChatMessageReceived(Hangman.Contracts.Match.MatchChatMessageDto message);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

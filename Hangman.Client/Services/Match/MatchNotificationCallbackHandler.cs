@@ -1,4 +1,6 @@
-﻿using Hangman.Client.ServiceReferenceMatchNotification;
+﻿using Hangman.Client.Models.Match;
+using Hangman.Client.ServiceReferenceMatchNotification;
+using Hangman.Contracts.Match;
 using System;
 using System.ServiceModel;
 
@@ -16,6 +18,8 @@ namespace Hangman.Client.Services.Match
         public event EventHandler<MatchStatusChangedEventArgs> MatchStatusChanged;
 
         public event EventHandler AvailableLobbiesChanged;
+
+        public event EventHandler<MatchChatMessageReceivedEventArgs> ChatMessageReceived;
 
         public void OnLobbyUpdated(int matchId)
         {
@@ -35,6 +39,21 @@ namespace Hangman.Client.Services.Match
         public void OnAvailableLobbiesChanged()
         {
             AvailableLobbiesChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void OnMatchChatMessageReceived(MatchChatMessageDto message)
+        {
+            MatchChatMessageModel model =
+                MatchChatMessageModel.FromDto(message);
+
+            if (model == null)
+            {
+                return;
+            }
+
+            ChatMessageReceived?.Invoke(
+                this,
+                new MatchChatMessageReceivedEventArgs(model));
         }
     }
 }

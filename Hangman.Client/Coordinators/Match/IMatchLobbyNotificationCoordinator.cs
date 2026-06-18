@@ -14,6 +14,8 @@ namespace Hangman.Client.Coordinators.Match
 
         event EventHandler<MatchStatusChangedEventArgs> MatchStatusChanged;
 
+        event EventHandler<MatchChatMessageReceivedEventArgs> ChatMessageReceived;
+
         Task<bool> SubscribeToLobbyAsync(int matchId);
 
         Task UnsubscribeFromLobbyAsync(int matchId);

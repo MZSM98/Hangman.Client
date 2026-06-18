@@ -106,6 +106,7 @@ namespace Hangman.Client.ViewModels
         }
 
         public event EventHandler BackRequested;
+        public event EventHandler<MatchGameplayRequestedEventArgs> GameplayRequested;
 
         public ObservableCollection<AvailableLobbyModel> AvailableLobbies
         {
@@ -315,6 +316,8 @@ namespace Hangman.Client.ViewModels
                     }
 
                     SetSuccess(GetMatchServerMessage(result.MessageCode));
+
+                    TryRequestGameplayNavigation();
                 },
                 null,
                 GetLobbyCommands());
@@ -411,6 +414,8 @@ namespace Hangman.Client.ViewModels
 
             CurrentLobby = result.Lobby;
             ClearAvailableLobbies();
+
+            TryRequestGameplayNavigation();
         }
 
         private void SubscribeNotificationEvents()
@@ -593,6 +598,28 @@ namespace Hangman.Client.ViewModels
         private void RequestBack()
         {
             BackRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void TryRequestGameplayNavigation()
+        {
+            if (CurrentLobby == null)
+            {
+                return;
+            }
+
+            bool shouldOpenGameplay =
+                CurrentLobby.IsVotingCategory ||
+                CurrentLobby.IsWaitingForHostWord ||
+                CurrentLobby.IsInProgress;
+
+            if (!shouldOpenGameplay)
+            {
+                return;
+            }
+
+            GameplayRequested?.Invoke(
+                this,
+                new MatchGameplayRequestedEventArgs(CurrentLobby));
         }
     }
 }
