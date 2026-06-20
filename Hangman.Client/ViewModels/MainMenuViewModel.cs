@@ -13,6 +13,7 @@ namespace Hangman.Client.ViewModels
 
         private readonly RelayCommand openProfileCommand;
         private readonly RelayCommand openMatchLobbyCommand;
+        private readonly RelayCommand openScoreCommand;
         private readonly RelayCommand logoutCommand;
 
         private MatchChatViewModel activeMatchChat;
@@ -23,6 +24,7 @@ namespace Hangman.Client.ViewModels
 
             openProfileCommand = new RelayCommand(OpenProfile);
             openMatchLobbyCommand = new RelayCommand(OpenMatchLobby);
+            openScoreCommand = new RelayCommand(OpenScore);
             logoutCommand = new RelayCommand(Logout);
         }
 
@@ -50,6 +52,11 @@ namespace Hangman.Client.ViewModels
             get { return openMatchLobbyCommand; }
         }
 
+        public ICommand OpenScoreCommand
+        {
+            get { return openScoreCommand; }
+        }
+
         public ICommand LogoutCommand
         {
             get { return logoutCommand; }
@@ -68,6 +75,16 @@ namespace Hangman.Client.ViewModels
             IsHomeVisible = false;
 
             profileViewModel.LoadProfileCommand.Execute(null);
+        }
+
+        private void OpenScore()
+        {
+            CloseCurrentViewModel();
+            ScoreViewModel scoreViewModel = new ScoreViewModel();
+            scoreViewModel.BackRequested += OnChildBackRequested;
+            CurrentViewModel = scoreViewModel;
+            IsHomeVisible = false;
+            scoreViewModel.LoadScoreCommand.Execute(null);
         }
 
         private void OpenMatchLobby()
@@ -251,6 +268,11 @@ namespace Hangman.Client.ViewModels
             if (CurrentViewModel is MatchResultViewModel matchResultViewModel)
             {
                 matchResultViewModel.ExitRequested -= OnMatchResultExitRequested;
+            }
+
+            if (CurrentViewModel is ScoreViewModel scoreViewModel)
+            {
+                scoreViewModel.BackRequested -= OnChildBackRequested;
             }
 
             if (CurrentViewModel is IDisposable disposableViewModel)

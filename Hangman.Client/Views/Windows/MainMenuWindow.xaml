@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:Hangman.Client.ViewModels"
         xmlns:userControls="clr-namespace:Hangman.Client.Views.UserControls"
+        xmlns:windows="clr-namespace:Hangman.Client.Views.Windows"
         mc:Ignorable="d"
         Title="El Ahorcado - Menú Principal"
         Height="720"
@@ -36,6 +37,10 @@
 
         <DataTemplate DataType="{x:Type viewModels:MatchResultViewModel}">
             <userControls:MatchResultView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:ScoreViewModel}">
+            <windows:ScoreView/>
         </DataTemplate>
     </Window.Resources>
 
@@ -104,6 +109,7 @@
 
                                 <Button Content="PUNTOS"
                                         Height="75"
+                                        Command="{Binding OpenScoreCommand}"
                                         Style="{StaticResource BotonRetroStyle}"/>
                             </StackPanel>
 

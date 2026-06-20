@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Hangman.Contracts">
+      <HintPath>..\..\Hangman.Server\Hangman.Contracts\bin\Debug\Hangman.Contracts.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=3.3.1.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.3.3.1\lib\net462\log4net.dll</HintPath>
     </Reference>
@@ -96,6 +99,10 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ServiceReferenceScore\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Connected Services\ServiceReferenceWord\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -173,6 +180,8 @@
     <Compile Include="Services\Match\WordSelectionOperationResult.cs" />
     <Compile Include="Services\Profile\IProfileClient.cs" />
     <Compile Include="Services\Profile\ProfileClient.cs" />
+    <Compile Include="Services\Score\IScoreClient.cs" />
+    <Compile Include="Services\Score\ScoreClient.cs" />
     <Compile Include="Services\Session\IMatchSessionContext.cs" />
     <Compile Include="Services\Session\MatchSessionContext.cs" />
     <Compile Include="Services\Word\IWordClient.cs" />
@@ -227,6 +236,7 @@
     <Compile Include="ViewModels\Match\MatchGuessViewModelDependencies.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\ScoreViewModel.cs" />
     <Compile Include="ViewModels\RequestPasswordResetViewModel.cs" />
     <Compile Include="ViewModels\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\VerifyEmailViewModel.cs" />
@@ -271,6 +281,9 @@
     </Compile>
     <Compile Include="Views\Windows\MainMenuWindow.xaml.cs">
       <DependentUpon>MainMenuWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\ScoreView.xaml.cs">
+      <DependentUpon>ScoreView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\UserControls\LoginView.xaml">
       <SubType>Designer</SubType>
@@ -331,6 +344,10 @@
     <Page Include="Views\Windows\MainMenuWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\ScoreView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -536,12 +553,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\HangmanGame\Hangman.Contracts\Hangman.Contracts.csproj">
-      <Project>{93557a29-2cee-4d35-9edb-2ef076d895f7}</Project>
-      <Name>Hangman.Contracts</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServiceReferenceAuth\" />

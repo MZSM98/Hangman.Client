@@ -1,4 +1,3 @@
 <Solution>
-  <Project Path="../HangmanGame/Hangman.Contracts/Hangman.Contracts.csproj" Id="93557a29-2cee-4d35-9edb-2ef076d895f7" />
   <Project Path="Hangman.Client/Hangman.Client.csproj" Id="0f116704-4820-42a7-817d-743edc3e33c0" />
 </Solution>
