@@ -3,5 +3,9 @@
   <Profiles>
     <Profile Name="(Default)" />
   </Profiles>
-  <Settings />
+  <Settings>
+    <Setting Name="LanguageCode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">es</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

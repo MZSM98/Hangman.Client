@@ -1,4 +1,5 @@
-﻿using Hangman.Client.ViewModels;
+﻿using Hangman.Client.Localization;
+using Hangman.Client.ViewModels;
 using System;
 using System.Windows;
 
@@ -23,6 +24,22 @@ namespace Hangman.Client.Views.Windows
             LoginMenuWindow loginMenuWindow = new LoginMenuWindow();
             loginMenuWindow.Show();
 
+            Close();
+        }
+
+        private void OnSetSpanish(object sender, RoutedEventArgs e)
+        {
+            LanguageManager.SetLanguage("es");
+            MainMenuWindow newWindow = new MainMenuWindow();
+            newWindow.Show();
+            Close();
+        }
+
+        private void OnSetEnglish(object sender, RoutedEventArgs e)
+        {
+            LanguageManager.SetLanguage("en");
+            MainMenuWindow newWindow = new MainMenuWindow();
+            newWindow.Show();
             Close();
         }
 

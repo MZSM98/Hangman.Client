@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using Hangman.Client.Localization;
+using log4net;
 using log4net.Config;
 using System;
 using System.IO;
@@ -15,9 +16,8 @@ namespace Hangman.Client
         {
             ConfigureLogging();
             RegisterGlobalExceptionHandlers();
-
+            LanguageManager.RestoreLanguage();
             Log.Info("Hangman.Client started.");
-
             base.OnStartup(e);
         }
 

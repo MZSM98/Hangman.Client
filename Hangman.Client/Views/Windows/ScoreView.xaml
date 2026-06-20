@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:localization="clr-namespace:Hangman.Client.Localization"
         mc:Ignorable="d"
         FontFamily="{StaticResource FuentePixel}">
 
@@ -18,7 +19,7 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0"
-                       Text="DESGLOSE DE PUNTAJE GLOBAL"
+                       Text="{localization:Loc Score_Title}"
                        FontSize="55"
                        FontWeight="Bold"
                        Foreground="{StaticResource ColorTexto}"
@@ -43,7 +44,7 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,30">
-                    <TextBlock Text="Partidas Ganadas como Retador (+10 pts)"
+                    <TextBlock Text="{localization:Loc Score_ChallengerWins}"
                                FontSize="22"
                                FontWeight="Bold"
                                Margin="0,0,0,12"
@@ -66,7 +67,7 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="0" Grid.Column="2" Margin="0,0,0,30">
-                    <TextBlock Text="Victorias como Creador (+5 pts)"
+                    <TextBlock Text="{localization:Loc Score_HostWins}"
                                FontSize="22"
                                FontWeight="Bold"
                                Margin="0,0,0,12"
@@ -89,7 +90,7 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" Margin="0,0,0,10">
-                    <TextBlock Text="Penalizaciones por Abandono (-3 pts)"
+                    <TextBlock Text="{localization:Loc Score_Penalties}"
                                FontSize="22"
                                FontWeight="Bold"
                                Margin="0,0,0,12"
@@ -130,7 +131,7 @@
             </TextBlock>
 
             <Button Grid.Row="5"
-                    Content="← REGRESAR"
+                    Content="{localization:Loc Score_BackButton}"
                     Height="60"
                     Width="300"
                     HorizontalAlignment="Center"

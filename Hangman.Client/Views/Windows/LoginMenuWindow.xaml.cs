@@ -1,4 +1,5 @@
-﻿using Hangman.Client.ViewModels;
+﻿using Hangman.Client.Localization;
+using Hangman.Client.ViewModels;
 using System;
 using System.Windows;
 
@@ -38,11 +39,26 @@ namespace Hangman.Client.Views.Windows
                 MessageBoxImage.Information);
         }
 
+        private void OnSetSpanish(object sender, RoutedEventArgs e)
+        {
+            LanguageManager.SetLanguage("es");
+            LoginMenuWindow newWindow = new LoginMenuWindow();
+            newWindow.Show();
+            Close();
+        }
+
+        private void OnSetEnglish(object sender, RoutedEventArgs e)
+        {
+            LanguageManager.SetLanguage("en");
+            LoginMenuWindow newWindow = new LoginMenuWindow();
+            newWindow.Show();
+            Close();
+        }
+
         protected override void OnClosed(EventArgs e)
         {
             viewModel.LoginSucceeded -= OnLoginSucceeded;
             viewModel.InformationMessageRequested -= OnInformationMessageRequested;
-
             base.OnClosed(e);
         }
     }

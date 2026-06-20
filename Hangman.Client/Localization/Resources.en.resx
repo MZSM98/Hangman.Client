@@ -975,4 +975,115 @@
   <data name="VerifyEmail_WindowTitle" xml:space="preserve">
     <value>Hangman - Account verification</value>
   </data>
+  <data name="MainMenu_Title" xml:space="preserve">
+    <value>HANGMAN</value>
+  </data>
+  <data name="MainMenu_MatchButton" xml:space="preserve">
+    <value>MATCH</value>
+  </data>
+  <data name="MainMenu_ProfileButton" xml:space="preserve">
+    <value>EDIT PROFILE</value>
+  </data>
+  <data name="MainMenu_ScoreButton" xml:space="preserve">
+    <value>SCORES</value>
+  </data>
+  <data name="MainMenu_Logout" xml:space="preserve">
+    <value>Sign Out</value>
+  </data>
+  <data name="MainMenu_LogoutIcon" xml:space="preserve">
+    <value>[→ </value>
+  </data>
+  <data name="MainMenu_WindowTitle" xml:space="preserve">
+    <value>Hangman - Main Menu</value>
+  </data>
+  <data name="Score_Title" xml:space="preserve">
+    <value>GLOBAL SCORE BREAKDOWN</value>
+  </data>
+  <data name="Score_ChallengerWins" xml:space="preserve">
+    <value>Wins as Challenger (+10 pts)</value>
+  </data>
+  <data name="Score_HostWins" xml:space="preserve">
+    <value>Wins as Host (+5 pts)</value>
+  </data>
+  <data name="Score_Penalties" xml:space="preserve">
+    <value>Abandon Penalties (-3 pts)</value>
+  </data>
+  <data name="Score_BackButton" xml:space="preserve">
+    <value>← GO BACK</value>
+  </data>
+  <data name="CreateMatch_Title" xml:space="preserve">
+    <value>NEW MATCH CONFIGURATION</value>
+  </data>
+  <data name="CreateMatch_CategoryLabel" xml:space="preserve">
+    <value>1. SELECT CATEGORY</value>
+  </data>
+  <data name="CreateMatch_LanguageLabel" xml:space="preserve">
+    <value>2. WORD LANGUAGE</value>
+  </data>
+  <data name="CreateMatch_GenerateButton" xml:space="preserve">
+    <value>CREATE MATCH</value>
+  </data>
+  <data name="CreateMatch_Description" xml:space="preserve">
+    <value>Once created, you will wait for a challenger to accept your match.</value>
+  </data>
+  <data name="CategorySelector_WordLabel" xml:space="preserve">
+    <value>Select the word to guess</value>
+  </data>
+  <data name="CategorySelector_Hint" xml:space="preserve">
+    <value>Click a word to select it.</value>
+  </data>
+  <data name="CategorySelector_ConfirmButton" xml:space="preserve">
+    <value>CONFIRM SELECTION</value>
+  </data>
+  <data name="MatchGuess_Title" xml:space="preserve">
+    <value>¡GUESS THE WORD!</value>
+  </data>
+  <data name="MatchGuess_HostLabel" xml:space="preserve">
+    <value>HOST: </value>
+  </data>
+  <data name="MatchGuess_GuestLabel" xml:space="preserve">
+    <value>GUEST: </value>
+  </data>
+  <data name="MatchGuess_HintLabel" xml:space="preserve">
+    <value>HINT: </value>
+  </data>
+  <data name="MatchGuess_TimeLabel" xml:space="preserve">
+    <value>TIME: </value>
+  </data>
+  <data name="MatchGuess_GuessWordButton" xml:space="preserve">
+    <value>GUESS WORD</value>
+  </data>
+  <data name="MatchGuess_ConfirmButton" xml:space="preserve">
+    <value>CONFIRM</value>
+  </data>
+  <data name="MatchGuess_CancelButton" xml:space="preserve">
+    <value>CANCEL</value>
+  </data>
+  <data name="MatchGuess_SurrenderButton" xml:space="preserve">
+    <value>SURRENDER</value>
+  </data>
+  <data name="MatchGuess_HostView" xml:space="preserve">
+    <value>HOST VIEW</value>
+  </data>
+  <data name="MatchGuess_SelectedWord" xml:space="preserve">
+    <value>Selected word</value>
+  </data>
+  <data name="MatchGuess_GuestFails" xml:space="preserve">
+    <value>Guest fails: </value>
+  </data>
+  <data name="MatchGuess_RemainingAttempts" xml:space="preserve">
+    <value>Remaining attempts: </value>
+  </data>
+  <data name="MatchGuess_Fails" xml:space="preserve">
+    <value>FAILS: </value>
+  </data>
+  <data name="MatchGuess_Warning" xml:space="preserve">
+    <value>Warning: if you guess the full word and fail, it counts as a fail.</value>
+  </data>
+  <data name="GameBoard_Title" xml:space="preserve">
+    <value>GUESS THE WORD!</value>
+  </data>
+  <data name="GameBoard_SurrenderButton" xml:space="preserve">
+    <value>SURRENDER</value>
+  </data>
 </root>

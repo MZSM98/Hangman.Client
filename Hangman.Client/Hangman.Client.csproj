@@ -116,6 +116,7 @@
     <Compile Include="Infrastructure\Logging\Log4NetClientLogger.cs" />
     <Compile Include="Infrastructure\Threading\IUiDispatcher.cs" />
     <Compile Include="Infrastructure\Threading\WpfUiDispatcher.cs" />
+    <Compile Include="Localization\LanguageManager.cs" />
     <Compile Include="Localization\LocExtension.cs" />
     <Compile Include="Localization\Messages\ClientValidationMessageProvider.cs" />
     <Compile Include="Localization\Messages\IMessageProvider.cs" />
@@ -273,8 +274,14 @@
     <Compile Include="Views\UserControls\VerifyEmailView.xaml.cs">
       <DependentUpon>VerifyEmailView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Windows\CategorySelectorView.xaml.cs">
+      <DependentUpon>CategorySelectorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\CreateMatchView.xaml.cs">
       <DependentUpon>CreateMatchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\GameBoardWindow.xaml.cs">
+      <DependentUpon>GameBoardWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\LoginMenuWindow.xaml.cs">
       <DependentUpon>LoginMenuWindow.xaml</DependentUpon>
@@ -329,9 +336,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Windows\CategorySelectorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Windows\CreateMatchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\GameBoardWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Windows\LoginMenuWindow.xaml">
       <SubType>Designer</SubType>

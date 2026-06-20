@@ -6,8 +6,9 @@
         xmlns:viewModels="clr-namespace:Hangman.Client.ViewModels"
         xmlns:userControls="clr-namespace:Hangman.Client.Views.UserControls"
         xmlns:windows="clr-namespace:Hangman.Client.Views.Windows"
+        xmlns:localization="clr-namespace:Hangman.Client.Localization"
         mc:Ignorable="d"
-        Title="El Ahorcado - Menú Principal"
+        Title="{localization:Loc MainMenu_WindowTitle}"
         Height="720"
         Width="1280"
         MinHeight="540"
@@ -81,7 +82,7 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0"
-                                       Text="EL AHORCADO"
+                                       Text="{localization:Loc MainMenu_Title}"
                                        FontSize="70"
                                        Foreground="#462A1A"
                                        HorizontalAlignment="Center"
@@ -97,17 +98,17 @@
                             </TextBlock>
 
                             <StackPanel Grid.Row="2" Width="550">
-                                <Button Content="PARTIDA"
+                                <Button Content="{localization:Loc MainMenu_MatchButton}"
                                         Height="75"
                                         Command="{Binding OpenMatchLobbyCommand}"
                                         Style="{StaticResource BotonRetroStyle}"/>
 
-                                <Button Content="EDITAR PERFIL"
+                                <Button Content="{localization:Loc MainMenu_ProfileButton}"
                                         Height="75"
                                         Command="{Binding OpenProfileCommand}"
                                         Style="{StaticResource BotonRetroStyle}"/>
 
-                                <Button Content="PUNTOS"
+                                <Button Content="{localization:Loc MainMenu_ScoreButton}"
                                         Height="75"
                                         Command="{Binding OpenScoreCommand}"
                                         Style="{StaticResource BotonRetroStyle}"/>
@@ -118,13 +119,6 @@
                                         HorizontalAlignment="Center"
                                         Margin="0,0,0,10">
 
-                                <TextBlock Text=" | "
-                                           FontSize="20"
-                                           FontFamily="Segoe UI"
-                                           Foreground="#462A1A"
-                                           VerticalAlignment="Center"
-                                           Margin="10,0"/>
-
                                 <Button Command="{Binding LogoutCommand}"
                                         Background="Transparent"
                                         BorderThickness="0"
@@ -132,13 +126,13 @@
                                         Padding="0">
 
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="[→ "
+                                        <TextBlock Text="{localization:Loc MainMenu_LogoutIcon}"
                                                    FontSize="22"
                                                    FontFamily="Segoe UI"
                                                    Foreground="#462A1A"
                                                    VerticalAlignment="Center"/>
 
-                                        <TextBlock Text="Cerrar Sesión"
+                                        <TextBlock Text="{localization:Loc MainMenu_Logout}"
                                                    FontSize="20"
                                                    FontFamily="Segoe UI"
                                                    FontWeight="Medium"
@@ -154,6 +148,40 @@
                 <ContentControl Content="{Binding CurrentViewModel}"/>
             </Grid>
         </Viewbox>
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="0,8,12,0">
+
+            <Button Content="{localization:Loc Language_Spanish}"
+                    Click="OnSetSpanish"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Cursor="Hand"
+                    Padding="4,2"
+                    FontSize="13"
+                    FontFamily="Segoe UI"
+                    FontWeight="Medium"
+                    Foreground="White"/>
+
+            <TextBlock Text=" | "
+                       Foreground="White"
+                       FontSize="13"
+                       FontFamily="Segoe UI"
+                       VerticalAlignment="Center"/>
+
+            <Button Content="{localization:Loc Language_English}"
+                    Click="OnSetEnglish"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Cursor="Hand"
+                    Padding="4,2"
+                    FontSize="13"
+                    FontFamily="Segoe UI"
+                    FontWeight="Medium"
+                    Foreground="White"/>
+        </StackPanel>
     </Grid>
 </Window>
     

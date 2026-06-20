@@ -26,5 +26,20 @@ namespace Hangman.Client.Properties
                 return defaultInstance;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("es")]
+        public string LanguageCode
+        {
+            get
+            {
+                return ((string)(this["LanguageCode"]));
+            }
+            set
+            {
+                this["LanguageCode"] = value;
+            }
+        }
     }
 }

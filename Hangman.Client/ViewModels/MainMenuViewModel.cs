@@ -1,7 +1,10 @@
-﻿using Hangman.Client.Models.Auth;
+﻿using Hangman.Client.Localization;
+using Hangman.Client.Models.Auth;
 using Hangman.Client.Models.Match;
 using Hangman.Client.ViewModels.Base;
 using System;
+using System.Globalization;
+using System.Threading;
 using System.Windows.Input;
 
 namespace Hangman.Client.ViewModels
@@ -62,9 +65,17 @@ namespace Hangman.Client.ViewModels
             get { return logoutCommand; }
         }
 
+        private void ApplyCurrentCulture()
+        {
+            CultureInfo culture = new CultureInfo(LanguageManager.GetCurrentLanguageCode());
+            Thread.CurrentThread.CurrentUICulture = culture;
+            Thread.CurrentThread.CurrentCulture = culture;
+        }
+
         private void OpenProfile()
         {
             CloseCurrentViewModel();
+            ApplyCurrentCulture();
 
             ProfileViewModel profileViewModel = new ProfileViewModel();
 
@@ -80,6 +91,7 @@ namespace Hangman.Client.ViewModels
         private void OpenScore()
         {
             CloseCurrentViewModel();
+            ApplyCurrentCulture();
             ScoreViewModel scoreViewModel = new ScoreViewModel();
             scoreViewModel.BackRequested += OnChildBackRequested;
             CurrentViewModel = scoreViewModel;
@@ -90,6 +102,7 @@ namespace Hangman.Client.ViewModels
         private void OpenMatchLobby()
         {
             CloseCurrentViewModel();
+            ApplyCurrentCulture();
 
             MatchLobbyViewModel matchLobbyViewModel = new MatchLobbyViewModel();
 

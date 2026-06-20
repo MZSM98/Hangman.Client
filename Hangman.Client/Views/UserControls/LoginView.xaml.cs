@@ -1,5 +1,4 @@
-﻿using Hangman.Client.Localization;
-using Hangman.Client.ViewModels;
+﻿using Hangman.Client.ViewModels;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -91,15 +90,6 @@ namespace Hangman.Client.Views.UserControls
             VisiblePasswordTextBox.Visibility = Visibility.Collapsed;
 
             isSynchronizingPassword = false;
-        }
-
-        private void SettingsButton_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show(
-                LocExtension.Get("Login_SettingsUnavailableMessage"),
-                LocExtension.Get("Login_SettingsUnavailableTitle"),
-                MessageBoxButton.OK,
-                MessageBoxImage.Information);
         }
 
         private void OnPasswordClearRequested(object sender, EventArgs e)

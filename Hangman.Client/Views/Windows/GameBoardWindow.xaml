@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:localization="clr-namespace:Hangman.Client.Localization"
         mc:Ignorable="d"
         Title="El Ahorcado - Tablero de Juego" Height="1080" Width="1920"
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
@@ -25,7 +26,7 @@
                 </Grid.RowDefinitions>
 
                 <Border Grid.Row="0" Background="{StaticResource ColorMaderaClara}" CornerRadius="12" Padding="15" BorderBrush="{StaticResource ColorMaderaBorde}" BorderThickness="3" Margin="0,0,0,20">
-                    <TextBlock Text="¡ADIVINA LA PALABRA!" FontSize="45" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{StaticResource ColorTexto}"/>
+                    <TextBlock Text="{localization:Loc GameBoard_Title}" FontSize="45" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{StaticResource ColorTexto}"/>
                 </Border>
 
                 <Grid Grid.Row="1" Margin="0,10,0,20">
@@ -101,7 +102,7 @@
                         <Button Content="M"/>
                     </UniformGrid>
 
-                    <Button Grid.Column="1" Content="RENDIRSE" Style="{StaticResource BotonRetroStyle}" Width="220" Height="75" FontSize="28" Background="#E59C9C" BorderBrush="#B55C5C" VerticalAlignment="Bottom" Margin="20,0,0,5"/>
+                    <Button Grid.Column="1" Content="{localization:Loc GameBoard_SurrenderButton}" Style="{StaticResource BotonRetroStyle}" Width="220" Height="75" FontSize="28" Background="#E59C9C" BorderBrush="#B55C5C" VerticalAlignment="Bottom" Margin="20,0,0,5"/>
                 </Grid>
             </Grid>
         </Border>

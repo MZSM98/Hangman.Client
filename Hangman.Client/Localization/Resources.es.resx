@@ -975,4 +975,115 @@
   <data name="VerifyEmail_WindowTitle" xml:space="preserve">
     <value>El Ahorcado - Verificación de cuenta</value>
   </data>
+  <data name="MainMenu_Title" xml:space="preserve">
+    <value>EL AHORCADO</value>
+  </data>
+  <data name="MainMenu_MatchButton" xml:space="preserve">
+    <value>PARTIDA</value>
+  </data>
+  <data name="MainMenu_ProfileButton" xml:space="preserve">
+    <value>EDITAR PERFIL</value>
+  </data>
+  <data name="MainMenu_ScoreButton" xml:space="preserve">
+    <value>PUNTOS</value>
+  </data>
+  <data name="MainMenu_Logout" xml:space="preserve">
+    <value>Cerrar Sesión</value>
+  </data>
+  <data name="MainMenu_LogoutIcon" xml:space="preserve">
+    <value>[→ </value>
+  </data>
+  <data name="MainMenu_WindowTitle" xml:space="preserve">
+    <value>El Ahorcado - Menú Principal</value>
+  </data>
+  <data name="Score_Title" xml:space="preserve">
+    <value>DESGLOSE DE PUNTAJE GLOBAL</value>
+  </data>
+  <data name="Score_ChallengerWins" xml:space="preserve">
+    <value>Partidas Ganadas como Retador (+10 pts)</value>
+  </data>
+  <data name="Score_HostWins" xml:space="preserve">
+    <value>Victorias como Creador (+5 pts)</value>
+  </data>
+  <data name="Score_Penalties" xml:space="preserve">
+    <value>Penalizaciones por Abandono (-3 pts)</value>
+  </data>
+  <data name="Score_BackButton" xml:space="preserve">
+    <value>← REGRESAR</value>
+  </data>
+  <data name="CreateMatch_Title" xml:space="preserve">
+    <value>CONFIGURACIÓN DE NUEVA PARTIDA</value>
+  </data>
+  <data name="CreateMatch_CategoryLabel" xml:space="preserve">
+    <value>1. SELECCIONA CATEGORÍA</value>
+  </data>
+  <data name="CreateMatch_LanguageLabel" xml:space="preserve">
+    <value>2. IDIOMA DE PALABRA</value>
+  </data>
+  <data name="CreateMatch_GenerateButton" xml:space="preserve">
+    <value>GENERAR PARTIDA</value>
+  </data>
+  <data name="CreateMatch_Description" xml:space="preserve">
+    <value>Una vez generada, deberás esperar a que un retador acepte tu partida.</value>
+  </data>
+  <data name="CategorySelector_WordLabel" xml:space="preserve">
+    <value>Seleccione la palabra a adivinar</value>
+  </data>
+  <data name="CategorySelector_Hint" xml:space="preserve">
+    <value>Haz clic en una palabra para seleccionarla.</value>
+  </data>
+  <data name="CategorySelector_ConfirmButton" xml:space="preserve">
+    <value>CONFIRMAR SELECCIÓN</value>
+  </data>
+  <data name="MatchGuess_Title" xml:space="preserve">
+    <value>¡ADIVINA LA PALABRA!</value>
+  </data>
+  <data name="MatchGuess_HostLabel" xml:space="preserve">
+    <value>HOST: </value>
+  </data>
+  <data name="MatchGuess_GuestLabel" xml:space="preserve">
+    <value>GUEST: </value>
+  </data>
+  <data name="MatchGuess_HintLabel" xml:space="preserve">
+    <value>PISTA: </value>
+  </data>
+  <data name="MatchGuess_TimeLabel" xml:space="preserve">
+    <value>TIEMPO: </value>
+  </data>
+  <data name="MatchGuess_GuessWordButton" xml:space="preserve">
+    <value>ADIVINAR PALABRA</value>
+  </data>
+  <data name="MatchGuess_ConfirmButton" xml:space="preserve">
+    <value>CONFIRMAR</value>
+  </data>
+  <data name="MatchGuess_CancelButton" xml:space="preserve">
+    <value>CANCELAR</value>
+  </data>
+  <data name="MatchGuess_SurrenderButton" xml:space="preserve">
+    <value>RENDIRSE</value>
+  </data>
+  <data name="MatchGuess_HostView" xml:space="preserve">
+    <value>VISTA DEL HOST</value>
+  </data>
+  <data name="MatchGuess_SelectedWord" xml:space="preserve">
+    <value>Palabra seleccionada</value>
+  </data>
+  <data name="MatchGuess_GuestFails" xml:space="preserve">
+    <value>Fallos del invitado: </value>
+  </data>
+  <data name="MatchGuess_RemainingAttempts" xml:space="preserve">
+    <value>Intentos restantes: </value>
+  </data>
+  <data name="MatchGuess_Fails" xml:space="preserve">
+    <value>FALLOS: </value>
+  </data>
+  <data name="MatchGuess_Warning" xml:space="preserve">
+    <value>Advertencia: si escribes la palabra completa y fallas, contará como fallo.</value>
+  </data>
+  <data name="GameBoard_Title" xml:space="preserve">
+    <value>¡ADIVINA LA PALABRA!</value>
+  </data>
+  <data name="GameBoard_SurrenderButton" xml:space="preserve">
+    <value>RENDIRSE</value>
+  </data>
 </root>
