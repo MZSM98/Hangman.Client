@@ -223,7 +223,7 @@
     <value>Winner</value>
   </data>
   <data name="MatchResult_YouLost" xml:space="preserve">
-    <value>YOU LOST!</value>
+    <value>YOU LOST</value>
   </data>
   <data name="MatchResult_YouWon" xml:space="preserve">
     <value>YOU WON!</value>

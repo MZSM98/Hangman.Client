@@ -529,7 +529,7 @@ namespace Hangman.Client.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a YOU LOST!.
+        ///   Busca una cadena traducida similar a YOU LOST.
         /// </summary>
         internal static string MatchResult_YouLost {
             get {

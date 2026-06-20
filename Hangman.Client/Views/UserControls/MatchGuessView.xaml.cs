@@ -8,10 +8,5 @@ namespace Hangman.Client.Views.UserControls
         {
             InitializeComponent();
         }
-
-        private void TextBox_TextChanged()
-        {
-
-        }
     }
 }

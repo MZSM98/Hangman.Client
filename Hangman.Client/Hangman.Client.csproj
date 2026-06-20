@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Hangman.Contracts">
-      <HintPath>..\..\Hangman.Server\Hangman.Contracts\bin\Debug\Hangman.Contracts.dll</HintPath>
+      <HintPath>..\..\HangmanGame\Hangman.Contracts\bin\Debug\Hangman.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=3.3.1.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.3.3.1\lib\net462\log4net.dll</HintPath>

@@ -735,12 +735,12 @@ namespace Hangman.Client.ViewModels
 
             countdownCancellationTokenSource = new CancellationTokenSource();
 
-            RunVotingCountdownAsync(
+            _ = RunVotingCountdownAsync(
                 state.CategoryVotingEndsAt.Value,
                 countdownCancellationTokenSource.Token);
         }
 
-        private async void RunVotingCountdownAsync(
+        private async Task RunVotingCountdownAsync(
             DateTime votingEndsAt,
             CancellationToken cancellationToken)
         {
@@ -763,6 +763,15 @@ namespace Hangman.Client.ViewModels
             }
             catch (TaskCanceledException)
             {
+                // Countdown was cancelled, no action needed.
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(
+                    "RunVotingCountdownAsync failed unexpectedly.",
+                    exception);
+
+                SetCommonUnexpectedError();
             }
         }
 
