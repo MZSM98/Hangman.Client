@@ -91,7 +91,7 @@ Ejemplo: `feature/game-board-window`, `feature/login-window`
 
 Este repositorio es exclusivamente el cliente. El servidor WCF vive en:
 
-> [https://github.com/tuzc0/Hangman.Server](https://github.com/tuzc0/Hangman.Server)
+> [https://github.com/tuzc0/Hangman.Server](https://github.com/tuzc0/HangmanGame)
 
 Ambos proyectos deben estar corriendo simultáneamente para que el juego funcione.
 
